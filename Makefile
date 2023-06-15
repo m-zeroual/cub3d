@@ -1,5 +1,6 @@
 SRCS	= 	src/ft_display_map.c \
 			src/main.c \
+			src/ft_error.c \
 			src/ft_utils.c \
 			lib/get_next_line/get_next_line.c \
 			lib/get_next_line/get_next_line_utils.c
