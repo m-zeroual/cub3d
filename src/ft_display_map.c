@@ -11,12 +11,14 @@
 /* ************************************************************************** */
 
 
-#include "./../include/ft_cub3d.h"
+#include "./../include/cub3d.h"
 
 void ft_display(char **map)
 {
-    int i = 0;
-    while (map[i])    
+	if (!map)
+		return ;
+	int i = 0;
+	while (map[i])
 		printf("%s\n", map[i++]);
 
 }
