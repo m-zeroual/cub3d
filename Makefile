@@ -1,7 +1,9 @@
-SRCS	= 	src/ft_display_map.c \
+SRCS	= 	src/check_map/ft_display_map.c \
 			src/main.c \
-			src/ft_error.c \
-			src/ft_utils.c \
+			src/check_map/check_error/ft_error.c \
+			src/check_map/parse_map.c \
+			src/check_map/check_error/ft_check6lines.c \
+			src/check_map/ft_utils.c \
 			lib/get_next_line/get_next_line.c \
 			lib/get_next_line/get_next_line_utils.c
 
