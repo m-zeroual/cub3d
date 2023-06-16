@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../include/cub3d.h"
+#include "./../../../include/cub3d.h"
 
 static int  ft_check_extension(char *map_name)
 {

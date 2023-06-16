@@ -19,17 +19,25 @@
 #include <stdio.h>
 
 
-//====> ft_display_map.c <=====
+//====> src/check_map/ft_display_map.c <=====
 void ft_display(char **map);
 
-//====> ft_error.c <=====
+//====> src/check_map/check_error/ft_error.c <=====
 void ft_check_error(char *map_name);
 
-//====> ft_utils.c <=====
-int ft_count_map(char *map_name);
-char **ft_read_map(char *map_name);
-int	ft_count_without_newline(char **map);
-char **ft_clean_map(char **map);
+//====> src/check_map/ft_utils.c <=====
+int     ft_count_map(char *map_name);
+char    **ft_read_map(char *map_name);
+int     ft_count_without_newline(char **map);
+char    **ft_clean_map(char **map);
 void	ft_free_map(char **map);
+
+
+//====> src/check_map/parse_map.c <=====
+int parse_map(char *map_name);
+
+//====> src/check_map/check_error/ft_utils.c <=====
+void ft_check6lines(char **map);
+
 
 #endif
