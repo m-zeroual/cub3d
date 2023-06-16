@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../include/cub3d.h"
+#include "./../../include/cub3d.h"
 
 // ft_count_map count lines and return lines
 int ft_count_map(char *map_name)
@@ -20,8 +20,8 @@ int ft_count_map(char *map_name)
 	char    *map;
 
 	fd = open(map_name, 'r');
-	if (fd == -1)				// ==> this protection not necessary.
-		return (-1);			// because it protect in function ft_check_error.
+	if (fd == -1)
+		return (0);
 		
 	map = get_next_line(fd);
 	size = 0;
@@ -32,7 +32,6 @@ int ft_count_map(char *map_name)
 	}
 	close(fd);
 	return (size);
-
 }
 
 int	ft_count_without_newline(char **map)
@@ -62,19 +61,33 @@ char **ft_read_map(char *map_name)
 
 	lines = ft_count_map(map_name);
 	if (!lines)
-		return (0);
+		return (NULL);
 	map = malloc((lines + 1) * sizeof(char *));
 	if (!map)
-		return (0);
+		return (NULL);
 	fd = open(map_name, 'r');
-	if (fd == -1)       		// ==> this protection not necessary.
-		return (0);				// because it protect in function ft_check_error.
+	if (fd == -1)       		
+		return (NULL);			
 	count = 0;
 	while (count < lines + 1)
 		map[count++] = get_next_line(fd);
 	close(fd);
 	return (map);
 }
+
+// int speace(char *line)
+// {
+// 	int i;
+
+// 	i = 0;
+// 	while (line[i])
+// 	{
+// 		if (line[i] != ' ')
+// 			return (1);
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
 char **ft_clean_map(char **map)
 {
@@ -86,11 +99,11 @@ char **ft_clean_map(char **map)
 	i_new_map = 0;
 	new_map = malloc((ft_count_without_newline(map) + 1) * sizeof(char *));
 	if (!new_map)
-		return (ft_free_map(map), NULL); // use function ft_free_map to free variable map.
+		return (ft_free_map(map), NULL);
 	i = 0;
 	while (map[i])
 	{
-		line = ft_strtrim(map[i],"\n");
+		line = ft_strtrim(map[i],"\n\t");
 		if (*line)
 			new_map[i_new_map++] = ft_strdup(line);
 		free(line);
