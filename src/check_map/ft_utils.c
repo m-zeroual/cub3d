@@ -45,7 +45,7 @@ int	ft_count_without_newline(char **map)
 	count = 0;
 	while (map[i])
 	{
-		line = ft_strtrim(map[i]," \t\n");
+		line = ft_strtrim(map[i],"\n");
 		if (*line)
 			count++;
 		free(line);
