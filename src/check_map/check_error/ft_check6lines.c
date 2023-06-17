@@ -11,9 +11,21 @@
 /* ************************************************************************** */
 
 #include "./../../../include/cub3d.h"
+int check_file_exist(char *file_name)
+{
+	int fd;
+
+	fd = open(file_name, 'r');
+	if (fd < 0)
+		return (0);
+	return (1);
+}
 
 int ft_check4lines(char *line, int pos, char **map)
 {
+	char	**file_texture;
+
+	file_texture = ft_split(line, ' ');
     if ((pos != 0 || ft_strncmp(line, "NO ", 3)) && (pos != 1 || ft_strncmp(line, "SO ", 3)) &&
 		(pos != 2 || ft_strncmp(line, "WE ", 3)) && (pos != 3 || ft_strncmp(line, "EA ", 3)))
 	{
@@ -21,6 +33,10 @@ int ft_check4lines(char *line, int pos, char **map)
 		ft_free_map(map);
 		return (0);
 	}
+	if (!check_file_exist(file_texture[1]))
+		return (ft_putstr_fd("Error\n\tFile texture does not exist.\n",2), ft_free_map(map), 0);
+	ft_free_map(file_texture);
+
 	// Ined to check here.
 	// if is file texture is exist or not.
 	return (1);
