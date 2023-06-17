@@ -12,7 +12,7 @@
 
 #include "./../../include/cub3d.h"
 
-int condition(int i, int j, int *player, char **new_map)
+int	condition(int i, int j, int *player, char **new_map)
 {
 	if (new_map[i][j] == 'N' || new_map[i][j] == 'W' || new_map[i][j] == 'E'
 	|| new_map[i][j] == 'S' || new_map[i][j] == ' ' || new_map[i][j] == '0'
@@ -20,7 +20,8 @@ int condition(int i, int j, int *player, char **new_map)
 	{
 		if (new_map[i][j] == '0')
 		{
-			if (i == 6 || i == ft_count_without_newline(new_map) - 1
+			if (i == 6 || i == ft_count_without_newline(new_map) - 1 || j == 0
+				|| j == (int)ft_strlen(new_map[i]) - 1
 				|| new_map[i - 1][j] == ' ' || new_map[i][j + 1] == ' '
 				|| new_map[i + 1][j] == ' ' || new_map[i][j - 1] == ' '
 				|| j >= (int)ft_strlen(new_map[i - 1])
@@ -33,7 +34,7 @@ int condition(int i, int j, int *player, char **new_map)
 	}
 	else
 		return (ft_putstr_fd("Error\n\t\
-		You have caractere in map not allowed.\n", 2), 0);
+ You have caractere in map not allowed.\n", 2), 0);
 	return (1);
 }
 
@@ -90,5 +91,6 @@ int parse_map(char *map_name)
     //======================================
 	ft_display(new_map);
 	ft_free_map(new_map);
+	// here evreything clean leaks is OK.
 	return (1);
 }
