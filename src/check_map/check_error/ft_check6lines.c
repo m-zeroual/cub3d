@@ -14,13 +14,15 @@
 
 int ft_check4lines(char *line, int pos, char **map)
 {
-    if ((pos != 0 || ft_strncmp(line, "NO", 2)) && (pos != 1 || ft_strncmp(line, "SO", 2)) &&
-		(pos != 2 || ft_strncmp(line, "WE", 2)) && (pos != 3 || ft_strncmp(line, "EA", 2)))
+    if ((pos != 0 || ft_strncmp(line, "NO ", 3)) && (pos != 1 || ft_strncmp(line, "SO ", 3)) &&
+		(pos != 2 || ft_strncmp(line, "WE ", 3)) && (pos != 3 || ft_strncmp(line, "EA ", 3)))
 	{
 		ft_putstr_fd("Error\n\tCardinal directions.\n",2);
 		ft_free_map(map);
 		return (0);
 	}
+	// Ined to check here.
+	// if is file texture is exist or not.
 	return (1);
 }
 
@@ -62,13 +64,16 @@ void ft_check6lines(char **map)
 		i = 0;
 		while (map[first6line][i] && (map[first6line][i] == ' ' || map[first6line][i] == '\t'))
 			i++;
-		if (map[first6line][i] == '\0')
-			first6line++;
+		// printf("%s\n", &map[first6line][i]);
+		free(map[first6line]);
+		map[first6line] = ft_strdup(&map[first6line][i]);
+		// printf("map |%s|\n", map[first6line]);
+
         if (first6line < 4)
-		    if (!ft_check4lines(&map[first6line][i], first6line, map))
+		    if (!ft_check4lines(map[first6line], first6line, map))
 				exit(1);
 		if (first6line >= 4 && first6line < 6)
-		    if (!ft_check4_5lines(&map[first6line][i], first6line, map))
+		    if (!ft_check4_5lines(map[first6line], first6line, map))
 				exit(1);
 		first6line++;
 	}
