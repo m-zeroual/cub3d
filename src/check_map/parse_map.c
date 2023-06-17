@@ -26,7 +26,7 @@ int	condition(int i, int j, int *player, char **new_map)
 				|| new_map[i + 1][j] == ' ' || new_map[i][j - 1] == ' '
 				|| j >= (int)ft_strlen(new_map[i - 1])
 				|| j >= (int)ft_strlen(new_map[i + 1]))
-					return (ft_putstr_fd("Error\n\tmap error.\n", 2), 0);
+				return (ft_putstr_fd("Error\n\tmap error.\n", 2), 0);
 		}
 		else if (new_map[i][j] == 'N' || new_map[i][j] == 'W'
 		|| new_map[i][j] == 'E' || new_map[i][j] == 'S')
@@ -38,7 +38,7 @@ int	condition(int i, int j, int *player, char **new_map)
 	return (1);
 }
 
-int check_map(char **new_map)
+int	check_map(char **new_map)
 {
 	int	line;
 	int	colum;
@@ -63,14 +63,14 @@ int check_map(char **new_map)
 	return (1);
 }
 
-int parse_map(char *map_name)
+int	parse_map(char *map_name)
 {
 	char	**map;
 	char	**new_map;
 
-    // first parse
-    // --------------------------------------
-	ft_check_error(map_name);       // ===> Extension and File exist
+	// --------------------------------------
+	// first parse
+	ft_check_error(map_name);// ===> Extension and File exist
 	map = ft_read_map(map_name);
 	if (!map)
 		return (ft_putstr_fd("Error\n\tGeneral error.\n", 2), 0);
@@ -80,15 +80,12 @@ int parse_map(char *map_name)
 	// ft_display(new_map);
 	// here evreything clean leaks is OK.
 	// ft_display(new_map);
-    // --------------------------------------
-
-
-
-    //second parse
-    //======================================
+	// --------------------------------------
+	//======================================
+	//second parse
 	if (!check_map(new_map))
 		exit(1);
-    //======================================
+	//======================================
 	ft_display(new_map);
 	ft_free_map(new_map);
 	// here evreything clean leaks is OK.

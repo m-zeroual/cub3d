@@ -13,16 +13,15 @@
 #include "./../../include/cub3d.h"
 
 // ft_count_map count lines and return lines
-int ft_count_map(char *map_name)
+int	ft_count_map(char *map_name)
 {
-	int     fd;
-	int     size;
-	char    *map;
+	int		fd;
+	int		size;
+	char	*map;
 
 	fd = open(map_name, 'r');
 	if (fd == -1)
 		return (0);
-		
 	map = get_next_line(fd);
 	size = 0;
 	while (map)
@@ -45,7 +44,7 @@ int	ft_count_without_newline(char **map)
 	count = 0;
 	while (map[i])
 	{
-		line = ft_strtrim(map[i],"\n");
+		line = ft_strtrim(map[i], "\n");
 		if (*line)
 			count++;
 		free(line);
@@ -54,7 +53,7 @@ int	ft_count_without_newline(char **map)
 	return (count);
 }
 
-char **ft_read_map(char *map_name)
+char	**ft_read_map(char *map_name)
 {
 	char	**map;
 	int		fd;
@@ -68,8 +67,8 @@ char **ft_read_map(char *map_name)
 	if (!map)
 		return (NULL);
 	fd = open(map_name, 'r');
-	if (fd == -1)       		
-		return (NULL);			
+	if (fd == -1)
+		return (NULL);
 	count = 0;
 	while (count < lines + 1)
 		map[count++] = get_next_line(fd);
@@ -77,9 +76,9 @@ char **ft_read_map(char *map_name)
 	return (map);
 }
 
-int speace_and_tab(char *line)
+int	speace_and_tab(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i])
@@ -91,7 +90,7 @@ int speace_and_tab(char *line)
 	return (0);
 }
 
-char **ft_clean_map(char **map)
+char	**ft_clean_map(char **map)
 {
 	char	*line;
 	char	**new_map;
@@ -105,7 +104,7 @@ char **ft_clean_map(char **map)
 	i = 0;
 	while (map[i])
 	{
-		line = ft_strtrim(map[i],"\n");
+		line = ft_strtrim(map[i], "\n");
 		if (*line && speace_and_tab(line))
 			new_map[i_new_map++] = ft_strdup(line);
 		free(line);
