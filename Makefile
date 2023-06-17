@@ -30,13 +30,14 @@ $(NAME):	$(OBJS)
 			$(CC) $(CFLAGS)  -c $^ -o $@
 
 clean:
-			$(RM) $(OBJS) $(OBJS_BONUS)
+			$(RM) $(OBJS)
 
 fclean:		clean
+			make fclean -C $(PATH_LIB)
 			$(RM) $(NAME)
 
 re:			fclean $(NAME)
 
 bonus:		$(OBJS_BONUS)
-			ar rcs $(NAME) $(OBJS_BONUS)
+			ar rcs $(NAME)
 
