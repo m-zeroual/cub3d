@@ -40,8 +40,6 @@ int	ft_check4lines(char *line, int pos, char **map)
 		return (ft_putstr_fd("Error\n\t\
  File texture does not exist.\n", 2), ft_free_map(map), 0);
 	ft_free_map(file_texture);
-	// Ined to check here.
-	// if is file texture is exist or not.
 	return (1);
 }
 
@@ -55,7 +53,8 @@ int	ft_check4_5lines(char *line, int pos, char **map)
 	number = 0;
 	if ((pos != 4 || ft_strncmp(line, "F", 1)) && (pos != 5
 			|| ft_strncmp(line, "C", 1)))
-		return (ft_putstr_fd("Error\n\tF and C error.\n", 2), ft_free_map(map), 0);
+		return (ft_putstr_fd("Error\n\tF and C error.\n", 2), \
+		ft_free_map(map), 0);
 	else
 	{
 		str = ft_split(line, ' ');
@@ -66,7 +65,8 @@ int	ft_check4_5lines(char *line, int pos, char **map)
 		{
 			num = ft_atoi(number[i++]);
 			if (num < 0 || num > 255)
-				return (ft_putstr_fd("Error\n\tNumber out of Range in RGB.\n", 2), ft_free_map(map), 0);
+				return (ft_putstr_fd("Error\n\t\
+ Number out of Range in RGB.\n", 2), ft_free_map(map), 0);
 		}
 		ft_free_map(number);
 	}
@@ -82,7 +82,8 @@ void	ft_check6lines(char **map)
 	while (first6line < 6)
 	{
 		i = 0;
-		while (map[first6line][i] && (map[first6line][i] == ' ' || map[first6line][i] == '\t'))
+		while (map[first6line][i] && (map[first6line][i] == ' '
+			|| map[first6line][i] == '\t'))
 			i++;
 		free(map[first6line]);
 		map[first6line] = ft_strdup(&map[first6line][i]);

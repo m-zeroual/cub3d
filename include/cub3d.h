@@ -28,8 +28,6 @@ typedef struct s_cub3d
     void    *mlx_win;
 
 } t_cub3d;
-//====> src/check_map/ft_display_map.c <=====
-void ft_display(char **map);
 
 //====> src/check_map/check_error/ft_error.c <=====
 void ft_check_error(char *map_name);
@@ -53,6 +51,7 @@ char    **parse_map(char *map_name);
 
 //====> src/cub3d/cub3d.c <=====
 void cub3d(t_cub3d *_cub3d);
+void ft_display(char **map);
 
 
 #endif
