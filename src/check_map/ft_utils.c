@@ -12,7 +12,6 @@
 
 #include "./../../include/cub3d.h"
 
-// ft_count_map count lines and return lines
 int	ft_count_map(char *map_name)
 {
 	int		fd;
@@ -114,17 +113,4 @@ char	**ft_clean_map(char **map)
 	new_map[i_new_map] = 0;
 	ft_check6lines(new_map);
 	return (new_map);
-}
-
-void	ft_free_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-	{
-		// printf("FREE ==>%s\n", map[i]);
-		free(map[i++]);
-	}
-	free(map);
 }
