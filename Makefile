@@ -12,13 +12,13 @@
 
 PATH_GET_NEXT_LINE = lib/get_next_line/
 
-SRCS	= 	src/cub3d/cub3d.c \
-			src/main.c \
+SRCS	= 	src/main.c \
 			src/check_map/ft_display_map.c \
 			src/check_map/check_error/ft_error.c \
 			src/check_map/parse_map.c \
 			src/check_map/check_error/ft_check6lines.c \
 			src/check_map/ft_utils.c \
+			src/cub3D/cub3d.c \
 			$(PATH_GET_NEXT_LINE)get_next_line.c \
 			$(PATH_GET_NEXT_LINE)get_next_line_utils.c
 
