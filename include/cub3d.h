@@ -14,16 +14,30 @@
 #ifndef	CUB3D_FT
 # define CUB3D_FT
 
-#include "./../lib/libft/libft.h"
-#include "./../lib/get_next_line/get_next_line.h"
-#include <stdio.h>
+# include "./../lib/libft/libft.h"
+# include "./../lib/get_next_line/get_next_line.h"
+# include <mlx.h>
+# include <stdio.h>
 
+typedef struct s_cub3d
+{
+    int     lines;
+    int     max;
+    char    **map;
+    void    *mlx_ptr;
+    void    *mlx_win;
 
+} t_cub3d;
 //====> src/check_map/ft_display_map.c <=====
 void ft_display(char **map);
 
 //====> src/check_map/check_error/ft_error.c <=====
 void ft_check_error(char *map_name);
+
+
+//====> src/check_map/check_error/ft_utils.c <=====
+void ft_check6lines(char **map);
+
 
 //====> src/check_map/ft_utils.c <=====
 int     ft_count_map(char *map_name);
@@ -34,10 +48,11 @@ void	ft_free_map(char **map);
 
 
 //====> src/check_map/parse_map.c <=====
-int parse_map(char *map_name);
+char    **parse_map(char *map_name);
 
-//====> src/check_map/check_error/ft_utils.c <=====
-void ft_check6lines(char **map);
+
+//====> src/cub3d/cub3d.c <=====
+void cub3d(t_cub3d *_cub3d);
 
 
 #endif

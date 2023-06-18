@@ -12,8 +12,9 @@
 
 PATH_GET_NEXT_LINE = lib/get_next_line/
 
-SRCS	= 	src/check_map/ft_display_map.c \
+SRCS	= 	src/cub3d/cub3d.c \
 			src/main.c \
+			src/check_map/ft_display_map.c \
 			src/check_map/check_error/ft_error.c \
 			src/check_map/parse_map.c \
 			src/check_map/check_error/ft_check6lines.c \
@@ -37,7 +38,7 @@ all:	$(NAME)
 
 $(NAME):$(OBJS)
 		make -C $(PATH_LIB)
-		$(CC) $(CFLAGS) $(PATH_LIB)libft.a $(OBJS) -o $(NAME)
+		$(CC) $(CFLAGS) $(PATH_LIB)libft.a $(OBJS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 .o:.c
 		$(CC) $(CFLAGS)  -c $^ -o $@
