@@ -10,14 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "./../../include/cub3d.h"
 
 void ft_display(char **map)
 {
 	if (!map)
 		return ;
-	int i = 0;
+	int i = 6;
 	while (map[i])
 		printf("%s\n", map[i++]);
 
