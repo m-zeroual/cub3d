@@ -68,26 +68,14 @@ char	**parse_map(char *map_name)
 	char	**map;
 	char	**new_map;
 
-	// --------------------------------------
-	// first parse
-	ft_check_error(map_name);// ===> Extension and File exist
+	ft_check_error(map_name);
 	map = ft_read_map(map_name);
 	if (!map)
 		return (ft_putstr_fd("Error\n\tGeneral error.\n", 2), NULL);
 	new_map = ft_clean_map(map);
 	if (!new_map)
 		return (NULL);
-	// ft_display(new_map);
-	// here evreything clean leaks is OK.
-	// ft_display(new_map);
-	// --------------------------------------
-	//======================================
-	//second parse
 	if (!check_map(new_map))
 		exit(1);
-	//======================================
-	// ft_display(new_map);
-	// ft_free_map(new_map);
-	// here evreything clean leaks is OK.
 	return (new_map);
 }
