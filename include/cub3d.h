@@ -19,14 +19,27 @@
 # include <mlx.h>
 # include <stdio.h>
 
+#define PIXEL 50
+
+
+typedef struct s_img
+{
+	void	*mlx_img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_img;
+
 typedef struct s_cub3d
 {
-    int     lines;
-    int     max;
+    int     height;
+    int     width;
     char    **map;
     void    *mlx_ptr;
     void    *mlx_win;
-
+    t_img   img;
+    
 } t_cub3d;
 
 //====> src/check_map/check_error/ft_error.c <=====
