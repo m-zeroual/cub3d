@@ -33,7 +33,7 @@ all:		${NAME}
 ${NAME}:	${OBJS}
 			ar rcs $@ $^
 
-.o:.c
+%.o:%.c
 			${CC} ${CFLAGS}  -c $^ -o $@
 
 clean:
