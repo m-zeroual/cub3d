@@ -21,7 +21,6 @@
 
 #define PIXEL 50
 
-
 typedef struct s_img
 {
 	void	*mlx_img;

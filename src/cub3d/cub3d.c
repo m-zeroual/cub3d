@@ -121,22 +121,28 @@ void left()
 
 }
 
-int	key_hook(int keycode, t_cub3d *_cub3d)
-{
-	(void)keycode;
-	(void)_cub3d;
+// int	key_hook(int keycode, t_cub3d *_cub3d)
+// {
+// 	(void)keycode;
+// 	(void)_cub3d;
 
-	if (keycode == 123)
-	{
-		left();	
-		printf("left\n");
-	}
-	if (keycode == 124)
-		printf("right\n");
-	if (keycode == 125)
-		printf("down\n");
-	if (keycode == 126)
-		printf("up\n");
+// 	if (keycode == 123)
+// 	{
+// 		left();	
+// 		printf("left\n");
+// 	}
+// 	if (keycode == 124)
+// 		printf("right\n");
+// 	if (keycode == 125)
+// 		printf("down\n");
+// 	if (keycode == 126)
+// 		printf("up\n");
+// 	return (0);
+// }
+
+int	key_hook(void *_cub3d)
+{
+	(void)_cub3d;
 	return (0);
 }
 
@@ -153,8 +159,8 @@ void cub3d(t_cub3d *_cub3d)
 	_cub3d->img.addr = mlx_get_data_addr(_cub3d->img.mlx_img, &_cub3d->img.bpp, &_cub3d->img.line_len, &_cub3d->img.endian);
 	ft_draw(_cub3d);
 	mlx_put_image_to_window(_cub3d->mlx_ptr, _cub3d->mlx_win, _cub3d->img.mlx_img, width, height);
-	mlx_key_hook(_cub3d->mlx_win, key_hook, _cub3d);
-	// mlx_loop_hook();
+	// mlx_key_hook(_cub3d->mlx_win, key_hook, _cub3d);
+	mlx_loop_hook(_cub3d->mlx_ptr, key_hook, _cub3d);
 	
 	// ft_display(_cub3d->map);
 	mlx_loop(_cub3d->mlx_ptr);

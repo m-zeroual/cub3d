@@ -37,11 +37,11 @@ OBJS	= $(SRCS:.c=.o)
 
 all:	$(NAME)
 
-$(NAME):$(OBJS)
+$(NAME):$(OBJS) include/cub3d.h
 		make -C $(PATH_LIB)
 		$(CC) $(CFLAGS) $(PATH_LIB)libft.a $(OBJS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
-.o:.c
+%.o:%.c
 		$(CC) $(CFLAGS)  -c $^ -o $@
 
 clean:
