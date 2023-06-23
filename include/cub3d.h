@@ -17,6 +17,7 @@
 # include "./../lib/libft/libft.h"
 # include "./../lib/get_next_line/get_next_line.h"
 # include <mlx.h>
+# include <math.h>
 # include <stdio.h>
 
 #define PIXEL 50
@@ -32,13 +33,24 @@ typedef struct s_img
 
 typedef struct s_cub3d
 {
-    int     height;
-    int     width;
-    char    **map;
-    void    *mlx_ptr;
-    void    *mlx_win;
-    t_img   img;
-    
+	int     height;
+	int     width;
+	char    **map;
+	void	*mlx_ptr;
+	void	*mlx_win;
+	float   player_facing;
+	float   rotation_speed;
+	int     turn_direction;
+	int     walk_direction;
+	int     px;
+	int     py;
+
+
+
+
+
+	t_img   img;
+	
 } t_cub3d;
 
 //====> src/check_map/check_error/ft_error.c <=====
