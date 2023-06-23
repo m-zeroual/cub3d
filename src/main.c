@@ -21,6 +21,7 @@ int main(int ac, char *av[])
 		_cub3d.map = parse_map(av[1]);
 		if (!_cub3d.map)
 			return (1);
+		
 		cub3d(&_cub3d);
 	}
 	else
