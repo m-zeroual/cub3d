@@ -47,6 +47,7 @@ $(NAME):$(OBJS) include/cub3d.h
 		$(CC) $(CFLAGS)  -c $^ -o $@
 
 clean:
+		make clean -C $(PATH_LIB)
 		$(RM) $(OBJS)
 
 fclean:	clean

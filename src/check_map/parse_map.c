@@ -76,6 +76,6 @@ char	**parse_map(char *map_name)
 	if (!new_map)
 		return (NULL);
 	if (!check_map(new_map))
-		exit(1);
+		exit(EXIT_FAILURE);
 	return (new_map);
 }
