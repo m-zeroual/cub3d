@@ -52,7 +52,7 @@ int	ft_check4_5lines(char *line, int pos, char **map)
 
 	number = 0;
 	if ((pos != 4 || ft_strncmp(line, "F", 1))
-		&& (pos != 5|| ft_strncmp(line, "C", 1)))
+		&& (pos != 5 || ft_strncmp(line, "C", 1)))
 		return (ft_putstr_fd("Error\n\tF and C error.\n", 2), \
 		ft_free_map(map), 0);
 	else
