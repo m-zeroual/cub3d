@@ -6,7 +6,7 @@
 #    By: mzeroual <mzeroual@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/17 13:12:29 by mzeroual          #+#    #+#              #
-#    Updated: 2023/07/23 18:51:00 by mzeroual         ###   ########.fr        #
+#    Updated: 2023/07/23 19:01:41 by mzeroual         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS	= 	src/main.c \
 			src/cub3d/cub3d.c \
 			$(PATH_GET_NEXT_LINE)get_next_line.c \
 			$(PATH_GET_NEXT_LINE)get_next_line_utils.c
+
 
 CC		= cc
 
