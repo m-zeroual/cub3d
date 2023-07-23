@@ -89,10 +89,10 @@ void	ft_check6lines(char **map)
 		map[first6line] = ft_strdup(&map[first6line][i]);
 		if (first6line < 4)
 			if (!ft_check4lines(map[first6line], first6line, map))
-				exit(1);
+				exit(EXIT_FAILURE);
 		if (first6line >= 4 && first6line < 6)
 			if (!ft_check4_5lines(map[first6line], first6line, map))
-				exit(1);
+				exit(EXIT_FAILURE);
 		first6line++;
 	}
 }

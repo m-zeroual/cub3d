@@ -148,7 +148,7 @@ void	ft_update_player(t_cub3d *_cub3d)
 
 int	quit(void)
 {
-	exit(0);
+	exit(EXIT_SUCCESS);
 	return (0);
 }
 
