@@ -39,7 +39,7 @@ typedef struct s_cub3d
 	void	*mlx_ptr;
 	void	*mlx_win;
 	float   player_facing;
-	float   rotation_speed;
+	float   rotation_angle;
 	int     turn_direction;
 	int     walk_direction;
 	int     px;
