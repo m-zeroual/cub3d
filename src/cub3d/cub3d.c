@@ -48,6 +48,21 @@ void	img_pix_put(t_cub3d *_cub3d, int x, int y, int color)
 	*(int *)pixel = color;
 }
 
+void ft_draw_ray(int x1, int y1, int targetX, int targetY)
+{
+	// int y;
+	// int x;
+
+	(void)x1;
+	(void)y1;
+	(void)targetX;
+	(void)targetY;
+
+
+	// while ();
+
+}
+
 void ft_put_player(t_cub3d *_cub3d, int x1, int y1)
 {
 	int x;
@@ -62,6 +77,7 @@ void ft_put_player(t_cub3d *_cub3d, int x1, int y1)
 		while (x < 5)
 		{
 			img_pix_put(_cub3d, x1 + x, y1 + y, 0xFF0000);
+			ft_draw_ray(x1, y1, x1, y1 - 20);
 			x++;
 		}
 		y++;
@@ -130,6 +146,11 @@ void	ft_update_player(t_cub3d *_cub3d)
 // 	_cub3d->py -= 5;
 // }
 
+int	quit(void)
+{
+	exit(0);
+	return (0);
+}
 
 int	key_hook(int keyCode, t_cub3d *_cub3d)
 {
@@ -153,19 +174,17 @@ int	key_hook(int keyCode, t_cub3d *_cub3d)
 		// up(_cub3d);
 		printf("up\n");
 	}
+	if (keyCode == 53)
+		quit();
 	return (0);
 }
 
-int	quit(void)
-{
-	exit(0);
-	return (0);
-}
+
 
 void	ft_draw_player(t_cub3d *_cub3d)
 {
 	printf("PPOS(%d,%d)\n", _cub3d->px, _cub3d->py);
-	ft_put_player(_cub3d, _cub3d->px - 25,  _cub3d->py - 25);
+	ft_put_player(_cub3d, _cub3d->px,  _cub3d->py);
 
 
 }
@@ -175,10 +194,9 @@ void cub3d(t_cub3d *_cub3d)
 	int width = 0;
 	int height = 0;
 
-
 	_cub3d->turn_direction = 0;
-	_cub3d->player_facing = M_PI / 2;
-	_cub3d->rotation_speed = 2 * (M_PI / 180);
+	_cub3d->rotation_angle = M_PI / 2;
+	_cub3d->rotation_angle = 2 * (M_PI / 180);
 	printf("%f\n", M_PI);
 	printf("%f\n", M_PI / 180);
 	ft_count(_cub3d, &_cub3d->width, &_cub3d->height);
@@ -189,11 +207,8 @@ void cub3d(t_cub3d *_cub3d)
 	ft_draw_map(_cub3d);
 	ft_draw_player(_cub3d);
 	mlx_put_image_to_window(_cub3d->mlx_ptr, _cub3d->mlx_win, _cub3d->img.mlx_img, width, height);
-	// mlx_key_hook(_cub3d->mlx_win, key_hook, _cub3d);
-
 	mlx_hook(_cub3d->mlx_win, 2, 0, key_hook, _cub3d);
 	mlx_hook(_cub3d->mlx_win, 17, 0, quit, _cub3d);
-	
 	// ft_display(_cub3d->map);
 	_cub3d->turn_direction = 0;
 	mlx_loop(_cub3d->mlx_ptr);
