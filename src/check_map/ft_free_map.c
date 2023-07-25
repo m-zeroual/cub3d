@@ -21,3 +21,12 @@ void	ft_free_map(char **map)
 		free(map[i++]);
 	free(map);
 }
+
+void	ft_display_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+		printf("%s", map[i++]);
+}

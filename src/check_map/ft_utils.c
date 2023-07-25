@@ -109,7 +109,7 @@ char	**ft_clean_map(char **map)
 		free(line);
 		i++;
 	}
-	ft_free_map(map);
+	// ft_free_map(map);
 	new_map[i_new_map] = 0;
 	ft_check6lines(new_map);
 	return (new_map);

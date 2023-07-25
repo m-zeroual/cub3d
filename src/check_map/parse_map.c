@@ -16,7 +16,7 @@ int	condition(int i, int j, int *player, char **new_map)
 {
 	if (new_map[i][j] == 'N' || new_map[i][j] == 'W' || new_map[i][j] == 'E'
 	|| new_map[i][j] == 'S' || new_map[i][j] == ' ' || new_map[i][j] == '0'
-	|| new_map[i][j] == '1')
+	|| new_map[i][j] == '1' || new_map[i][j] == '\n')
 	{
 		if (new_map[i][j] == '0')
 		{
@@ -38,16 +38,32 @@ int	condition(int i, int j, int *player, char **new_map)
 	return (1);
 }
 
-int	check_map(char **new_map)
+int ft_check_line(char *line)
 {
+	int i = 0;
+	while (line[i] && (line[i] == '\t' || line[i] == ' ' || line[i] == '\n'))
+		i++;
+	if (!line[i] || ft_isalpha(line[i]))
+		return (1);
+	return (0);
+}
+
+int	check_map(char **new_map, char **last_map)
+{
+	int i;
 	int	line;
 	int	colum;
 	int	player;
 
 	line = 6;
 	player = 0;
+	i = 0;
 	while (new_map[line])
 	{
+		while (line == 6 && ft_check_line(last_map[i]))
+			i++;
+		if (ft_strncmp(new_map[line], last_map[i], ft_strlen(new_map[line])))
+			return (ft_putstr_fd("Error\n\tmap error.\n", 2), 0);
 		colum = 0;
 		while (new_map[line][colum])
 		{
@@ -56,6 +72,7 @@ int	check_map(char **new_map)
 			colum++;
 		}
 		line++;
+		i++;
 	}
 	if (player != 1)
 		return (ft_putstr_fd("Error\n\tPlayer not exist\
@@ -75,7 +92,7 @@ char	**parse_map(char *map_name)
 	new_map = ft_clean_map(map);
 	if (!new_map)
 		return (NULL);
-	if (!check_map(new_map))
+	if (!check_map(new_map, map))
 		exit(EXIT_FAILURE);
 	return (new_map);
 }
