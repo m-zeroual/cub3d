@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mzeroual <mzeroual@student.1337.ma>        +#+  +:+       +#+         #
+#    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/17 13:12:29 by mzeroual          #+#    #+#              #
-#    Updated: 2023/07/23 19:01:41 by mzeroual         ###   ########.fr        #
+#    Updated: 2023/07/25 12:14:38 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS	= 	src/main.c \
 			src/check_map/ft_utils.c \
 			src/cub3d/ft_display_map.c \
 			src/cub3d/cub3d.c \
+			src/cub3d/control_hooks.c \
 			$(PATH_GET_NEXT_LINE)get_next_line.c \
 			$(PATH_GET_NEXT_LINE)get_next_line_utils.c
 
@@ -40,11 +41,14 @@ OBJS	= $(SRCS:.c=.o)
 all:	$(NAME)
 
 $(NAME):$(OBJS) include/cub3d.h
+		make -C lib/minilibx_opengl_20191021
 		make -C $(PATH_LIB)
-		$(CC) $(CFLAGS) $(PATH_LIB)libft.a $(OBJS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+		$(CC) $(CFLAGS) $(PATH_LIB)libft.a  lib/minilibx_opengl_20191021/libmlx.a $(OBJS) -framework OpenGL -framework AppKit -o $(NAME)
 
 %.o:%.c
 		$(CC) $(CFLAGS)  -c $^ -o $@
+
+# bonus:
 
 clean:
 		make clean -C $(PATH_LIB)
@@ -52,6 +56,9 @@ clean:
 
 fclean:	clean
 		make fclean -C $(PATH_LIB)
+		make clean -C lib/minilibx_opengl_20191021
 		$(RM) $(NAME)
 
 re:		fclean $(NAME)
+
+.PHONY: all clean fclean re bonus

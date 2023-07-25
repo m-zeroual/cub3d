@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mzeroual <mzeroual@student.1337.ma>        +#+  +:+       +#+         #
+#    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/08 22:44:27 by mzeroual          #+#    #+#              #
-#    Updated: 2022/10/24 23:38:28 by mzeroual         ###   ########.fr        #
+#    Updated: 2023/07/24 10:36:51 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ SRCS	= ft_split.c ft_striteri.c ft_strmapi.c ft_putnbr_fd.c ft_putendl_fd.c ft_p
 
 SRCS_BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c 
 
-CC		= gcc
+CC		= cc
 
 CFLAGS	= -Wall -Wextra -Werror
 

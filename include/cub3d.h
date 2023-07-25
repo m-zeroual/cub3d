@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzeroual <mzeroual@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/06/13 08:44:43 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/07/25 12:07:50 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,21 @@
 
 # include "./../lib/libft/libft.h"
 # include "./../lib/get_next_line/get_next_line.h"
-# include <mlx.h>
+# include "../lib/minilibx_opengl_20191021/mlx.h"
+// # include <mlx.h>
 # include <math.h>
 # include <stdio.h>
 
-#define PIXEL 50
+# define PIXEL 50
+
+# define PLAYER_SIZE 10
+# define ESC 53
+# define ARROW_UP 126
+# define ARROW_DOWN 125
+# define ARROW_RIGHT 124
+# define ARROW_LEFT 123
+# define ON_DESTROY 17
+
 
 typedef struct s_img
 {
@@ -30,6 +40,12 @@ typedef struct s_img
 	int		line_len;
 	int		endian;
 }	t_img;
+
+typedef struct s_scale
+{
+	int		right_left;
+	int		up_down;
+}	t_scale;
 
 typedef struct s_cub3d
 {
@@ -44,10 +60,6 @@ typedef struct s_cub3d
 	int     walk_direction;
 	int     px;
 	int     py;
-
-
-
-
 
 	t_img   img;
 	
@@ -74,8 +86,18 @@ char    **parse_map(char *map_name);
 
 
 //====> src/cub3d/cub3d.c <=====
-void cub3d(t_cub3d *_cub3d);
-void ft_display(char **map);
+void	cub3d(t_cub3d *_cub3d);
+void	ft_display(char **map);
+void	draw_map(t_cub3d *_cub3d);
+void	draw_player(t_cub3d *_cub3d, t_scale scale);
 
+
+
+/*#######################################################################
+#	 					   EVENTS HANDLER								#
+#######################################################################*/
+
+int		key_hook(int key, t_cub3d *_cub3d);
+int		ft_close(t_cub3d *_cub3d);
 
 #endif

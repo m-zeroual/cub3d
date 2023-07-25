@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzeroual <mzeroual@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 09:18:38 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/06/13 09:18:41 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/07/24 19:30:15 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int main(int ac, char *av[])
 		_cub3d.map = parse_map(av[1]);
 		if (!_cub3d.map)
 			return (1);
-		
 		cub3d(&_cub3d);
 	}
 	else
