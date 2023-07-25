@@ -12,7 +12,7 @@
 
 #include "./../../include/cub3d.h"
 
-void ft_display(char **map)
+void ft_display_map(char **map)
 {
 	if (!map)
 		return ;
