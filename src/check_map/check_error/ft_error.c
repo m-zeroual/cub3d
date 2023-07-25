@@ -29,7 +29,7 @@ void	ft_check_error(char *map_name)
 		ft_putstr_fd("Error\n\tExtension is not \'.cub\'.\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	fd = open(map_name, 'r');
+	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
 	{
 		ft_putstr_fd("Error\n\tFile does not exist.\n", 2);

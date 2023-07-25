@@ -67,6 +67,7 @@ char    **ft_read_map(char *map_name);
 int     ft_count_without_newline(char **map);
 char    **ft_clean_map(char **map);
 void	ft_free_map(char **map);
+void	ft_display_map(char **map);
 
 
 //====> src/check_map/parse_map.c <=====

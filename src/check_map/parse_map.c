@@ -38,9 +38,11 @@ int	condition(int i, int j, int *player, char **new_map)
 	return (1);
 }
 
-int ft_check_line(char *line)
+int	ft_check_line(char *line)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (line[i] && (line[i] == '\t' || line[i] == ' ' || line[i] == '\n'))
 		i++;
 	if (!line[i] || ft_isalpha(line[i]))
@@ -50,33 +52,30 @@ int ft_check_line(char *line)
 
 int	check_map(char **new_map, char **last_map)
 {
-	int i;
+	int	i;
 	int	line;
 	int	colum;
 	int	player;
 
-	line = 6;
+	line = 5;
 	player = 0;
-	i = 0;
-	while (new_map[line])
+	i = -1;
+	while (++line && new_map[line] && i++)
 	{
 		while (line == 6 && ft_check_line(last_map[i]))
 			i++;
 		if (ft_strncmp(new_map[line], last_map[i], ft_strlen(new_map[line])))
-			return (ft_putstr_fd("Error\n\tmap error.\n", 2), 0);
+			return (ft_putstr_fd("Map error.\n", 2), 0);
 		colum = 0;
 		while (new_map[line][colum])
 		{
 			if (!condition(line, colum, &player, new_map))
-				return (ft_free_map(new_map), 0);
+				return (0);
 			colum++;
 		}
-		line++;
-		i++;
 	}
 	if (player != 1)
-		return (ft_putstr_fd("Error\n\tPlayer not exist\
- or you have double player.\n", 2), ft_free_map(new_map), 0);
+		return (ft_putstr_fd("Error\n\tPlayer.\n", 2), 0);
 	return (1);
 }
 
@@ -91,8 +90,14 @@ char	**parse_map(char *map_name)
 		return (ft_putstr_fd("Error\n\tGeneral error.\n", 2), NULL);
 	new_map = ft_clean_map(map);
 	if (!new_map)
-		return (NULL);
+		return (ft_free_map(map), NULL);
+	ft_display_map(new_map);
 	if (!check_map(new_map, map))
+	{
+		ft_free_map(new_map);
+		ft_free_map(map);
 		exit(EXIT_FAILURE);
+	}
+	ft_free_map(map);
 	return (new_map);
 }

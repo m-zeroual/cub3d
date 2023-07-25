@@ -16,7 +16,7 @@ int	check_file_exist(char *file_name)
 {
 	int	fd;
 
-	fd = open(file_name, 'r');
+	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 		return (0);
 	return (1);
@@ -43,6 +43,21 @@ int	ft_check4lines(char *line, int pos, char **map)
 	return (1);
 }
 
+int	ft_check_double_coma(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[0] == ',' || line[ft_strlen(line) - 1] == ','
+			|| (line[i] == ',' && line[i + 1] == ','))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	ft_check4_5lines(char *line, int pos, char **map)
 {
 	int		i;
@@ -59,18 +74,18 @@ int	ft_check4_5lines(char *line, int pos, char **map)
 	{
 		str = ft_split(line, ' ');
 		number = ft_split(str[1], ',');
-		ft_free_map(str);
+		if (!ft_check_double_coma(str[1]))
+			return (ft_putstr_fd("Error\n\tComa.\n", 2), ft_free_map(str), 0);
 		i = 0;
 		while (number[i])
 		{
 			num = ft_atoi(number[i++]);
 			if (num < 0 || num > 255)
 				return (ft_putstr_fd("Error\n\t\
- Number out of Range in RGB.\n", 2), ft_free_map(map), 0);
+ Number out of Range in RGB.\n", 2), ft_free_map(str), ft_free_map(map), 0);
 		}
-		ft_free_map(number);
 	}
-	return (1);
+	return (ft_free_map(str), ft_free_map(number), 1);
 }
 
 void	ft_check6lines(char **map)

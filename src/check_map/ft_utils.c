@@ -18,7 +18,7 @@ int	ft_count_map(char *map_name)
 	int		size;
 	char	*map;
 
-	fd = open(map_name, 'r');
+	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
 		return (0);
 	map = get_next_line(fd);
@@ -65,7 +65,7 @@ char	**ft_read_map(char *map_name)
 	map = malloc((lines + 1) * sizeof(char *));
 	if (!map)
 		return (NULL);
-	fd = open(map_name, 'r');
+	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
 		return (NULL);
 	count = 0;
@@ -99,7 +99,7 @@ char	**ft_clean_map(char **map)
 	i_new_map = 0;
 	new_map = malloc((ft_count_without_newline(map) + 1) * sizeof(char *));
 	if (!new_map)
-		return (ft_free_map(map), NULL);
+		return (NULL);
 	i = 0;
 	while (map[i])
 	{
@@ -109,7 +109,6 @@ char	**ft_clean_map(char **map)
 		free(line);
 		i++;
 	}
-	// ft_free_map(map);
 	new_map[i_new_map] = 0;
 	ft_check6lines(new_map);
 	return (new_map);
