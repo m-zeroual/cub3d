@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/07/25 12:07:50 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/07/26 16:43:38 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,23 @@
 # include <stdio.h>
 
 # define PIXEL 50
-
 # define PLAYER_SIZE 10
+
 # define ESC 53
+
 # define ARROW_UP 126
 # define ARROW_DOWN 125
 # define ARROW_RIGHT 124
 # define ARROW_LEFT 123
+
+# define W_KEY 13
+# define S_KEY 1
+# define A_KEY 0
+# define D_KEY 2
+# define MINUS 78
+# define PLUS 69
+
+
 # define ON_DESTROY 17
 
 
@@ -47,6 +57,23 @@ typedef struct s_scale
 	int		up_down;
 }	t_scale;
 
+typedef struct s_point
+{
+	int		x;
+	int		y;
+}	t_point;
+
+
+typedef struct s_line
+{
+	int		delta_x;
+	int		delta_y;
+	int		incre_x;
+	int		incre_y;
+	int		error;
+	int		e2;
+}	t_line;
+
 typedef struct s_cub3d
 {
 	int     height;
@@ -55,14 +82,15 @@ typedef struct s_cub3d
 	void	*mlx_ptr;
 	void	*mlx_win;
 	float   player_facing;
-	float   rotation_angle;
+	int		rotation_angle;
+	// float   rotation_angle;
 	int     turn_direction;
 	int     walk_direction;
+	int     step_size;
 	int     px;
 	int     py;
 
 	t_img   img;
-	
 } t_cub3d;
 
 //====> src/check_map/check_error/ft_error.c <=====
@@ -90,6 +118,8 @@ void	cub3d(t_cub3d *_cub3d);
 void	ft_display(char **map);
 void	draw_map(t_cub3d *_cub3d);
 void	draw_player(t_cub3d *_cub3d, t_scale scale);
+void	draw_line(t_cub3d *_cub3d ,t_point p2);
+void	img_pix_put(t_cub3d *_cub3d, int x, int y, int color);
 
 
 

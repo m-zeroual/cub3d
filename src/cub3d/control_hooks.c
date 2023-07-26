@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:14:30 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/07/25 12:09:16 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/07/26 16:46:52 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	redraw_all(t_cub3d *_cub3d, t_scale scale)
 {
 	mlx_destroy_image(_cub3d->mlx_ptr, _cub3d->img.mlx_img);
 	_cub3d->img.mlx_img = mlx_new_image(_cub3d->mlx_ptr, (_cub3d->width * PIXEL) + 2, (_cub3d->height * PIXEL) + 2);
-	_cub3d->img.addr = mlx_get_data_addr(_cub3d->img.mlx_img, &_cub3d->img.bpp, \
+	_cub3d->img.addr = mlx_get_data_addr(_cub3d->img.mlx_img, &_cub3d->img.bpp, 
 	&_cub3d->img.line_len, &_cub3d->img.endian);
 	draw_map(_cub3d);
 	draw_player(_cub3d, scale);
@@ -45,25 +45,34 @@ int	key_hook(int key, t_cub3d *_cub3d)
 	scale.up_down = 0;
 	if (key == ESC)
 		close_window(_cub3d);
-	else if (key == ARROW_UP)
-	{
-		scale.up_down = -4;
-		printf("UP\n");
-	}
-	else if (key == ARROW_DOWN)
-	{
-		scale.up_down = +4;
-		printf("DOWN\n");
-	}
+	else if (key == W_KEY)
+		scale.up_down = -_cub3d->step_size;
+	else if (key == S_KEY)
+		scale.up_down = _cub3d->step_size;
+	else if (key == D_KEY)
+		scale.right_left = _cub3d->step_size;
+	else if (key == A_KEY)
+		scale.right_left = -_cub3d->step_size;
 	else if (key == ARROW_RIGHT)
 	{
-		scale.right_left = 4;
-		printf("RIGHT\n");
+		printf("CAMERA RIGHT\n");
+		_cub3d->rotation_angle -= 2;
 	}
 	else if (key == ARROW_LEFT)
 	{
-		scale.right_left = -4;
-		printf("LEFT\n");
+		printf("CAMERA LEFT\n");
+		_cub3d->rotation_angle += 2;
+		
+	}
+	else if (key == MINUS)
+	{
+		if (_cub3d->step_size > 0)
+			_cub3d->step_size -= 1;
+	}
+	else if (key == PLUS)
+	{
+		if (_cub3d->step_size < 50)
+			_cub3d->step_size += 1;
 	}
 	redraw_all(_cub3d, scale);
 	return (0);

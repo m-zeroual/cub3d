@@ -6,7 +6,7 @@
 #    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/17 13:12:29 by mzeroual          #+#    #+#              #
-#    Updated: 2023/07/25 12:14:38 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/07/26 15:50:03 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS	= 	src/main.c \
 			src/check_map/check_error/ft_check6lines.c \
 			src/check_map/ft_utils.c \
 			src/cub3d/ft_display_map.c \
+			src/cub3d/draw_line.c \
 			src/cub3d/cub3d.c \
 			src/cub3d/control_hooks.c \
 			$(PATH_GET_NEXT_LINE)get_next_line.c \
