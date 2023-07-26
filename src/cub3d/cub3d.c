@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:45 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/07/26 16:48:55 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/07/26 20:17:01 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,8 +175,32 @@ void	draw_player(t_cub3d *_cub3d, t_scale scale)
 
 	// printf("PPOS(%d,%d)\n", _cub3d->px, _cub3d->py);
 	line_lenth = 50;
-	_cub3d->px += scale.right_left;
-	_cub3d->py += scale.up_down;
+	// printf("value is: %c\n", _cub3d->map[(int)(_cub3d->px + scale.right_left) / PIXEL][(int)(_cub3d->py + scale.up_down) / PIXEL]);
+	// printf("value is: %c\n", _cub3d->map[0][1]);
+	// int i = 0;
+	// int j = 0;
+	// while ( i < _cub3d->width)
+	// {
+		
+	// }
+	printf("-------------------\n");
+	printf("%d    %d\n", _cub3d->px + scale.right_left, _cub3d->width);
+	printf("%d    %d\n", _cub3d->py + scale.up_down,  _cub3d->height);
+	// printf("-------------------\n");
+	// printf("%d    %d\n", _cub3d->py / 50,  scale.up_down);
+	// printf("%d    %d\n", _cub3d->px / 50,  scale.right_left);
+	// exit (1);
+	// if (_cub3d->map[(_cub3d->py + scale.up_down) / PIXEL][(_cub3d->px + scale.right_left) / PIXEL] != 1)
+	// {
+	// 	_cub3d->px += scale.right_left;
+	// 	_cub3d->py += scale.up_down;
+	// }
+	if ((_cub3d->px + scale.right_left - PLAYER_SIZE / 2) > 0 && (_cub3d->px + scale.right_left + PLAYER_SIZE / 2) < _cub3d->width * PIXEL
+		&& (_cub3d->py + scale.up_down - PLAYER_SIZE / 2) > 0 && (_cub3d->py + scale.up_down + PLAYER_SIZE / 2) < _cub3d->height * PIXEL)
+	{
+		_cub3d->px += scale.right_left;
+		_cub3d->py += scale.up_down;
+	}
 	y =  -PLAYER_SIZE / 2;
 	dest.x = _cub3d->px;
 	dest.y = _cub3d->py;
