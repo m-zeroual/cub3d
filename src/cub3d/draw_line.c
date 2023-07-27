@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 19:13:17 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/07/26 16:04:31 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/07/27 15:26:00 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	draw_line(t_cub3d *_cub3d ,t_point p2)
 	while (1)
 	{
 		if (p1.x >= 0 && p1.x < (_cub3d->width * PIXEL) + 2 && p1.y >= 0 && p1.y < (_cub3d->height * PIXEL) + 2)
-			img_pix_put(_cub3d, p1.x, p1.y, 0xFF0000);
+			img_pix_put(_cub3d, p1.x, p1.y, 0x00FFFF);
 		if (p1.x == p2.x && p1.y == p2.y)
 			break ;
 		line.e2 = 2 * line.error;

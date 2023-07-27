@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   control_hooks.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:14:30 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/07/26 16:46:52 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/07/27 17:00:45 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,27 +46,27 @@ int	key_hook(int key, t_cub3d *_cub3d)
 	if (key == ESC)
 		close_window(_cub3d);
 	else if (key == W_KEY)
-		scale.up_down = -_cub3d->step_size;
-	else if (key == S_KEY)
 		scale.up_down = _cub3d->step_size;
-	else if (key == D_KEY)
-		scale.right_left = _cub3d->step_size;
-	else if (key == A_KEY)
-		scale.right_left = -_cub3d->step_size;
+	else if (key == S_KEY)
+		scale.up_down = -_cub3d->step_size;
+	// else if (key == D_KEY)
+	// 	scale.right_left = _cub3d->step_size;
+	// else if (key == A_KEY)
+	// 	scale.right_left = -_cub3d->step_size;
 	else if (key == ARROW_RIGHT)
 	{
 		printf("CAMERA RIGHT\n");
-		_cub3d->rotation_angle -= 2;
+		_cub3d->rotation_angle -= 10;
 	}
 	else if (key == ARROW_LEFT)
 	{
 		printf("CAMERA LEFT\n");
-		_cub3d->rotation_angle += 2;
+		_cub3d->rotation_angle += 10;
 		
 	}
 	else if (key == MINUS)
 	{
-		if (_cub3d->step_size > 0)
+		if (_cub3d->step_size > 1)
 			_cub3d->step_size -= 1;
 	}
 	else if (key == PLUS)

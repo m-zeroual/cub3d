@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:45 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/07/26 20:17:01 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/07/27 16:59:23 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,8 +161,14 @@ void draw_map(t_cub3d *_cub3d)
 
 void	line_rotation(t_cub3d *_cub3d, t_point *point, int line_lenth)
 {
+	if (_cub3d->rotation_angle > 0)
+		_cub3d->rotation_angle = _cub3d->rotation_angle % 360;
+	if (_cub3d->rotation_angle < 0)
+		_cub3d->rotation_angle = (360 + _cub3d->rotation_angle) % 360;
+
 	point->x += cos(_cub3d->rotation_angle * M_PI / 180) * line_lenth;
-	point->y += sin(_cub3d->rotation_angle * M_PI / 180) * line_lenth;
+	point->y += -sin(_cub3d->rotation_angle * M_PI / 180) * line_lenth;
+	printf("%f\n", _cub3d->rotation_angle * M_PI / 180);
 // (double)
 }
 
@@ -173,37 +179,28 @@ void	draw_player(t_cub3d *_cub3d, t_scale scale)
 	int x;
 	int y;
 
-	// printf("PPOS(%d,%d)\n", _cub3d->px, _cub3d->py);
 	line_lenth = 50;
-	// printf("value is: %c\n", _cub3d->map[(int)(_cub3d->px + scale.right_left) / PIXEL][(int)(_cub3d->py + scale.up_down) / PIXEL]);
-	// printf("value is: %c\n", _cub3d->map[0][1]);
-	// int i = 0;
-	// int j = 0;
-	// while ( i < _cub3d->width)
-	// {
-		
-	// }
-	printf("-------------------\n");
-	printf("%d    %d\n", _cub3d->px + scale.right_left, _cub3d->width);
-	printf("%d    %d\n", _cub3d->py + scale.up_down,  _cub3d->height);
-	// printf("-------------------\n");
-	// printf("%d    %d\n", _cub3d->py / 50,  scale.up_down);
-	// printf("%d    %d\n", _cub3d->px / 50,  scale.right_left);
-	// exit (1);
-	// if (_cub3d->map[(_cub3d->py + scale.up_down) / PIXEL][(_cub3d->px + scale.right_left) / PIXEL] != 1)
+	// if (_cub3d->map[((_cub3d->py + scale.up_down) / PIXEL) + 6][(_cub3d->px + scale.right_left) / PIXEL] != '1')
 	// {
 	// 	_cub3d->px += scale.right_left;
 	// 	_cub3d->py += scale.up_down;
 	// }
-	if ((_cub3d->px + scale.right_left - PLAYER_SIZE / 2) > 0 && (_cub3d->px + scale.right_left + PLAYER_SIZE / 2) < _cub3d->width * PIXEL
-		&& (_cub3d->py + scale.up_down - PLAYER_SIZE / 2) > 0 && (_cub3d->py + scale.up_down + PLAYER_SIZE / 2) < _cub3d->height * PIXEL)
-	{
-		_cub3d->px += scale.right_left;
-		_cub3d->py += scale.up_down;
-	}
 	y =  -PLAYER_SIZE / 2;
 	dest.x = _cub3d->px;
 	dest.y = _cub3d->py;
+	line_rotation(_cub3d, &dest, line_lenth);
+	
+	if (scale.up_down)
+	{
+		if (_cub3d->map[((_cub3d->py + (scale.up_down * (dest.y - _cub3d->py) / line_lenth)) / PIXEL) + 6][(_cub3d->px + (scale.up_down * (dest.x - _cub3d->px) / line_lenth)) / PIXEL] != '1')
+		{
+			_cub3d->px = _cub3d->px + (scale.up_down * (dest.x - _cub3d->px) / line_lenth);
+			_cub3d->py = _cub3d->py + (scale.up_down * (dest.y - _cub3d->py) / line_lenth);
+			dest.x = _cub3d->px;
+			dest.y = _cub3d->py;
+			line_rotation(_cub3d, &dest, line_lenth);
+		}
+	}
 	while (y < PLAYER_SIZE / 2)
 	{
 		x = -PLAYER_SIZE / 2;
@@ -214,7 +211,6 @@ void	draw_player(t_cub3d *_cub3d, t_scale scale)
 		}
 		y++;
 	}
-	line_rotation(_cub3d, &dest, line_lenth);
 	draw_line(_cub3d , dest);
 }
 
