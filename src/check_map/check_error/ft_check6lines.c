@@ -3,50 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check6lines.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzeroual <mzeroual@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:25:24 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/06/15 17:25:26 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/07/28 23:08:09 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../../../include/cub3d.h"
 
-int	check_file_exist(char *file_name)
+static int	check_file_exist(char *file_name)
 {
 	int	fd;
 
+	if (!file_name)
+		return (0);
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 		return (0);
 	return (1);
 }
 
-int	ft_check4lines(char *line, int pos, char **map)
+static int	ft_check4lines(char *line, int pos)
 {
 	char	**file_texture;
 
-	file_texture = ft_split(line, ' ');
-	if ((pos != 0 || ft_strncmp(line, "NO ", 3))
-		&& (pos != 1 || ft_strncmp(line, "SO ", 3))
-		&& (pos != 2 || ft_strncmp(line, "WE ", 3))
-		&& (pos != 3 || ft_strncmp(line, "EA ", 3)))
-	{
-		ft_putstr_fd("Error\n\tCardinal directions.\n", 2);
-		ft_free_map(map);
+	if (!line)
 		return (0);
-	}
+	file_texture = ft_split(line, ' ');
+	if ((pos != 0 || ft_strncmp(*file_texture, "NO", 3))
+		&& (pos != 1 || ft_strncmp(*file_texture, "SO", 3))
+		&& (pos != 2 || ft_strncmp(*file_texture, "WE", 3))
+		&& (pos != 3 || ft_strncmp(*file_texture, "EA", 3)))
+		return (0);
 	if (!check_file_exist(file_texture[1]))
-		return (ft_putstr_fd("Error\n\t\
- File texture does not exist.\n", 2), ft_free_map(map), 0);
+		return (0);
 	ft_free_map(file_texture);
 	return (1);
 }
 
-int	ft_check_double_coma(char *line)
+static int	ft_check_double_coma(char *line)
 {
 	int	i;
 
+	if (!line)
+		return (0);
 	i = 0;
 	while (line[i])
 	{
@@ -58,56 +59,49 @@ int	ft_check_double_coma(char *line)
 	return (1);
 }
 
-int	ft_check4_5lines(char *line, int pos, char **map)
+static int	ft_check4_5lines(char *line, int pos)
 {
 	int		i;
 	int		num;
 	char	**str;
 	char	**number;
 
+	if (!line)
+		return (0);
 	number = 0;
-	if ((pos != 4 || ft_strncmp(line, "F", 1))
-		&& (pos != 5 || ft_strncmp(line, "C", 1)))
-		return (ft_putstr_fd("Error\n\tF and C error.\n", 2), \
-		ft_free_map(map), 0);
-	else
+	str = ft_split(line, ' ');
+	if ((pos != 4 || ft_strncmp(*str, "F", 2))
+		&& (pos != 5 || ft_strncmp(*str, "C", 2)))
+		return (0);
+	number = ft_split(str[1], ',');
+	if (!number || !ft_check_double_coma(str[1]) || str[2])
+		return (0);
+	i = 0;
+	while (number[i])
 	{
-		str = ft_split(line, ' ');
-		number = ft_split(str[1], ',');
-		if (!ft_check_double_coma(str[1]))
-			return (ft_putstr_fd("Error\n\tComa.\n", 2), ft_free_map(str), 0);
-		i = 0;
-		while (number[i])
-		{
-			num = ft_atoi(number[i++]);
-			if (num < 0 || num > 255)
-				return (ft_putstr_fd("Error\n\t\
- Number out of Range in RGB.\n", 2), ft_free_map(str), ft_free_map(map), 0);
-		}
+		num = ft_atoi(number[i++]);
+		if (num < 0 || num > 255 || i > 3)
+			return (0);
 	}
 	return (ft_free_map(str), ft_free_map(number), 1);
 }
 
-void	ft_check6lines(char **map)
+int	ft_check6lines(char **map)
 {
-	int	i;
 	int	first6line;
 
+	if (!map || !*map)
+		return (0);
 	first6line = 0;
 	while (first6line < 6)
 	{
-		i = 0;
-		while (map[first6line][i] && (map[first6line][i] == ' '
-			|| map[first6line][i] == '\t'))
-			i++;
-		free(map[first6line]);
-		map[first6line] = ft_strdup(&map[first6line][i]);
 		if (first6line < 4)
-			if (!ft_check4lines(map[first6line], first6line, map))
-				exit(EXIT_FAILURE);
+			if (!ft_check4lines(map[first6line], first6line))
+				return (0);
 		if (first6line >= 4 && first6line < 6)
-			if (!ft_check4_5lines(map[first6line], first6line, map))
-				exit(EXIT_FAILURE);
+			if (!ft_check4_5lines(map[first6line], first6line))
+				return (0);
 		first6line++;
 	}
+	return (1);
 }

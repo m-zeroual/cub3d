@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzeroual <mzeroual@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 18:51:54 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/06/15 18:51:57 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/07/28 23:08:31 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../../include/cub3d.h"
 
-int	condition(int i, int j, int *player, char **new_map)
+static int	condition(int i, int j, int *player, char **new_map)
 {
 	if (new_map[i][j] == 'N' || new_map[i][j] == 'W' || new_map[i][j] == 'E'
 	|| new_map[i][j] == 'S' || new_map[i][j] == ' ' || new_map[i][j] == '0'
@@ -38,7 +38,7 @@ int	condition(int i, int j, int *player, char **new_map)
 	return (1);
 }
 
-int	ft_check_line(char *line)
+static int	ft_check_line(char *line)
 {
 	int	i;
 
@@ -50,7 +50,7 @@ int	ft_check_line(char *line)
 	return (0);
 }
 
-int	check_map(char **new_map, char **last_map)
+static int	check_map(char **new_map, char **last_map)
 {
 	int	i;
 	int	line;
@@ -65,7 +65,7 @@ int	check_map(char **new_map, char **last_map)
 		while (line == 6 && ft_check_line(last_map[i]))
 			i++;
 		if (ft_strncmp(new_map[line], last_map[i], ft_strlen(new_map[line])))
-			return (ft_putstr_fd("Map error.\n", 2), 0);
+			return (ft_putstr_fd("Map Error.\n", 2), 0);
 		colum = 0;
 		while (new_map[line][colum])
 		{
@@ -75,7 +75,7 @@ int	check_map(char **new_map, char **last_map)
 		}
 	}
 	if (player != 1)
-		return (ft_putstr_fd("Error\n\tPlayer.\n", 2), 0);
+		return (ft_putstr_fd("Error Player.\n", 2), 0);
 	return (1);
 }
 
@@ -89,15 +89,11 @@ char	**parse_map(char *map_name)
 	if (!map)
 		return (ft_putstr_fd("Error\n\tGeneral error.\n", 2), NULL);
 	new_map = ft_clean_map(map);
-	if (!new_map)
+	if (!new_map || !*new_map)
 		return (ft_free_map(map), NULL);
-	ft_display_map(new_map);
 	if (!check_map(new_map, map))
-	{
-		ft_free_map(new_map);
-		ft_free_map(map);
-		exit(EXIT_FAILURE);
-	}
+		return (ft_free_map(new_map), ft_free_map(map), NULL);
+	ft_display_map(new_map);
 	ft_free_map(map);
 	return (new_map);
 }

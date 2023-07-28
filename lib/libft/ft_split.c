@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzeroual <mzeroual@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 19:35:07 by mzeroual          #+#    #+#             */
-/*   Updated: 2022/10/11 18:43:53 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/07/28 19:52:56 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ char	**ft_split(char const *s, char c)
 	int		j;
 	int		k;
 
-	if (!s)
-		return (0);
+	if (!s || !*s)
+		return (NULL);
 	i = 0;
 	j = check_len(s, c);
 	str = ft_calloc(j + 1, sizeof(char *));
 	if (!str)
-		return (0);
+		return (NULL);
 	j = 0;
 	while (s[j])
 	{

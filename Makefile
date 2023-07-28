@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mzeroual <mzeroual@student.1337.ma>        +#+  +:+       +#+         #
+#    By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/17 13:12:29 by mzeroual          #+#    #+#              #
-#    Updated: 2023/07/23 18:51:00 by mzeroual         ###   ########.fr        #
+#    Updated: 2023/07/25 22:50:57 by mzeroual         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ SRCS	= 	src/main.c \
 			src/check_map/check_error/ft_check6lines.c \
 			src/check_map/ft_utils.c \
 			src/cub3d/ft_display_map.c \
+			src/cub3d/ft_draw_map.c \
+			src/cub3d/img_pixl_put.c \
 			src/cub3d/cub3d.c \
 			$(PATH_GET_NEXT_LINE)get_next_line.c \
 			$(PATH_GET_NEXT_LINE)get_next_line_utils.c

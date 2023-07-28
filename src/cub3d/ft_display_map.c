@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_display_map.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzeroual <mzeroual@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:46:14 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/06/13 08:46:16 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/07/28 20:06:58 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void ft_display_map(char **map)
 {
 	if (!map)
 		return ;
-	int i = 6;
+	int i = 0;
 	while (map[i])
 		printf("%s\n", map[i++]);
 

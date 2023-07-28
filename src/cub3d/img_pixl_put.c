@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   img_pixl_put.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 09:18:38 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/07/28 23:06:40 by mzeroual         ###   ########.fr       */
+/*   Created: 2023/07/25 22:35:53 by mzeroual          #+#    #+#             */
+/*   Updated: 2023/07/25 22:54:41 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../include/cub3d.h"
+#include "./../../include/cub3d.h"
 
-
-int main(int ac, char *av[])
+void	img_pixl_put(t_cub3d *_cub3d, int x, int y, int color)
 {
-	t_cub3d _cub3d;
-	if (ac == 2)
-	{
-		_cub3d.map = parse_map(av[1]);
-		if (!_cub3d.map)
-			return (1);
-		
-		cub3d(&_cub3d);
-	}
-	else
-		ft_putstr_fd("Error\n\tYou need map file ended with extension \".cub\".\n", 2);
-	return (0);
+	char    *pixel;
+
+    pixel = _cub3d->img.addr + (y * _cub3d->img.line_len + x * (_cub3d->img.bpp / 8));
+	*(int *)pixel = color;
 }

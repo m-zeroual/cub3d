@@ -3,14 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzeroual <mzeroual@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 09:20:00 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/06/13 09:20:03 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/07/28 23:09:27 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../../include/cub3d.h"
+
+static int	all_line_speace(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != ' ' || line[i] != '\t')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	ft_count_without_newline(char **map)
+{
+	char	*line;
+	int		i;
+	int		count;
+
+	i = 0;
+	count = 0;
+	while (map[i])
+	{
+		line = ft_strtrim(map[i], "\n");
+		if (*line)
+			count++;
+		free(line);
+		i++;
+	}
+	return (count);
+}
 
 int	ft_count_map(char *map_name)
 {
@@ -31,25 +64,6 @@ int	ft_count_map(char *map_name)
 	}
 	close(fd);
 	return (size);
-}
-
-int	ft_count_without_newline(char **map)
-{
-	char	*line;
-	int		i;
-	int		count;
-
-	i = 0;
-	count = 0;
-	while (map[i])
-	{
-		line = ft_strtrim(map[i], "\n");
-		if (*line)
-			count++;
-		free(line);
-		i++;
-	}
-	return (count);
 }
 
 char	**ft_read_map(char *map_name)
@@ -75,20 +89,6 @@ char	**ft_read_map(char *map_name)
 	return (map);
 }
 
-int	speace_and_tab(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] != ' ' && line[i] != '\t')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 char	**ft_clean_map(char **map)
 {
 	char	*line;
@@ -104,12 +104,13 @@ char	**ft_clean_map(char **map)
 	while (map[i])
 	{
 		line = ft_strtrim(map[i], "\n");
-		if (*line && speace_and_tab(line))
+		if (*line && all_line_speace(line))
 			new_map[i_new_map++] = ft_strdup(line);
 		free(line);
 		i++;
 	}
 	new_map[i_new_map] = 0;
-	ft_check6lines(new_map);
+	if (!ft_check6lines(new_map))
+		return (ft_free_map(map), NULL);
 	return (new_map);
 }
