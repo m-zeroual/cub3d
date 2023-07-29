@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:25:24 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/07/28 23:08:09 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/07/29 12:34:30 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,20 @@ static int	ft_check4lines(char *line, int pos)
 
 static int	ft_check_double_coma(char *line)
 {
-	int	i;
+	int		i;
+	int		j;
+	char	**number;
 
 	if (!line)
 		return (0);
+	number = ft_split(line, ',');
+	j = 0;
+	while (number[j])
+		j++;
 	i = 0;
 	while (line[i])
 	{
-		if (line[0] == ',' || line[ft_strlen(line) - 1] == ','
+		if (j != 3 || line[0] == ',' || line[ft_strlen(line) - 1] == ','
 			|| (line[i] == ',' && line[i + 1] == ','))
 			return (0);
 		i++;

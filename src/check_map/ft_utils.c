@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 09:20:00 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/07/28 23:09:27 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/07/29 12:20:32 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ static int	all_line_speace(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] != ' ' || line[i] != '\t')
-			return (1);
+		if (line[i] != ' ' && line[i] != '\t')
+			return (0);
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
 int	ft_count_without_newline(char **map)
@@ -104,13 +104,13 @@ char	**ft_clean_map(char **map)
 	while (map[i])
 	{
 		line = ft_strtrim(map[i], "\n");
-		if (*line && all_line_speace(line))
+		if (*line && !all_line_speace(line))
 			new_map[i_new_map++] = ft_strdup(line);
 		free(line);
 		i++;
 	}
 	new_map[i_new_map] = 0;
 	if (!ft_check6lines(new_map))
-		return (ft_free_map(map), NULL);
+		return (ft_free_map(new_map), ft_free_map(map), NULL);
 	return (new_map);
 }

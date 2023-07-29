@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 18:51:54 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/07/28 23:08:31 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/07/29 12:03:23 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	**parse_map(char *map_name)
 		return (ft_putstr_fd("Error\n\tGeneral error.\n", 2), NULL);
 	new_map = ft_clean_map(map);
 	if (!new_map || !*new_map)
-		return (ft_free_map(map), NULL);
+		return (NULL);
 	if (!check_map(new_map, map))
 		return (ft_free_map(new_map), ft_free_map(map), NULL);
 	ft_display_map(new_map);

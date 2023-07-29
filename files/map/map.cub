@@ -2,8 +2,14 @@
 SO ./files/texture/south_texture
 WE      ./files/texture/west_texture
 EA         ./files/texture/east_texture
-F 55,25,12
-C 225,30,0
+F 55,25,55
+C 225,30,77
+
+
+            
+
+
+
 1111        11111111
 1001        100011101
 1011        10001111
