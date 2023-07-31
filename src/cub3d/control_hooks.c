@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   control_hooks.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:14:30 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/07/27 17:00:45 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/07/31 19:00:38 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	redraw_all(t_cub3d *_cub3d, t_scale scale)
 	&_cub3d->img.line_len, &_cub3d->img.endian);
 	draw_map(_cub3d);
 	draw_player(_cub3d, scale);
+	draw_ray(_cub3d);
 	mlx_put_image_to_window(_cub3d->mlx_ptr, _cub3d->mlx_win, _cub3d->img.mlx_img, 0, 0);
 }
 
@@ -42,13 +43,13 @@ int	key_hook(int key, t_cub3d *_cub3d)
 	t_scale	scale;
 
 	scale.right_left = 0;
-	scale.up_down = 0;
+	scale.walk = 0;
 	if (key == ESC)
 		close_window(_cub3d);
 	else if (key == W_KEY)
-		scale.up_down = _cub3d->step_size;
+		scale.walk = _cub3d->step_size;
 	else if (key == S_KEY)
-		scale.up_down = -_cub3d->step_size;
+		scale.walk = -_cub3d->step_size;
 	// else if (key == D_KEY)
 	// 	scale.right_left = _cub3d->step_size;
 	// else if (key == A_KEY)
@@ -56,12 +57,12 @@ int	key_hook(int key, t_cub3d *_cub3d)
 	else if (key == ARROW_RIGHT)
 	{
 		printf("CAMERA RIGHT\n");
-		_cub3d->rotation_angle -= 10;
+		_cub3d->rotation_angle += 3;
 	}
 	else if (key == ARROW_LEFT)
 	{
 		printf("CAMERA LEFT\n");
-		_cub3d->rotation_angle += 10;
+		_cub3d->rotation_angle -= 3;
 		
 	}
 	else if (key == MINUS)

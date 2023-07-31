@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/07/26 16:43:38 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/07/31 18:45:06 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_img
 typedef struct s_scale
 {
 	int		right_left;
-	int		up_down;
+	int		walk;
 }	t_scale;
 
 typedef struct s_point
@@ -82,14 +82,14 @@ typedef struct s_cub3d
 	void	*mlx_ptr;
 	void	*mlx_win;
 	float   player_facing;
+	// double	rotation_angle;
 	int		rotation_angle;
-	// float   rotation_angle;
 	int     turn_direction;
 	int     walk_direction;
 	int     step_size;
-	int     px;
-	int     py;
-
+	float     px;
+	float     py;
+	
 	t_img   img;
 } t_cub3d;
 
@@ -119,6 +119,7 @@ void	ft_display(char **map);
 void	draw_map(t_cub3d *_cub3d);
 void	draw_player(t_cub3d *_cub3d, t_scale scale);
 void	draw_line(t_cub3d *_cub3d ,t_point p2);
+void	draw_ray(t_cub3d *_cub3d);
 void	img_pix_put(t_cub3d *_cub3d, int x, int y, int color);
 
 

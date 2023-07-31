@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:45 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/07/27 16:59:23 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/07/31 19:18:05 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,30 +39,6 @@ void ft_count(t_cub3d *_cub3d, int *width, int *height)
 		i++;
 	}
 }
-
-// void	img_pix_put(t_cub3d *_cub3d, int x, int y, int color)
-// {
-// 	char    *pixel;
-
-//     pixel = _cub3d->img.addr + (y * _cub3d->img.line_len + x * (_cub3d->img.bpp / 8));
-// 	*(int *)pixel = color;
-// }
-
-// void ft_draw_ray(int x1, int y1, int targetX, int targetY)
-// {
-// 	// int y;
-// 	// int x;
-
-// 	(void)x1;
-// 	(void)y1;
-// 	(void)targetX;
-// 	(void)targetY;
-
-
-// 	// while ();
-
-// }
-
 
 void ft_put_pixle(t_cub3d *_cub3d, char c, int x1, int y1)
 {
@@ -110,108 +86,89 @@ void draw_map(t_cub3d *_cub3d)
 	}
 }
 
-// void	ft_update_player(t_cub3d *_cub3d)
-// {
-// 	(void)_cub3d;
-// 	_cub3d->px -= 3; 
-// }
-
-// void left(t_cub3d *_cub3d)
-// {
-// 	// ft_update_player(_cub3d);
-// }
-
-// void up(t_cub3d *_cub3d)
-// {
-// 	_cub3d->py -= 5;
-// }
-
-// int	quit(void)
-// {
-// 	exit(EXIT_SUCCESS);
-// 	return (0);
-// }
-
-// int	key_hook(int keyCode, t_cub3d *_cub3d)
-// {
-// 	(void)_cub3d;
-// 	if (keyCode == 123)
-// 	{
-// 		_cub3d->turn_direction = -1;
-// 		printf("left\n");
-// 	}
-// 	if (keyCode == 124)
-// 	{
-// 		_cub3d->turn_direction = 1;
-// 		printf("right\n");
-// 	}
-// 	if (keyCode == 125)
-// 	{
-// 		printf("down\n");
-// 	}
-// 	if (keyCode == 126)
-// 	{
-// 		// up(_cub3d);
-// 		printf("up\n");
-// 	}
-// 	if (keyCode == 53)
-// 		quit();
-// 	return (0);
-// }
-
-void	line_rotation(t_cub3d *_cub3d, t_point *point, int line_lenth)
+int	horisontal_intersection(t_cub3d *_cub3d, t_point *dest)
 {
+	int	start_y;
+	int	start_x;
+
+	start_y = (int)(_cub3d->py / PIXEL)  * PIXEL;
+	start_x = start_y + ((_cub3d->py - start_y) / tan(_cub3d->rotation_angle));
+	while (1)
+	{
+		if (_cub3d->map[start_y / PIXEL + 6][start_y / PIXEL] == '1')
+			break;
+		if (_cub3d->rotation_angle >= 0 && _cub3d->rotation_angle <= 180)
+			start_y += PIXEL;
+		else
+			start_y -= PIXEL;
+		start_x += start_y / tan(_cub3d->rotation_angle);
+	}
+	dest->x = start_x;
+	dest->y = start_y;
+	return (sqrt(pow(start_x, 2) + pow(start_y, 2)));
+}
+
+// void	point_rotation(t_cub3d *_cub3d, float *x, float *y, int rotation_angle)
+// {
+// 	if (_cub3d->rotation_angle > 0)
+// 			_cub3d->rotation_angle = _cub3d->rotation_angle % 360;
+// 	if (_cub3d->rotation_angle <= 0)
+// 		_cub3d->rotation_angle = (360 + _cub3d->rotation_angle) % 360;
+// 	x += cos(_cub3d->rotation_angle * M_PI / 180) * line_lenth;
+// 	y += sin(_cub3d->rotation_angle * M_PI / 180) * line_lenth;
+// }
+
+void	draw_ray(t_cub3d *_cub3d)
+{
+	t_point	dest;
+	int		line_lenth;
+
+	dest.x = _cub3d->px;
+	dest.y = _cub3d->py;
+	// horisontal_intersection(_cub3d, dest);
+	line_lenth = 50;
 	if (_cub3d->rotation_angle > 0)
 		_cub3d->rotation_angle = _cub3d->rotation_angle % 360;
-	if (_cub3d->rotation_angle < 0)
+	if (_cub3d->rotation_angle <= 0)
 		_cub3d->rotation_angle = (360 + _cub3d->rotation_angle) % 360;
-
-	point->x += cos(_cub3d->rotation_angle * M_PI / 180) * line_lenth;
-	point->y += -sin(_cub3d->rotation_angle * M_PI / 180) * line_lenth;
-	printf("%f\n", _cub3d->rotation_angle * M_PI / 180);
-// (double)
+	dest.x += cos(_cub3d->rotation_angle * M_PI / 180) * line_lenth;
+	dest.y += sin(_cub3d->rotation_angle * M_PI / 180) * line_lenth;
+	draw_line(_cub3d , dest);
 }
 
 void	draw_player(t_cub3d *_cub3d, t_scale scale)
 {
-	t_point	dest;
-	int		line_lenth;
-	int x;
-	int y;
+	int		i;
+	int 	j;
+	float	new_x;
+	float	new_y;
 
-	line_lenth = 50;
-	// if (_cub3d->map[((_cub3d->py + scale.up_down) / PIXEL) + 6][(_cub3d->px + scale.right_left) / PIXEL] != '1')
-	// {
-	// 	_cub3d->px += scale.right_left;
-	// 	_cub3d->py += scale.up_down;
-	// }
-	y =  -PLAYER_SIZE / 2;
-	dest.x = _cub3d->px;
-	dest.y = _cub3d->py;
-	line_rotation(_cub3d, &dest, line_lenth);
-	
-	if (scale.up_down)
+	if (scale.walk)
 	{
-		if (_cub3d->map[((_cub3d->py + (scale.up_down * (dest.y - _cub3d->py) / line_lenth)) / PIXEL) + 6][(_cub3d->px + (scale.up_down * (dest.x - _cub3d->px) / line_lenth)) / PIXEL] != '1')
+		if (_cub3d->rotation_angle > 0)
+			_cub3d->rotation_angle = _cub3d->rotation_angle % 360;
+		if (_cub3d->rotation_angle <= 0)
+			_cub3d->rotation_angle = (360 + _cub3d->rotation_angle) % 360;
+		printf("angel value: %d\n", _cub3d->rotation_angle);
+		new_x = _cub3d->px + cos(_cub3d->rotation_angle * M_PI / 180) * scale.walk;
+		new_y = _cub3d->py + sin(_cub3d->rotation_angle * M_PI / 180) * scale.walk;
+		if (_cub3d->map[(int)new_y / PIXEL + 6][(int)new_x / PIXEL] != '1')
 		{
-			_cub3d->px = _cub3d->px + (scale.up_down * (dest.x - _cub3d->px) / line_lenth);
-			_cub3d->py = _cub3d->py + (scale.up_down * (dest.y - _cub3d->py) / line_lenth);
-			dest.x = _cub3d->px;
-			dest.y = _cub3d->py;
-			line_rotation(_cub3d, &dest, line_lenth);
+			_cub3d->px = new_x;
+			_cub3d->py = new_y;
 		}
 	}
-	while (y < PLAYER_SIZE / 2)
+	i =  -PLAYER_SIZE / 2;
+	while (i < PLAYER_SIZE / 2)
 	{
-		x = -PLAYER_SIZE / 2;
-		while (x < PLAYER_SIZE / 2)
+		j = -PLAYER_SIZE / 2;
+		while (j < PLAYER_SIZE / 2)
 		{
-			img_pix_put(_cub3d, _cub3d->px + x, _cub3d->py + y, 0xFF0000);
-			x++;
+			img_pix_put(_cub3d, round(_cub3d->px + j), round(_cub3d->py + i), 0xFF0000);
+			j++;
 		}
-		y++;
+		i++;
 	}
-	draw_line(_cub3d , dest);
 }
 
 void cub3d(t_cub3d *_cub3d)
@@ -220,7 +177,7 @@ void cub3d(t_cub3d *_cub3d)
 	int height = 0;
 	t_scale	scale;
 
-	scale.up_down = 0;
+	scale.walk = 0;
 	scale.right_left = 0;
 	ft_count(_cub3d, &_cub3d->width, &_cub3d->height);
 	_cub3d->rotation_angle = 0;
@@ -231,6 +188,7 @@ void cub3d(t_cub3d *_cub3d)
 	_cub3d->img.addr = mlx_get_data_addr(_cub3d->img.mlx_img, &_cub3d->img.bpp, &_cub3d->img.line_len, &_cub3d->img.endian);
 	draw_map(_cub3d);
 	draw_player(_cub3d, scale);
+	draw_ray(_cub3d);
 	mlx_put_image_to_window(_cub3d->mlx_ptr, _cub3d->mlx_win, _cub3d->img.mlx_img, width, height);
 	
 	mlx_hook(_cub3d->mlx_win, 2, 0, &key_hook, _cub3d);

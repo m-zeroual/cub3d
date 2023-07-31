@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 19:13:17 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/07/27 15:26:00 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/07/31 19:05:04 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	img_pix_put(t_cub3d *_cub3d, int x, int y, int color)
     pixel = _cub3d->img.addr + (y * _cub3d->img.line_len + x * (_cub3d->img.bpp / 8));
 	*(int *)pixel = color;
 }
-
 
 static int	take_decision(t_line *line, t_point *p1, t_point *p2)
 {
@@ -52,6 +51,25 @@ static void	direction(t_point p1, t_point p2, t_line *line)
 		line->incre_y = -1;
 }
 
+// dda
+// void	draw_line(t_cub3d *_cub3d ,t_point p2)
+// {
+//     int dx = p2.x - _cub3d->px;
+//     int dy = p2.y - _cub3d->py;
+//     int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+//     float xIncrement = (float)dx / steps;
+//     float yIncrement = (float)dy / steps;
+
+//     float x = _cub3d->px;
+//     float y = _cub3d->py;
+
+//     for (int i = 0; i <= steps; i++) {
+// 		img_pix_put(_cub3d, round(x), round(y), 0x00FFFF);
+//         x += xIncrement;
+//         y += yIncrement;
+//     }
+// }
+
 void	draw_line(t_cub3d *_cub3d ,t_point p2)
 {
 	t_line	line;
@@ -65,7 +83,8 @@ void	draw_line(t_cub3d *_cub3d ,t_point p2)
 	line.error = line.delta_x + line.delta_y;
 	while (1)
 	{
-		if (p1.x >= 0 && p1.x < (_cub3d->width * PIXEL) + 2 && p1.y >= 0 && p1.y < (_cub3d->height * PIXEL) + 2)
+		if (p1.x >= 0 && p1.x < (_cub3d->width * PIXEL) + 2 \
+		&& p1.y >= 0 && p1.y < (_cub3d->height * PIXEL) + 2)
 			img_pix_put(_cub3d, p1.x, p1.y, 0x00FFFF);
 		if (p1.x == p2.x && p1.y == p2.y)
 			break ;
