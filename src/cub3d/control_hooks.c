@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:14:30 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/07/31 19:00:38 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/01 11:24:28 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,17 @@ int	key_hook(int key, t_cub3d *_cub3d)
 	if (key == ESC)
 		close_window(_cub3d);
 	else if (key == W_KEY)
+	{
+		// _cub3d->px += cos(_cub3d->rotation_angle * M_PI / 180) * 30;
+		// _cub3d->py += sin(_cub3d->rotation_angle * M_PI / 180) * 30;
 		scale.walk = _cub3d->step_size;
+	}
 	else if (key == S_KEY)
+	{
+		// _cub3d->px -= cos(_cub3d->rotation_angle * M_PI / 180) * 30;
+		// _cub3d->py -= sin(_cub3d->rotation_angle * M_PI / 180) * 30;
 		scale.walk = -_cub3d->step_size;
+	}
 	// else if (key == D_KEY)
 	// 	scale.right_left = _cub3d->step_size;
 	// else if (key == A_KEY)
