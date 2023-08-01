@@ -6,13 +6,13 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/07/28 22:18:15 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/01 10:17:13 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#ifndef	CUB3D_FT
-# define CUB3D_FT
+#ifndef	CUB3D_H
+# define CUB3D_H
 
 # include "./../lib/libft/libft.h"
 # include "./../lib/get_next_line/get_next_line.h"
@@ -21,6 +21,10 @@
 # include <stdio.h>
 
 #define PIXEL 50
+#define UP 1
+#define DOWN 0
+#define RIGHT 1
+#define LEFT 0
 
 typedef struct s_img
 {
@@ -31,6 +35,11 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
+typedef struct s_calcul
+{
+	
+}	t_calcul;
+
 typedef struct s_cub3d
 {
 	int     height;
@@ -38,15 +47,25 @@ typedef struct s_cub3d
 	char    **map;
 	void	*mlx_ptr;
 	void	*mlx_win;
-	int     px;
-	int     py;
+	int		up_down;
+	int		left_right;
+	float     px;
+	float     py;
 
-	int     	endx;
-	int     	endy;
+	float     	startx;
+	float     	starty;
+	float     	stepx;
+	float     	stepy;
+	float     	endx;
+	float     	endy;
+	float     	endxv;
+	float     	endyv;
+	
+	
+	float     sx;
+	float     sy;
+
 	int     rotation;
-
-
-
 
 
 	t_img   img;
