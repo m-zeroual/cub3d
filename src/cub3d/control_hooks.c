@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:14:30 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/01 11:24:28 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/01 15:21:35 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ int	key_hook(int key, t_cub3d *_cub3d)
 	else if (key == ARROW_RIGHT)
 	{
 		printf("CAMERA RIGHT\n");
-		_cub3d->rotation_angle += 3;
+		_cub3d->rotation_angle -= 3;
 	}
 	else if (key == ARROW_LEFT)
 	{
 		printf("CAMERA LEFT\n");
-		_cub3d->rotation_angle -= 3;
+		_cub3d->rotation_angle += 3;
 		
 	}
 	else if (key == MINUS)

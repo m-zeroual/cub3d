@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:45 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/01 12:37:38 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/01 15:21:10 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,36 +90,51 @@ int	horisontal_intersection(t_cub3d *_cub3d, t_point *dest)
 {
 	int	start_y;
 	int	start_x;
+	int	check;
 
-	start_y = (int)(_cub3d->py / PIXEL)  * PIXEL;
-	start_x = _cub3d->px + ((start_y - _cub3d->py) / tan(_cub3d->rotation_angle * M_PI / 180));
+	if (_cub3d->rotation_angle > 0)
+		_cub3d->rotation_angle = _cub3d->rotation_angle % 360;
+	if (_cub3d->rotation_angle <= 0)
+		_cub3d->rotation_angle = (360 + _cub3d->rotation_angle) % 360;
+
+	if (_cub3d->rotation_angle >= 0 && _cub3d->rotation_angle <= 180)
+		start_y = (int)(_cub3d->py / PIXEL)  * PIXEL;
+	else
+		start_y = (int)(_cub3d->py / PIXEL)  * PIXEL + 50;
+
+	start_x = _cub3d->px + ((_cub3d->py - start_y) / tan(_cub3d->rotation_angle * M_PI / 180));
+	
+	check = 0;
 	if (_cub3d->rotation_angle > 180 && _cub3d->rotation_angle <= 360)
-		start_y--;
+		check = 1;
+	printf("rotation angle :%d\n", _cub3d->rotation_angle);
+	printf("start (%d, %d)\n", start_x, start_y);
 	while (start_x >= 0 && start_x < (_cub3d->width * PIXEL) && start_y >= 0 && start_y < (_cub3d->height * PIXEL))
 	{
-		if (_cub3d->map[(int)((start_y) / PIXEL) + 6][(int)(start_x / PIXEL)] == '1')
+		if (_cub3d->map[(int)((start_y - check) / PIXEL) + 6][(int)(start_x / PIXEL)] == '1')
 			break;
 		// start_y -= PIXEL;
 		if (_cub3d->rotation_angle > 180 && _cub3d->rotation_angle <= 360)
-			start_y -= PIXEL;
-		else if (_cub3d->rotation_angle > 0 && _cub3d->rotation_angle <= 180)
 			start_y += PIXEL;
-		if (_cub3d->rotation_angle > 270 && _cub3d->rotation_angle <= 90)
-			start_x -= start_y / tan(_cub3d->rotation_angle * M_PI / 180);
-		else 
-			start_x += start_y / tan(_cub3d->rotation_angle * M_PI / 180);
+		else if (_cub3d->rotation_angle > 0 && _cub3d->rotation_angle <= 180)
+			start_y -= PIXEL;
+		// if (_cub3d->rotation_angle > 270 && _cub3d->rotation_angle <= 90)
+		// 	start_x -= PIXEL / tan(_cub3d->rotation_angle * M_PI / 180);
+		// else 
+		start_x += PIXEL / tan(_cub3d->rotation_angle * M_PI / 180);
 	}
 	dest->x = start_x;
 	dest->y = start_y;
+	
 	return (sqrt(pow(start_x, 2) + pow(start_y, 2)));
 }
 
 // void	point_rotation(t_cub3d *_cub3d, float *x, float *y, int rotation_angle)
 // {
-// 	if (_cub3d->rotation_angle > 0)
-// 			_cub3d->rotation_angle = _cub3d->rotation_angle % 360;
-// 	if (_cub3d->rotation_angle <= 0)
-// 		_cub3d->rotation_angle = (360 + _cub3d->rotation_angle) % 360;
+	// if (_cub3d->rotation_angle > 0)
+	// 		_cub3d->rotation_angle = _cub3d->rotation_angle % 360;
+	// if (_cub3d->rotation_angle <= 0)
+	// 	_cub3d->rotation_angle = (360 + _cub3d->rotation_angle) % 360;
 // 	x += cos(_cub3d->rotation_angle * M_PI / 180) * line_lenth;
 // 	y += sin(_cub3d->rotation_angle * M_PI / 180) * line_lenth;
 // }
@@ -127,20 +142,19 @@ int	horisontal_intersection(t_cub3d *_cub3d, t_point *dest)
 void	draw_ray(t_cub3d *_cub3d)
 {
 	t_point	dest;
-	// int		line_lenth;
+	int		line_lenth;
 
 	dest.x = _cub3d->px;
 	dest.y = _cub3d->py;
-	horisontal_intersection(_cub3d, &dest);
-	// line_lenth = 50;
-	// if (_cub3d->rotation_angle > 0)
-	// 	_cub3d->rotation_angle = _cub3d->rotation_angle % 360;
-	// if (_cub3d->rotation_angle <= 0)
-	// 	_cub3d->rotation_angle = (360 + _cub3d->rotation_angle) % 360;
-	// dest.x += cos(_cub3d->rotation_angle * M_PI / 180) * line_lenth;
-	// dest.y += sin(_cub3d->rotation_angle * M_PI / 180) * line_lenth;
-	// dest.x = cos(_cub3d->rotation_angle * M_PI / 180) * 6;
-	// dest.y = sin(_cub3d->rotation_angle * M_PI / 180) * 6;
+	// horisontal_intersection(_cub3d, &dest);
+	line_lenth = 50;
+	if (_cub3d->rotation_angle > 0)
+		_cub3d->rotation_angle = _cub3d->rotation_angle % 360;
+	if (_cub3d->rotation_angle <= 0)
+		_cub3d->rotation_angle = (360 + _cub3d->rotation_angle) % 360;
+	dest.x += cos(_cub3d->rotation_angle * M_PI / 180) * line_lenth;
+	dest.y += -sin(_cub3d->rotation_angle * M_PI / 180) * line_lenth;
+	printf("angle: %d\n", _cub3d->rotation_angle);
 	draw_line(_cub3d , dest);
 }
 
@@ -159,7 +173,7 @@ void	draw_player(t_cub3d *_cub3d, t_scale scale)
 			_cub3d->rotation_angle = (360 + _cub3d->rotation_angle) % 360;
 		// printf("angel value: %d\n", _cub3d->rotation_angle);
 		new_x = _cub3d->px + cos(_cub3d->rotation_angle * M_PI / 180) * scale.walk;
-		new_y = _cub3d->py + sin(_cub3d->rotation_angle * M_PI / 180) * scale.walk;
+		new_y = _cub3d->py - sin(_cub3d->rotation_angle * M_PI / 180) * scale.walk;
 		if (_cub3d->map[(int)(new_y / PIXEL) + 6][(int)((new_x + (PLAYER_SIZE / 2)) / PIXEL)] != '1' && 
 		_cub3d->map[(int)(new_y / PIXEL) + 6][(int)((new_x - (PLAYER_SIZE / 2)) / PIXEL)] != '1' && 
 		_cub3d->map[(int)((new_y - (PLAYER_SIZE / 2)) / PIXEL) + 6][(int)(new_x / PIXEL)] != '1' &&
@@ -185,9 +199,9 @@ void	draw_player(t_cub3d *_cub3d, t_scale scale)
 int	initial_direction(t_cub3d *_cub3d)
 {
 	if (_cub3d->map[(int)(_cub3d->py / PIXEL) + 6][(int)(_cub3d->px / PIXEL)] == 'N')
-		return (270);
-	else if (_cub3d->map[(int)(_cub3d->py / PIXEL) + 6][(int)(_cub3d->px / PIXEL)] == 'S')
 		return (90);
+	else if (_cub3d->map[(int)(_cub3d->py / PIXEL) + 6][(int)(_cub3d->px / PIXEL)] == 'S')
+		return (270);
 	else if (_cub3d->map[(int)(_cub3d->py / PIXEL) + 6][(int)(_cub3d->px / PIXEL)] == 'E')
 		return (0);
 	else
@@ -203,7 +217,8 @@ void cub3d(t_cub3d *_cub3d)
 	scale.walk = 0;
 	scale.right_left = 0;
 	ft_count(_cub3d, &_cub3d->width, &_cub3d->height);
-	_cub3d->rotation_angle = initial_direction(_cub3d);
+	_cub3d->rotation_angle = 222;
+	// _cub3d->rotation_angle = initial_direction(_cub3d);
 	_cub3d->step_size = 4;
 	_cub3d->mlx_ptr = mlx_init();
 	_cub3d->mlx_win = mlx_new_window(_cub3d->mlx_ptr, (_cub3d->width * PIXEL) + 2, (_cub3d->height * PIXEL) + 2, "cub3d");
