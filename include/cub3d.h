@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/01 10:17:13 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/01 16:04:52 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,25 @@
 #define RIGHT 1
 #define LEFT 0
 
+
+# define PLAYER_SIZE 10
+
+# define ESC 53
+
+# define ARROW_UP 126
+# define ARROW_DOWN 125
+# define ARROW_RIGHT 124
+# define ARROW_LEFT 123
+
+# define W_KEY 13
+# define S_KEY 1
+# define A_KEY 0
+# define D_KEY 2
+# define MINUS 78
+# define PLUS 69
+
+# define ON_DESTROY 17
+
 typedef struct s_img
 {
 	void	*mlx_img;
@@ -34,6 +53,12 @@ typedef struct s_img
 	int		line_len;
 	int		endian;
 }	t_img;
+
+typedef struct s_scale
+{
+	int		right_left;
+	int		walk;
+}	t_scale;
 
 typedef struct s_calcul
 {
