@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:45 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/01 18:17:57 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/02 21:45:59 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ int vetagorc(int x1, int y1, int x, int y)
 
 void ft_draw_ray(t_cub3d *_cub3d, int endx, int endy, int color)
 {
+	int i;
+
+	i = 0;
     int dx = endx - _cub3d->px;
     int dy = endy - _cub3d->py;
     int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
@@ -28,121 +31,16 @@ void ft_draw_ray(t_cub3d *_cub3d, int endx, int endy, int color)
     float x = _cub3d->px;
     float y = _cub3d->py;
 
-    for (int i = 0; i <= steps; i++) {
+    while (i <= steps) 
+	{
 		if (x >= 0 && x < _cub3d->width * PIXEL && y >= 0 && y < _cub3d->height * PIXEL)
 			img_pixl_put(_cub3d, (int)x, (int)y, color);
         x += xIncrement;
         y += yIncrement;
+		i++;
     }
 }
 
-
-
-void start_piont_and_step_H(t_cub3d *_cub3d)
-{
-	if (_cub3d->up_down)
-		_cub3d->starty = (((int)(_cub3d->py / PIXEL) * PIXEL));
-	else
-		_cub3d->starty = (((int)(_cub3d->py / PIXEL) * PIXEL) + PIXEL);
-	// if (_cub3d->rotation != 0 && _cub3d->rotation != 180)
-		_cub3d->startx = _cub3d->px + ((_cub3d->py - _cub3d->starty) / tan(_cub3d->rotation * M_PI / 180));
-
-	_cub3d->stepy = PIXEL;
-	// if (_cub3d->rotation != 0 && _cub3d->rotation != 180)
-		_cub3d->stepx = (_cub3d->stepy / tan(_cub3d->rotation * M_PI / 180));
-	printf("------------H-----------\n");
-	printf("|L_R = %d|\n|U_D = %d|\n", _cub3d->left_right, _cub3d->up_down);
-	printf("Angle C˚==> %d\n", _cub3d->rotation);
-	printf("Tan     ==> %f\n", tan(_cub3d->rotation * M_PI / 180));
-	printf("start   ==> (%f, %f)\n", _cub3d->startx, _cub3d->starty);
-	printf("step    ==> (%f, %f)\n", _cub3d->stepx, _cub3d->stepy);
-}
-
-
-
-
-float ft_calcul_horizontal(t_cub3d *_cub3d)
-{
-	start_piont_and_step_H(_cub3d);
-	_cub3d->endy = _cub3d->starty;
-	_cub3d->endx = _cub3d->startx;
-	int check = 0;
-	while (1)
-	{
-		if (_cub3d->up_down)
-			check = 1;
-		if (!((int)_cub3d->endx > 0 && (int)_cub3d->endx <= _cub3d->width * PIXEL)
-		|| !((int)_cub3d->endy - check > 0 &&  (int)_cub3d->endy - check <= _cub3d->height * PIXEL)
-		|| _cub3d->map[(int)((_cub3d->endy - check) / PIXEL) + 6][(int)(_cub3d->endx / PIXEL)] == '1')
-			break ;
-		if (_cub3d->up_down)
-			_cub3d->endy -= _cub3d->stepy;
-		else
-			_cub3d->endy += _cub3d->stepy;
-			
-		_cub3d->endx += _cub3d->stepx;
-	}
-	printf("px %f py %f\n", _cub3d->px, _cub3d->py);
-	printf("endx %f endy  %f\n", _cub3d->endx, _cub3d->endy);
-	ft_draw_ray(_cub3d, _cub3d->endx, _cub3d->endy, 0x00FF00);
-
-	return (vetagorc(_cub3d->endx, _cub3d->endy, _cub3d->px, _cub3d->py ));
-}
-
-// void ft_calcul_start_piont_and_step_V(t_cub3d *_cub3d)
-// {
-// 	if (_cub3d->left_right)
-// 		_cub3d->startx = (((int)(_cub3d->px / 50) * 50) + 50);
-// 	else
-// 		_cub3d->startx = (((int)(_cub3d->px / 50) * 50));
-
-// 	_cub3d->starty = _cub3d->py + ((_cub3d->px - _cub3d->startx) * tan(_cub3d->rotation * M_PI / 180));
-
-// 	_cub3d->stepx = 50;
-// 	_cub3d->stepy = (_cub3d->stepx * tan(_cub3d->rotation * M_PI / 180));
-// 	printf("------------V-----------\n");
-// 	printf("|L_R = %d|\n|U_D = %d|\n", _cub3d->left_right, _cub3d->up_down);
-// 	printf("Angle C˚==> %d\n", _cub3d->rotation);
-// 	printf("Tan     ==> %f\n", tan(_cub3d->rotation * M_PI / 180));
-// 	printf("L_R     ==> %d\n", _cub3d->left_right);
-// 	printf("start   ==> (%f, %f)\n", _cub3d->startx, _cub3d->starty);
-// 	printf("step    ==> (%f, %f)\n", _cub3d->stepx, _cub3d->stepy);
-// 	// ft_display_map(_cub3d->map);
-// }
-
-// float ft_calcul_vertical(t_cub3d *_cub3d)
-// {
-// 	ft_calcul_start_piont_and_step_V(_cub3d);
-// 	_cub3d->endyv = _cub3d->starty;
-// 	_cub3d->endxv = _cub3d->startx;
-// 	int check = 0;
-// 	printf("%f %f\n", _cub3d->endxv, _cub3d->endyv);
-
-// 	while (1)
-// 	{
-// 		if (_cub3d->left_right)
-// 			check = _cub3d->endxv;
-// 		else
-// 			check = _cub3d->endxv - 1;
-// 			printf("i = %d, j = %d\n",((int)(_cub3d->endy / 50)),  (int)(check / 50));
-// 			printf("|%c|\n", _cub3d->map[((int)(_cub3d->endy / 50)) + 6][(int)(check / 50)]);
-
-// 		if ((int)(_cub3d->endyv) < 0 ||  (int)(_cub3d->endyv) > (_cub3d->height * PIXEL)
-// 		|| ((int)(check) < 0 ||  (int)(check) > (_cub3d->width * PIXEL))
-// 		  || _cub3d->map[((int)(_cub3d->endyv / 50)) + 6][(int)(check / 50)] == '1')
-// 			break ;
-// 		if (_cub3d->left_right)
-// 			_cub3d->endxv += _cub3d->stepx;
-// 		else
-// 			_cub3d->endxv -= _cub3d->stepx;
-
-// 		_cub3d->endyv += _cub3d->stepy;
-// 		// printf("here\n");
-// 	    // printf("%f %f\n", _cub3d->endxv, _cub3d->endyv);
-// 	}
-// 	ft_draw_ray(_cub3d, _cub3d->endxv, _cub3d->endyv, 0x00FF00);
-// 	return (vetagorc(_cub3d->endxv, _cub3d->endyv, _cub3d->px, _cub3d->py));
-// }
 
 
 void ft_check_view(t_cub3d *_cub3d)
@@ -151,6 +49,7 @@ void ft_check_view(t_cub3d *_cub3d)
 		_cub3d->up_down = UP;
 	else
 		_cub3d->up_down = DOWN;
+
 	if (_cub3d->rotation >= 90 && _cub3d->rotation < 270)
 		_cub3d->left_right = LEFT;
 	else 
@@ -231,8 +130,8 @@ void ft_rotation(t_cub3d *_cub3d)
 	if (_cub3d->rotation < 0)
 		_cub3d->rotation = (360 + _cub3d->rotation) % 360;
 	
-	_cub3d->endx = _cub3d->px + cos(_cub3d->rotation * M_PI / 180) * 25;
-	_cub3d->endy = _cub3d->py + -sin(_cub3d->rotation * M_PI / 180) * 25;
+	// _cub3d->vertical.x = _cub3d->px + cos(_cub3d->rotation * M_PI / 180) * 25;
+	// _cub3d->vertical.y = _cub3d->py + -sin(_cub3d->rotation * M_PI / 180) * 25;
 }
 
 // void	draw_player(t_cub3d *_cub3d)
@@ -272,40 +171,123 @@ void ft_rotation(t_cub3d *_cub3d)
 // 	}
 // }
 
-int	initial_direction(t_cub3d *_cub3d)
+// int	initial_direction(t_cub3d *_cub3d)
+// {
+// 	if (_cub3d->map[(int)(_cub3d->py / PIXEL) + 6][(int)(_cub3d->px / PIXEL)] == 'N')
+// 		return (90);
+// 	else if (_cub3d->map[(int)(_cub3d->py / PIXEL) + 6][(int)(_cub3d->px / PIXEL)] == 'S')
+// 		return (270);
+// 	else if (_cub3d->map[(int)(_cub3d->py / PIXEL) + 6][(int)(_cub3d->px / PIXEL)] == 'E')
+// 		return (0);
+// 	else
+// 		return (180);	
+// }
+
+
+int ft_calcul_h(t_cub3d *_cub3d)
 {
-	if (_cub3d->map[(int)(_cub3d->py / PIXEL) + 6][(int)(_cub3d->px / PIXEL)] == 'N')
-		return (90);
-	else if (_cub3d->map[(int)(_cub3d->py / PIXEL) + 6][(int)(_cub3d->px / PIXEL)] == 'S')
-		return (270);
-	else if (_cub3d->map[(int)(_cub3d->py / PIXEL) + 6][(int)(_cub3d->px / PIXEL)] == 'E')
-		return (0);
+	int check = 0;
+	if (_cub3d->up_down)
+		_cub3d->start.y = (int)(_cub3d->py / PIXEL) * PIXEL;
 	else
-		return (180);	
+		_cub3d->start.y = (int)(_cub3d->py / PIXEL) * PIXEL + PIXEL;
+	_cub3d->start.x = _cub3d->px + ((_cub3d->py - _cub3d->start.y) / tan(_cub3d->rotation * M_PI / 180));
+	_cub3d->step.y = PIXEL;
+	if(_cub3d->up_down)
+		_cub3d->step.y *= -1;
+	_cub3d->step.x =  _cub3d->step.y / tan(_cub3d->rotation * M_PI / 180);
+	if (_cub3d->left_right && _cub3d->step.x < 0)
+		_cub3d->step.x *= -1;
+	if (!_cub3d->left_right && _cub3d->step.x > 0)
+		_cub3d->step.x *= -1;
+	if (_cub3d->up_down)
+		check = 1;
+	_cub3d->horizontal.y = _cub3d->start.y;
+	_cub3d->horizontal.x = _cub3d->start.x;
+	while (((int)(_cub3d->horizontal.x / PIXEL) >= 0 && (int)(_cub3d->horizontal.x / PIXEL) <= _cub3d->width)
+		&& (((int)_cub3d->horizontal.y / PIXEL) - check >= 0 &&  (int)(_cub3d->horizontal.y / PIXEL) - check <= _cub3d->height)
+		&& _cub3d->map[(int)((_cub3d->horizontal.y - check) / PIXEL) + 6][(int)(_cub3d->horizontal.x / PIXEL)] != '1')
+	{
+		_cub3d->horizontal.y += _cub3d->step.y;
+		_cub3d->horizontal.x += _cub3d->step.x;
+	}
+	printf("-------------H------------\n");
+	printf("up_down\t (%d)\n", _cub3d->up_down);
+	printf("rotation\t (%d)\n",_cub3d->rotation);
+	printf("Player\t (%f, %f)\n", _cub3d->px, _cub3d->py);
+	printf("Start\t(%f, %f)\n", _cub3d->start.x, _cub3d->start.y);
+	printf("Step \t(%f, %f)\n", _cub3d->step.x, _cub3d->step.y);
+	printf("horizontal \t(%f, %f)\n", _cub3d->horizontal.x, _cub3d->horizontal.y);
+	// ft_draw_ray(_cub3d, (int)_cub3d->horizontal.x, (int)_cub3d->horizontal.y, 0x00FF00);
+	return (vetagorc(_cub3d->horizontal.x, _cub3d->horizontal.y, _cub3d->px, _cub3d->py));
 }
 
+int ft_calcul_v(t_cub3d *_cub3d)
+{
+	int check = 0;
+	if (_cub3d->left_right)
+		_cub3d->start.x = (int)(_cub3d->px / PIXEL) * PIXEL + PIXEL;
+	else
+		_cub3d->start.x = (int)(_cub3d->px / PIXEL) * PIXEL;
+	_cub3d->start.y = _cub3d->py + ((_cub3d->px - _cub3d->start.x) * tan(_cub3d->rotation * M_PI / 180));
+
+	_cub3d->step.x = PIXEL;
+	if(!_cub3d->left_right)
+		_cub3d->step.x *= -1;
+	_cub3d->step.y =  _cub3d->step.x * tan(_cub3d->rotation * M_PI / 180);
+
+	if (_cub3d->up_down && _cub3d->step.y > 0)
+		_cub3d->step.y *= -1;
+
+	if (!_cub3d->up_down && _cub3d->step.y < 0)
+		_cub3d->step.y *= -1;
+	if (!_cub3d->left_right)
+		check = 1;
+	_cub3d->vertical.y = _cub3d->start.y;
+	_cub3d->vertical.x = _cub3d->start.x;
+	while (((int)(_cub3d->vertical.x / PIXEL) - check >= 0 && (int)(_cub3d->vertical.x / PIXEL) - check <= _cub3d->width)
+		&& (((int)_cub3d->vertical.y / PIXEL) >= 0 &&  (int)(_cub3d->vertical.y / PIXEL) < _cub3d->height)
+		&& _cub3d->map[(int)((_cub3d->vertical.y) / PIXEL) + 6][(int)((_cub3d->vertical.x - check) / PIXEL)] != '1')
+	{
+		_cub3d->vertical.y += _cub3d->step.y;
+		_cub3d->vertical.x += _cub3d->step.x;
+	}
+	printf("-------------V------------\n");
+	printf("left_right\t (%d)\n", _cub3d->left_right);
+	printf("rotation\t (%d)\n",_cub3d->rotation);
+	printf("Player\t (%f, %f)\n", _cub3d->px, _cub3d->py);
+	printf("Start\t(%f, %f)\n", _cub3d->start.x, _cub3d->start.y);
+	printf("Step \t(%f, %f)\n", _cub3d->step.x, _cub3d->step.y);
+	printf("vertical \t(%f, %f)\n", _cub3d->horizontal.x, _cub3d->horizontal.y);
+	// ft_draw_ray(_cub3d, (int)_cub3d->vertical.x, (int)_cub3d->vertical.y, 0x00FF00);
+	return (vetagorc(_cub3d->vertical.x, _cub3d->vertical.y, _cub3d->px, _cub3d->py));
+}
 
 void ft_raycating(t_cub3d *_cub3d)
 {
 	ft_check_view(_cub3d);
 	// ft_draw_ray(_cub3d, );
-	// ft_calcul_horizontal(_cub3d);
+	int dy = ft_calcul_h(_cub3d);
+	printf("%d\n", dy);
+	int dx = ft_calcul_v(_cub3d);
+	printf("%d\n", dx);
 	// ft_calcul_vertical(_cub3d);
 
-	float dy = ft_calcul_horizontal(_cub3d);
-	printf("%f\n", dy);
+	// float dy = ft_calcul_h(_cub3d);
+	// printf("%f\n", dy);
 	// ft_calcul_vertical(_cub3d);
 	// float dx = ft_calcul_vertical(_cub3d);
-	// if (dy < dx)
-	// {
-	// 	ft_draw_ray(_cub3d, _cub3d->endx, _cub3d->endy, 0xFF0000);
-	// 	printf("dy = %f\n", dy);
-	// }
-	// else
-	// {
-	// 	printf("dx = %f\n", dx);
-	// 	ft_draw_ray(_cub3d, _cub3d->endxv, _cub3d->endyv, 0x00FF00);
-	// }
+	// printf("%f\n", dx);
+	if (dy < dx)
+	{
+		ft_draw_ray(_cub3d, _cub3d->horizontal.x, _cub3d->horizontal.y, 0xFF0000);
+		printf("dy = %d\n", dy);
+	}
+	else
+	{
+		ft_draw_ray(_cub3d, _cub3d->vertical.x, _cub3d->vertical.y, 0xFF0000);
+		printf("dx = %d\n", dx);
+	}
 }
 
 int ft_draw(t_cub3d *_cub3d)
@@ -328,10 +310,12 @@ int	key_hook(int keyCode, t_cub3d *_cub3d)
 	(void)_cub3d;
 	if (keyCode == 123)
 	{
+		printf("----------left---------\n");
 		_cub3d->rotation += 1;
 	}
 	if (keyCode == 124)
 	{
+		printf("----------right---------\n");
 		_cub3d->rotation -= 1;
 	}
 	if (keyCode == 125)

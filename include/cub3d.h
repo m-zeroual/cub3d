@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/01 17:01:49 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/02 12:48:42 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdio.h>
 
 #define PIXEL 50
+
 #define UP 1
 #define DOWN 0
 #define RIGHT 1
@@ -54,16 +55,13 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-typedef struct s_scale
-{
-	int		right_left;
-	int		walk;
-}	t_scale;
 
-typedef struct s_calcul
+typedef struct s_point
 {
+	float	x;
+	float	y;
 	
-}	t_calcul;
+}	t_point;
 
 typedef struct s_cub3d
 {
@@ -77,22 +75,14 @@ typedef struct s_cub3d
 	float     px;
 	float     py;
 
-	float     	startx;
-	float     	starty;
-	float     	stepx;
-	float     	stepy;
-	float     	endx;
-	float     	endy;
-	float     	endxv;
-	float     	endyv;
+	t_point start;
+	t_point step;
 	
-	
-	float     sx;
-	float     sy;
 
 	int     rotation;
 
-
+	t_point vertical;
+	t_point horizontal;
 	t_img   img;
 	
 } t_cub3d;
