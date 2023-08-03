@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/02 12:48:42 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/03 16:25:20 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_cub3d
 	
 
 	int     rotation;
+	float	ray_angle;
 
 	t_point vertical;
 	t_point horizontal;
