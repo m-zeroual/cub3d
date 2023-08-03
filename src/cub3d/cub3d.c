@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:45 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/03 17:02:35 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/03 19:58:54 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,6 +232,7 @@ int ft_calcul_h(t_cub3d *_cub3d)
 int ft_calcul_v(t_cub3d *_cub3d)
 {
 	int check = 0;
+	int check_left = 0;
 	if (_cub3d->left_right)
 		_cub3d->start.x = (int)(_cub3d->px / PIXEL) * PIXEL + PIXEL;
 	else
@@ -250,15 +251,17 @@ int ft_calcul_v(t_cub3d *_cub3d)
 		_cub3d->step.y *= -1;
 	if (!_cub3d->left_right)
 		check = 1;
+	if (_cub3d->up_down)
+		check_left = 1;
 	_cub3d->vertical.y = _cub3d->start.y;
 	_cub3d->vertical.x = _cub3d->start.x;
 	while (((int)(_cub3d->vertical.x / PIXEL) - check >= 0 && (int)(_cub3d->vertical.x / PIXEL) - check < _cub3d->width)
-		&& (((int)_cub3d->vertical.y / PIXEL) >= 0 &&  (int)(_cub3d->vertical.y / PIXEL) < _cub3d->height)
+		&& ((((int)_cub3d->vertical.y) / PIXEL) - check_left  >= 0 &&  ((int)(_cub3d->vertical.y / PIXEL) - check_left) < _cub3d->height)
 		)
 	{
 	// 	printf("%d %d\n", (int)(((_cub3d->vertical.y) - check) / PIXEL) + 6, (int)(_cub3d->vertical.x / PIXEL));
 	// 	printf("%s\n", _cub3d->map[(int)(((_cub3d->vertical.y) - check) / PIXEL) + 6]);
-		if (_cub3d->map[(int)((_cub3d->vertical.y) / PIXEL) + 6][(((int)(_cub3d->vertical.x) - check) / PIXEL)] == '1')
+		if (_cub3d->map[((int)_cub3d->vertical.y - check_left) / PIXEL  + 6][((int)_cub3d->vertical.x - check) / PIXEL ] == '1')
 			break ;
 		_cub3d->vertical.y += _cub3d->step.y;
 		_cub3d->vertical.x += _cub3d->step.x;
@@ -344,12 +347,12 @@ int	key_hook(int keyCode, t_cub3d *_cub3d)
 	if (keyCode == 123)
 	{
 		printf("----------left---------\n");
-		_cub3d->rotation += 3;
+		_cub3d->rotation += 1;
 	}
 	if (keyCode == 124)
 	{
 		printf("----------right---------\n");
-		_cub3d->rotation -= 3;
+		_cub3d->rotation -= 1;
 	}
 	if (keyCode == 125)
 	{
