@@ -1,9 +1,9 @@
-         NO ./files/texture/north_texture
 SO ./files/texture/south_texture
+        NO ./files/texture/north_texture
 WE      ./files/texture/west_texture
-EA         ./files/texture/east_texture
-F 55,25,55
 C 225,30,77
+F 55,25,55
+EA         ./files/texture/east_texture
 
 
             
@@ -11,8 +11,28 @@ C 225,30,77
 
 
 
+
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 11111111111111111111111
-101101000000000000000011111111
+101101000000000000000011111111111111111111
 10110100000000000000001
 1011010000101000000001
 10110100000N0000000001

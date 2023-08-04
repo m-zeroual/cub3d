@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 22:28:12 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/03 14:50:16 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/04 13:09:31 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void ft_draw_map(t_cub3d *_cub3d)
 		x = 0;
 		while (x < _cub3d->width)
 		{
-			if (_cub3d->map[y][x] == '1' && x <= (int)ft_strlen(_cub3d->map[y]))
+			if (x <= (int)ft_strlen(_cub3d->map[y]) && _cub3d->map[y][x] == '1')
 				ft_put_pixle(_cub3d, '1', x, y);
 			ft_put_pixle(_cub3d, '0', x, y);
 			x++;

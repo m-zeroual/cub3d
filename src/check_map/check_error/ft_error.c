@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:28:31 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/07/25 22:32:11 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/04 16:02:34 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_check_error(char *map_name)
 	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_putstr_fd("Error\n\tFile does not exist.\n", 2);
+		ft_putstr_fd("Error\n\tFail to open File.\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	close(fd);

@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/03 16:25:20 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/03 22:15:52 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #define LEFT 0
 
 
-# define PLAYER_SIZE 10
+# define PLAYER_SIZE 6
 
 # define ESC 53
 

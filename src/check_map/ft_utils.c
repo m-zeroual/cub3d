@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 09:20:00 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/07/29 12:20:32 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/04 16:12:53 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ char	**ft_clean_map(char **map)
 		i++;
 	}
 	new_map[i_new_map] = 0;
+	ft_display_map(new_map);
 	if (!ft_check6lines(new_map))
 		return (ft_free_map(new_map), ft_free_map(map), NULL);
 	return (new_map);
