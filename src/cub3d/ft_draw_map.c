@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 22:28:12 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/04 23:26:59 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/04 23:33:24 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ static void ft_put_pixle(t_cub3d *_cub3d, char c, int x1, int y1)
 				img_pixl_put(_cub3d, (x1 * PIXEL) + (x ), (y1 * PIXEL) + (y), 0x808080);
 				// img_pixl_put(_cub3d, (x1 * PIXEL) + (x + 1), (y1 * PIXEL) + (y + 1), 0x808080);
 			}
-			img_pixl_put(_cub3d, (x1 * PIXEL) + x, y1 * PIXEL, 0x0000FF);
-			if (y1 == _cub3d->height - 1)
-				img_pixl_put(_cub3d, (x1 * PIXEL) + x, y1 * PIXEL + PIXEL, 0x0000FF);
+			// img_pixl_put(_cub3d, (x1 * PIXEL) + x, y1 * PIXEL, 0x0000FF);
+			// if (y1 == _cub3d->height - 1)
+			// 	img_pixl_put(_cub3d, (x1 * PIXEL) + x, y1 * PIXEL + PIXEL, 0x0000FF);
 			x++;
 		}
-		img_pixl_put(_cub3d, (x1 * PIXEL), (y1 * PIXEL) + y, 0x0000FF);
-		if (x1 == _cub3d->width - 1)
-			img_pixl_put(_cub3d, (x1 * PIXEL) + PIXEL, (y1 * PIXEL) + y, 0x0000FF);
+		// img_pixl_put(_cub3d, (x1 * PIXEL), (y1 * PIXEL) + y, 0x0000FF);
+		// if (x1 == _cub3d->width - 1)
+		// 	img_pixl_put(_cub3d, (x1 * PIXEL) + PIXEL, (y1 * PIXEL) + y, 0x0000FF);
 		y++;
 	}
 }
