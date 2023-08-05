@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 09:20:00 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/04 16:12:53 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/05 14:58:28 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char	**ft_clean_map(char **map)
 	i_new_map = 0;
 	new_map = malloc((ft_count_without_newline(map) + 1) * sizeof(char *));
 	if (!new_map)
-		return (NULL);
+		return (ft_free_map(map) , NULL);
 	i = 0;
 	while (map[i])
 	{

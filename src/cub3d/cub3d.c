@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:45 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/04 14:40:02 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/05 12:48:53 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ int	initial_direction(t_cub3d *_cub3d)
 int ft_calcul_h(t_cub3d *_cub3d)
 {
 	int check = 0;
-	int check_left = 0;
+	// int check_left = 0;
 	if (_cub3d->up_down)
 		_cub3d->start.y = (int)(_cub3d->py / PIXEL) * PIXEL;
 	else
@@ -204,8 +204,8 @@ int ft_calcul_h(t_cub3d *_cub3d)
 	// printf("left_right == %d\n", _cub3d->left_right);
 	if (_cub3d->up_down)
 		check = 1;
-	if (!_cub3d->left_right)
-		check_left = 1;
+	// if (!_cub3d->left_right)
+	// 	check_left = 1;
 	_cub3d->horizontal.y = _cub3d->start.y;
 	_cub3d->horizontal.x = _cub3d->start.x;
 	while (((int)(_cub3d->horizontal.x / PIXEL) >= 0 && (int)(_cub3d->horizontal.x / PIXEL) < _cub3d->width)

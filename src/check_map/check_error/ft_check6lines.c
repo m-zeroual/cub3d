@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:25:24 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/04 21:52:26 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/05 13:06:56 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,14 @@
 
 static int	ft_check_double_coma(char *line)
 {
-	int		i;
-	int		j;
-	char	**number;
+	int	i;
 
 	if (!line)
 		return (0);
-	number = ft_split(line, ',');
-	j = 0;
-	while (number[j])
-		j++;
 	i = 0;
 	while (line[i])
 	{
-		if (j != 3 || line[0] == ',' || line[ft_strlen(line) - 1] == ','
+		if (line[0] == ',' || line[ft_strlen(line) - 1] == ','
 			|| (line[i] == ',' && line[i + 1] == ','))
 			return (ft_putstr_fd("Error\n\tin coma.\n", 2), 0);
 		i++;
@@ -48,8 +42,8 @@ static int ft_check_rgb(char *line)
 	while (rgb[i])
 	{
 		num = ft_atoi(rgb[i]);
-		if (num < 0 || num > 255 || i > 3)
-			return (ft_putstr_fd("Error\n\tRGB out of range.\n", 2), 0);
+		if (num < 0 || num > 255 || i >= 3)
+			return (ft_free_map(rgb), ft_putstr_fd("Error\n\tRGB out of range.\n", 2), 0);
 		i++;
 	}
 	ft_free_map(rgb);
@@ -98,7 +92,7 @@ int	ft_check6lines(char **map)
 	{
 		str = ft_split(map[first6line], ' ');
 		if (!ft_check_texure(str))
-			return (0);
+			return (ft_free_map(str), 0);
 		ft_free_map(str);
 		first6line++;
 	}
