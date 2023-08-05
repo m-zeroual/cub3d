@@ -6,22 +6,13 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 09:53:42 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/04 23:18:28 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/05 11:59:07 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../../include/cub3d.h"
 
-int	quit(t_cub3d *_cub3d)
-{
-	mlx_destroy_window(_cub3d->mlx_ptr, _cub3d->mlx_win);
-	// mlx_destroy_image(_cub3d->mlx_ptr, _cub3d->img.mlx_img);
-	// ft_free_all(_cub3d);
-	exit(EXIT_SUCCESS);
-	return (0);
-}
-
-int	is_upside_wall(t_cub3d *_cub3d, int x, int y)
+static int	is_upside_wall(t_cub3d *_cub3d, int x, int y)
 {
 	if (_cub3d->map[(int)((y + PLAYER_SIZE / 2) / PIXEL) + 6] \
 	[(int)(x / PIXEL)] == '1')
@@ -38,7 +29,7 @@ int	is_upside_wall(t_cub3d *_cub3d, int x, int y)
 	return (0);
 }
 
-void	s_w_key(int keyCode, t_cub3d *_cub3d)
+static void	s_w_key(int keyCode, t_cub3d *_cub3d)
 {
 	float	new_x;
 	float	new_y;
@@ -65,7 +56,7 @@ void	s_w_key(int keyCode, t_cub3d *_cub3d)
 	}
 }
 
-void	a_d_key(int keyCode, t_cub3d *_cub3d)
+static void	a_d_key(int keyCode, t_cub3d *_cub3d)
 {
 	float	new_x;
 	float	new_y;
@@ -87,6 +78,17 @@ void	a_d_key(int keyCode, t_cub3d *_cub3d)
 		if (!is_upside_wall(_cub3d, new_x, new_y))
 			_cub3d->px = ((_cub3d->py = new_y), new_x);
 	}
+}
+
+int	mouse_hook(int x, int y, t_cub3d *_cub3d)
+{
+	(void)y;
+	if (_cub3d->mouse_x_pos > x)
+		_cub3d->rotation += 2;
+	else if (_cub3d->mouse_x_pos < x)
+		_cub3d->rotation -= 2;
+	_cub3d->mouse_x_pos = x;
+	return (0);
 }
 
 int	key_hook(int keyCode, t_cub3d *_cub3d)

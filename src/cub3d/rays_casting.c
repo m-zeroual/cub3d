@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 22:56:57 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/04 22:58:10 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/05 10:45:21 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,35 @@ double ft_calcul_v(t_cub3d *_cub3d)
 	return (vetagorc(_cub3d->vertical.x, _cub3d->vertical.y, _cub3d->px, _cub3d->py));
 }
 
+// int	create_trgb(int r, int g, int b)
+// {
+// 	return (r << 16 | g << 8 | b);
+// }
+
+void	draw_sky(t_cub3d *_cub3d, int index, int end)
+{
+	int	j;
+
+	j = 0;
+	while (j < end)
+	{
+		img_pixl_put(_cub3d, index, j, 0x87CEEB);
+		j++;
+	}
+}
+
+void	draw_floor(t_cub3d *_cub3d, int index, int start)
+{
+	int	j;
+
+	j = start;
+	while (j < HEIGHT)
+	{
+		img_pixl_put(_cub3d, index, j, 0xD2B48C);
+		j++;
+	}
+}
+
 static void	draw_wall(t_cub3d *_cub3d, double d_ray, int index)
 {
 	double	projected_wall;
@@ -96,11 +125,13 @@ static void	draw_wall(t_cub3d *_cub3d, double d_ray, int index)
 	start = (int)((HEIGHT / 2) - (projected_wall / 2));
 	if (start < 0)
 		start = 0;
+	draw_sky(_cub3d, index, start);
 	while (j < projected_wall && j < HEIGHT)
 	{
 		img_pixl_put(_cub3d, index, start + j, 0x0000FF);
 		j++;
 	}
+	draw_floor(_cub3d, index, start + j);
 }
 
 static void	ft_raycating(t_cub3d *_cub3d, int i)

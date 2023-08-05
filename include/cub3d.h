@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/04 23:26:12 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/05 11:57:44 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@
 
 # define PIXEL 20
 # define HEIGHT 1080
-# define WIDTH 1300
-// # define HEIGHT 1080
-// # define WIDTH 1920
+# define WIDTH 1920
 # define PLAYER_SIZE 6
 # define VUE_ANGLE 60
 
@@ -51,6 +49,8 @@
 # define PLUS 69
 
 # define ON_DESTROY 17
+# define ON_MOUSE_MOVE 6
+# define ON_KEY_PRESS 2
 
 typedef struct s_draw_ray
 {
@@ -63,7 +63,6 @@ typedef struct s_draw_ray
 	int		dy;
 	int		steps;
 }	t_draw_ray;
-
 
 typedef struct s_img
 {
@@ -96,7 +95,7 @@ typedef struct s_cub3d
 	t_point start;
 	t_point step;
 	
-
+	int		mouse_x_pos;
 	int     rotation;
 	double	ray_angle;
 
@@ -139,6 +138,7 @@ void ft_draw_map(t_cub3d *_cub3d);
 
 //====> src/cub3d/control_hooks.c <=====
 int	key_hook(int keyCode, t_cub3d *_cub3d);
+int	mouse_hook(int x, int y, t_cub3d *_cub3d)
 int	quit(t_cub3d *_cub3d);
 
 

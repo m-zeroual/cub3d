@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 22:53:41 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/04 23:25:45 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/05 12:01:00 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 void	img_pixl_put(t_cub3d *_cub3d, int x, int y, int color)
 {
-	char    *pixel;
+	char	*pixel;
 
-    pixel = _cub3d->img.addr + (y * _cub3d->img.line_len + x * (_cub3d->img.bpp / 8));
+	pixel = _cub3d->img.addr + (y * _cub3d->img.line_len + \
+	x * (_cub3d->img.bpp / 8));
 	*(int *)pixel = color;
 }
 
