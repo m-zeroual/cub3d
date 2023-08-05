@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/03 22:15:52 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/05 12:08:17 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,18 @@
 # include <math.h>
 # include <stdio.h>
 
-#define PIXEL 50
+
+# define PIXEL 20
+# define HEIGHT 1080
+# define WIDTH 1920
+# define PLAYER_SIZE 6
+# define VUE_ANGLE 60
 
 #define UP 1
 #define DOWN 0
 #define RIGHT 1
 #define LEFT 0
 
-
-# define PLAYER_SIZE 6
 
 # define ESC 53
 
@@ -41,10 +44,25 @@
 # define S_KEY 1
 # define A_KEY 0
 # define D_KEY 2
+
 # define MINUS 78
 # define PLUS 69
 
 # define ON_DESTROY 17
+# define ON_MOUSE_MOVE 6
+# define ON_KEY_PRESS 2
+
+typedef struct s_draw_ray
+{
+	float	xincrement;
+	float	yincrement;
+	float	x;
+	float	y;
+	int		i;
+    int		dx;
+	int		dy;
+	int		steps;
+}	t_draw_ray;
 
 typedef struct s_img
 {
@@ -58,9 +76,8 @@ typedef struct s_img
 
 typedef struct s_point
 {
-	float	x;
-	float	y;
-	
+	double	x;
+	double	y;
 }	t_point;
 
 typedef struct s_cub3d
@@ -78,9 +95,9 @@ typedef struct s_cub3d
 	t_point start;
 	t_point step;
 	
-
+	int		mouse_x_pos;
 	int     rotation;
-	float	ray_angle;
+	double	ray_angle;
 
 	t_point vertical;
 	t_point horizontal;
@@ -117,9 +134,26 @@ void ft_display_map(char **map);
 //====> src/cub3d/ft_draw_map.c <=====
 void ft_draw_map(t_cub3d *_cub3d);
 
-//====> src/cub3d/img_pix_put.c <=====
-void	img_pixl_put(t_cub3d *_cub3d, int x, int y, int color);
 // -------------------------------------------------------------------------
+
+//====> src/cub3d/control_hooks.c <=====
+int	key_hook(int keyCode, t_cub3d *_cub3d);
+int	mouse_hook(int x, int y, t_cub3d *_cub3d);
+int	quit(t_cub3d *_cub3d);
+
+
+//====> src/cub3d/cub3d_utils.c <=====
+void	img_pixl_put(t_cub3d *_cub3d, int x, int y, int color);
+void	ft_draw_ray(t_cub3d *_cub3d, int endx, int endy, int color);
+double	vetagorc(double x1, double y1, double x, double y);
+double	normalize_angle(double angle);
+void	ft_check_view(t_cub3d *_cub3d);
+
+//====> src/cub3d/rays_casting.c <=====
+void	cast_all_rays(t_cub3d *_cub3d);
+
+//====> src/cub3d/cub3d_utils2.c <=====
+int	quit(t_cub3d *_cub3d);
 
 
 #endif

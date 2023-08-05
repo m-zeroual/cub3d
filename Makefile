@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+         #
+#    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/17 13:12:29 by mzeroual          #+#    #+#              #
-#    Updated: 2023/08/03 20:25:36 by mzeroual         ###   ########.fr        #
+#    Updated: 2023/08/05 12:08:40 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,10 @@ SRCS	= 	src/main.c \
 			src/check_map/ft_utils.c \
 			src/cub3d/ft_display_map.c \
 			src/cub3d/ft_draw_map.c \
-			src/cub3d/img_pixl_put.c \
+			src/cub3d/control_hooks.c \
+			src/cub3d/cub3d_utils.c \
+			src/cub3d/rays_casting.c \
+			src/cub3d/cub3d_utils2.c \
 			src/cub3d/cub3d.c \
 			$(PATH_GET_NEXT_LINE)get_next_line.c \
 			$(PATH_GET_NEXT_LINE)get_next_line_utils.c
