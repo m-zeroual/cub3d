@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/05 11:57:44 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/05 12:08:17 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ void ft_draw_map(t_cub3d *_cub3d);
 
 //====> src/cub3d/control_hooks.c <=====
 int	key_hook(int keyCode, t_cub3d *_cub3d);
-int	mouse_hook(int x, int y, t_cub3d *_cub3d)
+int	mouse_hook(int x, int y, t_cub3d *_cub3d);
 int	quit(t_cub3d *_cub3d);
 
 
@@ -151,5 +151,9 @@ void	ft_check_view(t_cub3d *_cub3d);
 
 //====> src/cub3d/rays_casting.c <=====
 void	cast_all_rays(t_cub3d *_cub3d);
+
+//====> src/cub3d/cub3d_utils2.c <=====
+int	quit(t_cub3d *_cub3d);
+
 
 #endif
