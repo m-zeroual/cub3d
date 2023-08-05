@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 09:18:38 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/05 17:31:40 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/05 18:10:47 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int main(int ac, char *av[])
 	t_cub3d _cub3d;
 	if (ac == 2)
 	{
-		_cub3d.map = parse_map(av[1]);
+		_cub3d.map = parse_map(av[1], &_cub3d);
 		if (!_cub3d.map)
 			return (1);
 		
@@ -28,10 +28,3 @@ int main(int ac, char *av[])
 		ft_putstr_fd("Error\n\tYou need map file ended with extension \".cub\".\n", 2);
 	return (0);
 }
-
-// {
-// 	int	hieght;
-// 	int	width;
-// 	int	file_name;
-// 	void *chihaja;
-// }

@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/05 17:46:09 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/05 18:03:59 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_draw_ray
 	int		steps;
 }	t_draw_ray;
 
+
 typedef struct s_img
 {
 	void	*mlx_img;
@@ -76,6 +77,14 @@ typedef struct s_img
 	int		line_len;
 	int		endian;
 }	t_img;
+
+typedef struct s_texture
+{
+	void	*img;
+	int		height;
+	int		width;
+	char	*name;
+}	t_texture;
 
 
 typedef struct s_point
@@ -96,6 +105,13 @@ typedef struct s_cub3d
 	float     px;
 	float     py;
 
+	t_texture north;
+	t_texture south;
+	t_texture east;
+	t_texture west;
+
+	char **c_rgb;
+	char **f_rgb;
 	t_point start;
 	t_point step;
 	
@@ -111,7 +127,7 @@ typedef struct s_cub3d
 
 // -------------- parse map partie ----------------------
 //====> src/check_map/check_error/ft_check6lines.c <=====
-int	ft_check6lines(char **map);
+int	ft_check6lines(char **map, t_cub3d *_cub3d);
 
 //====> src/check_map/check_error/ft_error.c <=====
 void ft_check_error(char *map_name);
@@ -123,10 +139,10 @@ void	ft_free_map(char **map);
 int		ft_count_without_newline(char **map);
 int     ft_count_map(char *map_name);
 char    **ft_read_map(char *map_name);
-char    **ft_clean_map(char **map);
+char    **ft_clean_map(char **map, t_cub3d *_cub3d);
 
 //====> src/check_map/parse_map.c <=====
-char    **parse_map(char *map_name);
+char    **parse_map(char *map_name, t_cub3d *_cub3d);
 // ------------------------------------------------------
 
 

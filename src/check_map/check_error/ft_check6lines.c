@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:25:24 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/05 13:06:56 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/05 18:04:33 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,9 @@ static int ft_check_rgb(char *line)
 }
 
 
-static int	ft_check_texure(char **s)
+static int	ft_check_texure(char **s, t_cub3d *_cub3d)
 {
 	int	i;
-	int	fd;
 
 	i = -1;
 	if (!s || !*s)
@@ -68,9 +67,14 @@ static int	ft_check_texure(char **s)
 		if (i == 1 && (!ft_strncmp(s[0], "NO", 2) || !ft_strncmp(s[0], "SO", 2)
 		|| !ft_strncmp(s[0], "WE", 2) || !ft_strncmp(s[0], "EA", 2)))
 		{
-			fd = open(s[i], O_RDONLY);
-			if (fd == -1)
-				return (ft_putstr_fd("Error\nimage not found.\n", 2), 0);
+			if (!ft_strncmp(s[0], "NO", 2))
+				_cub3d->north.name = ft_strdup(s[i]);
+			else if (!ft_strncmp(s[0], "WE", 2))
+				_cub3d->north.name = ft_strdup(s[i]);
+			else if (!ft_strncmp(s[0], "SO", 2))
+				_cub3d->north.name = ft_strdup(s[i]);
+			else if (!ft_strncmp(s[0], "EA", 2))
+				_cub3d->north.name = ft_strdup(s[i]);
 		}
 		if (i == 1 && (!ft_strncmp(s[0], "F", 1) || !ft_strncmp(s[0], "C", 1)) && !ft_check_rgb(s[1]))
 			return (0);
@@ -80,7 +84,7 @@ static int	ft_check_texure(char **s)
 	return (1);
 }
 
-int	ft_check6lines(char **map)
+int	ft_check6lines(char **map, t_cub3d *_cub3d)
 {
 	int		first6line;
 	char	**str;
@@ -91,7 +95,7 @@ int	ft_check6lines(char **map)
 	while (first6line < 6)
 	{
 		str = ft_split(map[first6line], ' ');
-		if (!ft_check_texure(str))
+		if (!ft_check_texure(str, _cub3d))
 			return (ft_free_map(str), 0);
 		ft_free_map(str);
 		first6line++;
