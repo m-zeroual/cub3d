@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 09:20:00 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/06 21:38:11 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/06 21:52:21 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ char	**ft_clean_map(char **map, t_cub3d *_cub3d)
 		if (*line)
 		{
 			if(count[2] == 1)
-				return (ft_free_map(map), NULL);
+				return (ft_putstr_fd("Error\n\tnew line in the map.\n", 2), ft_free_map(map), NULL);
 			new_map[count[1]++] = ft_strdup(line);
 		}
 		if (count[1] >= 7 && *line == 0)
