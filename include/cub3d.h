@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/05 21:20:08 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/06 19:54:14 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ typedef struct s_cub3d
 	t_point step;
 	
 	int		mouse_x_pos;
-	double     rotation;
+	double  rotation;
 	double	ray_angle;
 
 	t_point vertical;
