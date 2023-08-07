@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/06 22:37:57 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/07 14:05:02 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,6 @@ void	cast_all_rays(t_cub3d *_cub3d);
 //====> src/cub3d/cub3d_utils2.c <=====
 int		quit(t_cub3d *_cub3d);
 int		img_get_pixel_color(t_cub3d *_cub3d, int x, int y);
-
+int		get_color(t_cub3d *_cub3d, int ceile_or_floor);
 
 #endif

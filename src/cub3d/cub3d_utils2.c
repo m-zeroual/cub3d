@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 11:58:47 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/07 12:27:50 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/07 14:41:34 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,27 @@ int	img_get_pixel_color(t_cub3d *_cub3d, int x, int y)
 	pixel = _cub3d->east.img.addr + (y * _cub3d->east.img.line_len + \
 	x * (_cub3d->east.img.bpp / 8));
 	return (*(int *)pixel);
+}
+
+int	get_color(t_cub3d *_cub3d, int ceile_or_floor)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	if (ceile_or_floor == 1)
+	{
+		r = ft_atoi(_cub3d->c_rgb[0]);
+		g = ft_atoi(_cub3d->c_rgb[1]);
+		b = ft_atoi(_cub3d->c_rgb[2]);
+	}
+	else
+	{
+		r = ft_atoi(_cub3d->f_rgb[0]);
+		g = ft_atoi(_cub3d->f_rgb[1]);
+		b = ft_atoi(_cub3d->f_rgb[2]);
+	}
+	return (r << 16 | g << 8 | b);
 }
 
 // void	ft_free_all(t_cub3d *_cub3d)

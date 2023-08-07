@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 22:56:57 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/07 13:14:13 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/07 14:46:38 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,6 @@ double ft_calcul_v(t_cub3d *_cub3d)
 	return (vetagorc(_cub3d->vertical.x, _cub3d->vertical.y, _cub3d->px, _cub3d->py));
 }
 
-// int	create_trgb(int r, int g, int b)
-// {
-// 	return (r << 16 | g << 8 | b);
-// }
-
 void	draw_sky(t_cub3d *_cub3d, int index, int end)
 {
 	int	j;
@@ -95,7 +90,8 @@ void	draw_sky(t_cub3d *_cub3d, int index, int end)
 	j = 0;
 	while (j < end)
 	{
-		img_pixl_put(_cub3d, index, j, 0x87CEEB);
+		// img_pixl_put(_cub3d, index, j, 0x87CEEB);
+		img_pixl_put(_cub3d, index, j, get_color(_cub3d, 1));
 		j++;
 	}
 }
@@ -107,16 +103,17 @@ void	draw_floor(t_cub3d *_cub3d, int index, int start)
 	j = start;
 	while (j < HEIGHT)
 	{
-		img_pixl_put(_cub3d, index, j, 0xD2B48C);
+		img_pixl_put(_cub3d, index, j, get_color(_cub3d, 0));
+		// img_pixl_put(_cub3d, index, j, 0xD2B48C);
 		j++;
 	}
 }
 
-static void	draw_wall(t_cub3d *_cub3d, t_point dest_ray_p, double d_ray, int index)
+static void	draw_wall(t_cub3d *_cub3d, t_point dest_ray_p, double d_ray, int index, int intersection)
 {
 	double	projected_wall;
 	int		start;
-	// int		x_step;
+	int		x_step;
 	(void) dest_ray_p;
 	double	y_step;
 	int		j;
@@ -130,11 +127,15 @@ static void	draw_wall(t_cub3d *_cub3d, t_point dest_ray_p, double d_ray, int ind
 		start = 0;
 	draw_sky(_cub3d, index, start);
 	y_step = 0;
-	// x_step = _cub3d->east.width / PIXEL * dest_ray_p.x;
+	if (intersection == 1)
+	x_step = (_cub3d->east.width / PIXEL) * (dest_ray_p.x - (int)(dest_ray_p.x / PIXEL) * PIXEL);
+	// x_step = (_cub3d->east.width / PIXEL) * fmod((dest_ray_p.x / PIXEL), PIXEL);
+	else
+		x_step = (_cub3d->east.width / PIXEL) * (dest_ray_p.y - (int)(dest_ray_p.y / PIXEL) * PIXEL);
 	// printf("VALUE: %lf\n", step);
 	while (j < projected_wall && j < HEIGHT)
 	{
-		img_pixl_put(_cub3d, index, start + j, img_get_pixel_color(_cub3d, index, y_step));
+		img_pixl_put(_cub3d, index, start + j, img_get_pixel_color(_cub3d, x_step, y_step));
 
 		// img_pixl_put(_cub3d, index, start + j, 0x0000FF);
 		y_step += (double)_cub3d->east.height / projected_wall;
@@ -157,14 +158,14 @@ static void	ft_raycating(t_cub3d *_cub3d, int i)
 		ft_draw_ray(_cub3d, _cub3d->horizontal.x, _cub3d->horizontal.y, 0x00FF00);
 		point.x = _cub3d->horizontal.x;
 		point.y = _cub3d->horizontal.y;
-		draw_wall(_cub3d, point, dy, i);
+		draw_wall(_cub3d, point, dy, i, 1);
 	}
 	else
 	{
 		ft_draw_ray(_cub3d, _cub3d->vertical.x, _cub3d->vertical.y, 0x00FF00);
-		point.x = _cub3d->horizontal.x;
-		point.y = _cub3d->horizontal.y;
-		draw_wall(_cub3d, point, dx, i);
+		point.x = _cub3d->vertical.x;
+		point.y = _cub3d->vertical.y;
+		draw_wall(_cub3d, point, dx, i, 2);
 	}
 }
 
