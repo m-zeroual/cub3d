@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 22:56:57 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/05 18:10:57 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/07 16:10:36 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ static void	ft_raycating(t_cub3d *_cub3d, int i)
 		ft_draw_ray(_cub3d, _cub3d->vertical.x, _cub3d->vertical.y, 0x00FF00);
 		draw_wall(_cub3d, dx, i);
 	}
+	printf("%s\n", _cub3d->textures[0].name);
 }
 
 void	cast_all_rays(t_cub3d *_cub3d)

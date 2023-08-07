@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:25:24 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/05 22:50:28 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/07 15:51:48 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ static int ft_fill_texture_name(char **s, t_cub3d *_cub3d)
 	if (s[2])
 		return (ft_putstr_fd("Error\n\tto many args.\n", 2), 0);
 	if (!ft_strncmp(s[0], "NO", 3) && s[1])
-		_cub3d->north.name = ft_strdup(s[1]);
-	else if (!ft_strncmp(s[0], "WE", 3) && s[1])
-		_cub3d->west.name = ft_strdup(s[1]);
+		_cub3d->textures[0].name = ft_strdup(s[1]);
 	else if (!ft_strncmp(s[0], "SO", 3) && s[1])
-		_cub3d->south.name = ft_strdup(s[1]);
+		_cub3d->textures[1].name = ft_strdup(s[1]);
 	else if (!ft_strncmp(s[0], "EA", 3) && s[1])
-		_cub3d->east.name = ft_strdup(s[1]);
+		_cub3d->textures[2].name = ft_strdup(s[1]);
+	else if (!ft_strncmp(s[0], "WE", 3) && s[1])
+		_cub3d->textures[3].name = ft_strdup(s[1]);
 	return (1);
 }
 static int	ft_check_texure(char **s, t_cub3d *_cub3d)

@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/06 19:54:14 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/07 15:49:07 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,7 @@ typedef struct s_cub3d
 	float     px;
 	float     py;
 
-	t_texture north;
-	t_texture south;
-	t_texture east;
-	t_texture west;
+	t_texture textures[4];
 
 	char **c_rgb;
 	char **f_rgb;
