@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:45 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/05 11:57:22 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/06 19:48:47 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int	ft_draw(t_cub3d *_cub3d)
 	mlx_put_image_to_window(_cub3d->mlx_ptr, _cub3d->mlx_win, \
 	_cub3d->img.mlx_img, 0, 0);
 	mlx_destroy_image(_cub3d->mlx_ptr, _cub3d->img.mlx_img);
+
 	return (0);
 }
 
@@ -94,7 +95,33 @@ void	cub3d(t_cub3d *_cub3d)
 {
 	ft_count(_cub3d, &_cub3d->width, &_cub3d->height);
 	_cub3d->mlx_ptr = mlx_init();
+	_cub3d->east.img.mlx_img = mlx_xpm_file_to_image(_cub3d->mlx_ptr, _cub3d->east.name, &_cub3d->east.width, &_cub3d->east.height);
+	if (!_cub3d->east.img.mlx_img)
+	{
+		ft_putstr_fd("Error in texture\n", 2);
+		exit(1);
+	}
+	printf("HEIGHT: %d\tWIDTH: %d\n", _cub3d->east.height, _cub3d->east.width);
+	
+	_cub3d->east.img.addr = mlx_get_data_addr(_cub3d->east.img.mlx_img, &_cub3d->east.img.bpp, \
+	&_cub3d->east.img.line_len, &_cub3d->east.img.endian);
+	// printf("%s\n",  _cub3d->east.name);
+	// printf("%s\n",  _cub3d->west.name);
+	// printf("%s\n",  _cub3d->north.name);
+	// printf("%s\n",  _cub3d->south.name);
+	// printf("%s\n",  _cub3d->c_rgb[0]);
+	// printf("%s\n",  _cub3d->c_rgb[1]);
+	// printf("%s\n",  _cub3d->c_rgb[2]);
+	// printf("%s\n",  _cub3d->f_rgb[0]);
+	// printf("%s\n",  _cub3d->f_rgb[1]);
+	// printf("%s\n",  _cub3d->f_rgb[2]);
+	// sleep(3);
+	// int color = img_get_pixel_color(_cub3d, 100, 150);
+	// printf("COLOR IS: %d\n", color);
+	// exit(1);
 	_cub3d->mlx_win = mlx_new_window(_cub3d->mlx_ptr, WIDTH, HEIGHT, "cub3d");
+	// mlx_put_image_to_window(_cub3d->mlx_ptr, _cub3d->mlx_win,
+	// _cub3d->east.img.mlx_img, 0, 0);
 	_cub3d->rotation = initial_direction(_cub3d);
 	_cub3d->mouse_x_pos = 0;
 	mlx_loop_hook(_cub3d->mlx_ptr, ft_draw, _cub3d);

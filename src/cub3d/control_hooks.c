@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 09:53:42 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/05 11:59:07 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/06 22:55:17 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ int	mouse_hook(int x, int y, t_cub3d *_cub3d)
 int	key_hook(int keyCode, t_cub3d *_cub3d)
 {
 	if (keyCode == ARROW_LEFT)
-		_cub3d->rotation += 1;
+		_cub3d->rotation += 2.864789;
 	else if (keyCode == ARROW_RIGHT)
-		_cub3d->rotation -= 1;
+		_cub3d->rotation -= 2.864789;
 	else if (keyCode == S_KEY || keyCode == W_KEY)
 		s_w_key(keyCode, _cub3d);
 	else if (keyCode == A_KEY || keyCode == D_KEY)

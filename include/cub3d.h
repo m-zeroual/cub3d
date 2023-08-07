@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/05 12:08:17 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/06 22:37:57 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,12 @@
 # define PIXEL 20
 # define HEIGHT 1080
 # define WIDTH 1920
-# define PLAYER_SIZE 6
+# define PLAYER_SIZE 4
 # define VUE_ANGLE 60
+
+
+
+
 
 #define UP 1
 #define DOWN 0
@@ -64,6 +68,7 @@ typedef struct s_draw_ray
 	int		steps;
 }	t_draw_ray;
 
+
 typedef struct s_img
 {
 	void	*mlx_img;
@@ -72,6 +77,14 @@ typedef struct s_img
 	int		line_len;
 	int		endian;
 }	t_img;
+
+typedef struct s_texture
+{
+	t_img   img;
+	int		height;
+	int		width;
+	char	*name;
+}	t_texture;
 
 
 typedef struct s_point
@@ -92,11 +105,18 @@ typedef struct s_cub3d
 	float     px;
 	float     py;
 
+	t_texture north;
+	t_texture south;
+	t_texture east;
+	t_texture west;
+
+	char **c_rgb;
+	char **f_rgb;
 	t_point start;
 	t_point step;
 	
 	int		mouse_x_pos;
-	int     rotation;
+	double     rotation;
 	double	ray_angle;
 
 	t_point vertical;
@@ -107,7 +127,7 @@ typedef struct s_cub3d
 
 // -------------- parse map partie ----------------------
 //====> src/check_map/check_error/ft_check6lines.c <=====
-int	ft_check6lines(char **map);
+int	ft_check6lines(char **map, t_cub3d *_cub3d);
 
 //====> src/check_map/check_error/ft_error.c <=====
 void ft_check_error(char *map_name);
@@ -119,10 +139,10 @@ void	ft_free_map(char **map);
 int		ft_count_without_newline(char **map);
 int     ft_count_map(char *map_name);
 char    **ft_read_map(char *map_name);
-char    **ft_clean_map(char **map);
+char    **ft_clean_map(char **map, t_cub3d *_cub3d);
 
 //====> src/check_map/parse_map.c <=====
-char    **parse_map(char *map_name);
+char    **parse_map(char *map_name, t_cub3d *_cub3d);
 // ------------------------------------------------------
 
 
@@ -153,7 +173,8 @@ void	ft_check_view(t_cub3d *_cub3d);
 void	cast_all_rays(t_cub3d *_cub3d);
 
 //====> src/cub3d/cub3d_utils2.c <=====
-int	quit(t_cub3d *_cub3d);
+int		quit(t_cub3d *_cub3d);
+int		img_get_pixel_color(t_cub3d *_cub3d, int x, int y);
 
 
 #endif
