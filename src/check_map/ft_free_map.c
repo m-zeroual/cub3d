@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzeroual <mzeroual@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 00:57:18 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/06/19 00:57:21 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/09 15:30:19 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_free_map(char **map)
 	int	i;
 
 	i = 0;
-	while (map[i])
+	while (map && map[i])
 		free(map[i++]);
 	free(map);
 }

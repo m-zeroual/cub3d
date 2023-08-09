@@ -1,16 +1,16 @@
-WE      ./files/texture/west_texture
+WE      ./files/texture/west_texture.xpm
               EA         ./files/texture/east_texture.xpm
-     SO ./files/texture/south_texture
-   NO ./files/texture/north_texture
+     SO ./files/texture/south_texture.xpm
+   NO ./files/texture/north_texture.xpm
 
 F 255,165,79
 C 135,206,235
 
 1111111111111111
+1N00100000000001
+1000D00000000001
+11D1100000000001
 1000000000000001
 1000000000000001
-1000000000000001
-1000000000000001
-100000000N000001
 1000000000000001
 1111111111111111

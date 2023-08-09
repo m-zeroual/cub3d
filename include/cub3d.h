@@ -6,20 +6,20 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/07 14:05:02 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/09 16:07:58 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef	CUB3D_H
 # define CUB3D_H
+
+
 
 # include "./../lib/libft/libft.h"
 # include "./../lib/get_next_line/get_next_line.h"
 # include <mlx.h>
 # include <math.h>
 # include <stdio.h>
-
 
 # define PIXEL 20
 # define HEIGHT 1080
@@ -28,14 +28,10 @@
 # define VUE_ANGLE 60
 
 
-
-
-
 #define UP 1
 #define DOWN 0
 #define RIGHT 1
 #define LEFT 0
-
 
 # define ESC 53
 
@@ -51,6 +47,8 @@
 
 # define MINUS 78
 # define PLUS 69
+
+# define D_OPEN 14
 
 # define ON_DESTROY 17
 # define ON_MOUSE_MOVE 6
@@ -102,13 +100,13 @@ typedef struct s_cub3d
 	void	*mlx_win;
 	int		up_down;
 	int		left_right;
-	float     px;
-	float     py;
+	float	px;
+	float	py;
+	int		is_door;
+	int		wall_door;
+	t_point door_hit;
 
-	t_texture north;
-	t_texture south;
-	t_texture east;
-	t_texture west;
+	t_texture	textures[5];
 
 	char **c_rgb;
 	char **f_rgb;
@@ -174,7 +172,8 @@ void	cast_all_rays(t_cub3d *_cub3d);
 
 //====> src/cub3d/cub3d_utils2.c <=====
 int		quit(t_cub3d *_cub3d);
-int		img_get_pixel_color(t_cub3d *_cub3d, int x, int y);
+void	open_textures(t_cub3d *_cub3d);
+int		img_get_pixel_color(t_texture texture, int x, int y);
 int		get_color(t_cub3d *_cub3d, int ceile_or_floor);
 
 #endif
