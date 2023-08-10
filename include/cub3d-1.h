@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/07 21:51:46 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/07 15:49:07 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define PIXEL 20
 # define HEIGHT 1080
 # define WIDTH 1920
-# define PLAYER_SIZE 4
+# define PLAYER_SIZE 6
 # define VUE_ANGLE 60
 
 
@@ -80,7 +80,7 @@ typedef struct s_img
 
 typedef struct s_texture
 {
-	t_img   img;
+	void	*img;
 	int		height;
 	int		width;
 	char	*name;
@@ -104,8 +104,8 @@ typedef struct s_cub3d
 	int		left_right;
 	float     px;
 	float     py;
-	t_texture textures[4];
 
+	t_texture textures[4];
 
 	char **c_rgb;
 	char **f_rgb;
@@ -113,7 +113,7 @@ typedef struct s_cub3d
 	t_point step;
 	
 	int		mouse_x_pos;
-	double     rotation;
+	double  rotation;
 	double	ray_angle;
 
 	t_point vertical;
@@ -170,8 +170,7 @@ void	ft_check_view(t_cub3d *_cub3d);
 void	cast_all_rays(t_cub3d *_cub3d);
 
 //====> src/cub3d/cub3d_utils2.c <=====
-int		quit(t_cub3d *_cub3d);
-int		img_get_pixel_color(t_cub3d *_cub3d, int x, int y, int pos);
-int		get_color(t_cub3d *_cub3d, int ceile_or_floor);
+int	quit(t_cub3d *_cub3d);
+
 
 #endif

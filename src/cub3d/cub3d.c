@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:45 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/05 20:28:46 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/07 16:38:24 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,24 @@ int	ft_draw(t_cub3d *_cub3d)
 
 void	cub3d(t_cub3d *_cub3d)
 {
+	int i;
+
+	i = -1;
 	ft_count(_cub3d, &_cub3d->width, &_cub3d->height);
 	_cub3d->mlx_ptr = mlx_init();
+	while (++i < 4)
+	{
+		printf("%s\n",_cub3d->textures[i].name);
+		_cub3d->textures[i].img.mlx_img = mlx_xpm_file_to_image(_cub3d->mlx_ptr, _cub3d->textures[i].name, &_cub3d->textures[i].width, &_cub3d->textures[i].height);
+		if (!_cub3d->textures[i].img.mlx_img)
+		{
+			ft_putstr_fd("Error in texture\n", 2);
+			exit(1);
+		}
+		printf("HEIGHT: %d\tWIDTH: %d\n", _cub3d->textures[i].height, _cub3d->textures[i].width);
+		_cub3d->textures[i].img.addr = mlx_get_data_addr(_cub3d->textures[i].img.mlx_img, &_cub3d->textures[i].img.bpp, \
+		&_cub3d->textures[i].img.line_len, &_cub3d->textures[i].img.endian);
+	}
 	_cub3d->mlx_win = mlx_new_window(_cub3d->mlx_ptr, WIDTH, HEIGHT, "cub3d");
 	_cub3d->rotation = initial_direction(_cub3d);
 	_cub3d->mouse_x_pos = 0;

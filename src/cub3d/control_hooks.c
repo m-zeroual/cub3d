@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 09:53:42 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/05 21:22:17 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/07 17:08:44 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ int	mouse_hook(int x, int y, t_cub3d *_cub3d)
 {
 	(void)y;
 	if (_cub3d->mouse_x_pos > x)
-		_cub3d->rotation += 2;
+		_cub3d->rotation += 4.25488;
 	else if (_cub3d->mouse_x_pos < x)
-		_cub3d->rotation -= 2;
+		_cub3d->rotation -= 4.25488;
 	_cub3d->mouse_x_pos = x;
 	return (0);
 }

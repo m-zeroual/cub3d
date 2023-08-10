@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 22:56:57 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/07 16:10:36 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/10 10:21:22 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,6 @@ double ft_calcul_v(t_cub3d *_cub3d)
 	return (vetagorc(_cub3d->vertical.x, _cub3d->vertical.y, _cub3d->px, _cub3d->py));
 }
 
-// int	create_trgb(int r, int g, int b)
-// {
-// 	return (r << 16 | g << 8 | b);
-// }
-
 void	draw_sky(t_cub3d *_cub3d, int index, int end)
 {
 	int	j;
@@ -95,7 +90,8 @@ void	draw_sky(t_cub3d *_cub3d, int index, int end)
 	j = 0;
 	while (j < end)
 	{
-		img_pixl_put(_cub3d, index, j, 0x87CEEB);
+		// img_pixl_put(_cub3d, index, j, 0x87CEEB);
+		img_pixl_put(_cub3d, index, j, get_color(_cub3d, 1));
 		j++;
 	}
 }
@@ -107,16 +103,21 @@ void	draw_floor(t_cub3d *_cub3d, int index, int start)
 	j = start;
 	while (j < HEIGHT)
 	{
-		img_pixl_put(_cub3d, index, j, 0xD2B48C);
+		img_pixl_put(_cub3d, index, j, get_color(_cub3d, 0));
+		// img_pixl_put(_cub3d, index, j, 0xD2B48C);
 		j++;
 	}
 }
 
-static void	draw_wall(t_cub3d *_cub3d, double d_ray, int index)
+static void	draw_wall(t_cub3d *_cub3d, t_point dest_ray_p, double d_ray, int index, int intersection)
 {
 	double	projected_wall;
 	int		start;
+	int		x_step;
+	(void) dest_ray_p;
+	double	y_step;
 	int		j;
+	// int		color;
 
 	projected_wall = (double)(HEIGHT / (double)(d_ray * \
 	cos((_cub3d->ray_angle - _cub3d->rotation) * M_PI / 180) / PIXEL));
@@ -125,18 +126,95 @@ static void	draw_wall(t_cub3d *_cub3d, double d_ray, int index)
 	if (start < 0)
 		start = 0;
 	draw_sky(_cub3d, index, start);
-	while (j < projected_wall && j < HEIGHT)
+	y_step = 0;
+	// if (_cub3d->ray_angle > 60 && _cub3d->ray_angle < 120)
+	if (_cub3d->ray_angle > 45 && _cub3d->ray_angle < 135)
 	{
-		img_pixl_put(_cub3d, index, start + j, 0x0000FF);
-		j++;
+		if (intersection == 1)
+			x_step = (_cub3d->textures[0].width / PIXEL) * (dest_ray_p.x - (int)(dest_ray_p.x / PIXEL) * PIXEL);
+		// x_step = (_cub3d->east.width / PIXEL) * fmod((dest_ray_p.x / PIXEL), PIXEL);
+		else
+			x_step = (_cub3d->textures[0].width / PIXEL) * (dest_ray_p.y - (int)(dest_ray_p.y / PIXEL) * PIXEL);
+		// printf("VALUE: %lf\n", step);
+		while (j < projected_wall && j < HEIGHT)
+		{
+			// img_pixl_put(_cub3d, index, start + j, img_get_pixel_color(_cub3d, x_step, y_step, 0));
+
+			img_pixl_put(_cub3d, index, start + j, 0x0000FF);
+			y_step += (double)_cub3d->textures[0].height / projected_wall;
+			j++;
+		}
+		// printf("up %s\n", _cub3d->textures[0].name);
+
 	}
+	// else 	if (_cub3d->ray_angle > 225 && _cub3d->ray_angle < 315)
+	// {
+	// 	if (intersection == 1)
+	// 		x_step = (_cub3d->textures[1].width / PIXEL) * (dest_ray_p.x - (int)(dest_ray_p.x / PIXEL) * PIXEL);
+	// 	// x_step = (_cub3d->east.width / PIXEL) * fmod((dest_ray_p.x / PIXEL), PIXEL);
+	// 	else
+	// 		x_step = (_cub3d->textures[1].width / PIXEL) * (dest_ray_p.y - (int)(dest_ray_p.y / PIXEL) * PIXEL);
+	// 	// printf("VALUE: %lf\n", step);
+	// 	while (j < projected_wall && j < HEIGHT)
+	// 	{
+	// 		img_pixl_put(_cub3d, index, start + j, img_get_pixel_color(_cub3d, x_step, y_step, 1));
+
+	// 		// img_pixl_put(_cub3d, index, start + j, 0x0000FF);
+	// 		y_step += (double)_cub3d->textures[1].height / projected_wall;
+	// 		j++;
+	// 	}
+	// 	// printf("down %s\n", _cub3d->textures[1].name);
+	// }
+	// else 	if (_cub3d->ray_angle > 135 && _cub3d->ray_angle < 225)
+	// {
+	// 	if (intersection == 1)
+	// 		x_step = (_cub3d->textures[2].width / PIXEL) * (dest_ray_p.x - (int)(dest_ray_p.x / PIXEL) * PIXEL);
+	// 	// x_step = (_cub3d->east.width / PIXEL) * fmod((dest_ray_p.x / PIXEL), PIXEL);
+	// 	else
+	// 		x_step = (_cub3d->textures[2].width / PIXEL) * (dest_ray_p.y - (int)(dest_ray_p.y / PIXEL) * PIXEL);
+	// 	// printf("VALUE: %lf\n", step);
+	// 	while (j < projected_wall && j < HEIGHT)
+	// 	{
+	// 		img_pixl_put(_cub3d, index, start + j, img_get_pixel_color(_cub3d, x_step, y_step, 2));
+
+	// 		// img_pixl_put(_cub3d, index, start + j, 0x0000FF);
+	// 		y_step += (double)_cub3d->textures[2].height / projected_wall;
+	// 		j++;
+	// 	}
+	// 	// printf("right %s\n", _cub3d->textures[2].name);
+
+	// }
+	// else
+	// {
+	// 	if (intersection == 1)
+	// 		x_step = (_cub3d->textures[3].width / PIXEL) * (dest_ray_p.x - (int)(dest_ray_p.x / PIXEL) * PIXEL);
+	// 	// x_step = (_cub3d->east.width / PIXEL) * fmod((dest_ray_p.x / PIXEL), PIXEL);
+	// 	else
+	// 		x_step = (_cub3d->textures[3].width / PIXEL) * (dest_ray_p.y - (int)(dest_ray_p.y / PIXEL) * PIXEL);
+	// 	// printf("VALUE: %lf\n", step);
+	// 	while (j < projected_wall && j < HEIGHT)
+	// 	{
+	// 		img_pixl_put(_cub3d, index, start + j, img_get_pixel_color(_cub3d, x_step, y_step, 3));
+
+	// 		// img_pixl_put(_cub3d, index, start + j, 0x0000FF);
+	// 		y_step += (double)_cub3d->textures[3].height / projected_wall;
+	// 		j++;
+	// 	}
+	// 	// printf("left %s\n", _cub3d->textures[3].name);
+	// }
 	draw_floor(_cub3d, index, start + j);
+	// usleep(30);
+	if (index == WIDTH - 1)
+	printf("ray      =>  %f\n", _cub3d->ray_angle);
+		
+	// printf("rotation =>  %f\n", _cub3d->rotation);
 }
 
 static void	ft_raycating(t_cub3d *_cub3d, int i)
 {
 	double	dy;
 	double	dx;
+	t_point	point;
 	
 	ft_check_view(_cub3d);
 	dy = ft_calcul_h(_cub3d);
@@ -144,14 +222,17 @@ static void	ft_raycating(t_cub3d *_cub3d, int i)
 	if (dy < dx)
 	{
 		ft_draw_ray(_cub3d, _cub3d->horizontal.x, _cub3d->horizontal.y, 0x00FF00);
-		draw_wall(_cub3d, dy, i);
+		point.x = _cub3d->horizontal.x;
+		point.y = _cub3d->horizontal.y;
+		draw_wall(_cub3d, point, dy, i, 1);
 	}
 	else
 	{
 		ft_draw_ray(_cub3d, _cub3d->vertical.x, _cub3d->vertical.y, 0x00FF00);
-		draw_wall(_cub3d, dx, i);
+		point.x = _cub3d->vertical.x;
+		point.y = _cub3d->vertical.y;
+		draw_wall(_cub3d, point, dx, i, 2);
 	}
-	printf("%s\n", _cub3d->textures[0].name);
 }
 
 void	cast_all_rays(t_cub3d *_cub3d)

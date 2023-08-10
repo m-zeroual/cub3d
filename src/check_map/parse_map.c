@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 18:51:54 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/06 17:56:03 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/10 11:03:37 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	condition(int i, int j, int *player, char **new_map)
 		|| new_map[i][j] == 'W' || new_map[i][j] == 'E'
 		|| new_map[i][j] == 'S' || new_map[i][j] == 'D')
 		{
-			if (i == 6 || i == ft_count_without_newline(new_map) - 1 || j == 0 || j == (int)ft_strlen(new_map[i]) - 1
+			if (i == 6 || i == ft_count_without_newline(new_map) - 1 || j == 0
+				|| j == (int)ft_strlen(new_map[i]) - 1
 				|| new_map[i - 1][j] == ' ' || new_map[i][j + 1] == ' '
 				|| new_map[i + 1][j] == ' ' || new_map[i][j - 1] == ' '
 				|| j >= (int)ft_strlen(new_map[i - 1])
