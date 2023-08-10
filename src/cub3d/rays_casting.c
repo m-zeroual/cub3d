@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 22:56:57 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/10 13:19:45 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/10 17:06:54 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,6 +242,7 @@ void	is_door(t_cub3d *_cub3d, t_point point)
 
 static void	ft_raycating(t_cub3d *_cub3d, t_ray_data ray_data)
 {
+	ft_check_view(_cub3d);
 	ray_data.dy = ft_calcul_h(_cub3d, &ray_data.is_door_h);
 	ray_data.dx = ft_calcul_v(_cub3d, &ray_data.is_door_v);
 	if (ray_data.dy < ray_data.dx)
@@ -250,9 +251,8 @@ static void	ft_raycating(t_cub3d *_cub3d, t_ray_data ray_data)
 		ray_data.dest_ray_p.x = _cub3d->horizontal.x;
 		ray_data.dest_ray_p.y = _cub3d->horizontal.y;
 		ray_data.wall_or_door = ray_data.is_door_h;
-		ray_data.intersection = 1;
 		ray_data.ray_lenth = ray_data.dy;
-		draw_3d_game(_cub3d, ray_data);
+		ray_data.intersection = 1;
 	}
 	else
 	{
@@ -260,10 +260,10 @@ static void	ft_raycating(t_cub3d *_cub3d, t_ray_data ray_data)
 		ray_data.dest_ray_p.x = _cub3d->vertical.x;
 		ray_data.dest_ray_p.y = _cub3d->vertical.y;
 		ray_data.wall_or_door = ray_data.is_door_v;
-		ray_data.intersection = 2;
 		ray_data.ray_lenth = ray_data.dx;
-		draw_3d_game(_cub3d, ray_data);
+		ray_data.intersection = 2;
 	}
+	draw_3d_game(_cub3d, ray_data);
 	if (_cub3d->ray_angle > (_cub3d->rotation - 10) && _cub3d->ray_angle < (_cub3d->rotation + 10) && _cub3d->is_door == 0)
 		is_door(_cub3d, ray_data.dest_ray_p);
 }
@@ -305,7 +305,7 @@ static void	ft_raycating(t_cub3d *_cub3d, t_ray_data ray_data)
 void	cast_all_rays(t_cub3d *_cub3d)
 {
 	t_ray_data	ray_data;
-	int			i;
+	int	i;
 
 	i = 0;
 	_cub3d->ray_angle = _cub3d->rotation + (VUE_ANGLE / 2);
@@ -318,9 +318,8 @@ void	cast_all_rays(t_cub3d *_cub3d)
 		ray_data.intersection = 0;
 		ray_data.index = i;
 		_cub3d->ray_angle = normalize_angle(_cub3d->ray_angle);
-		ft_check_view(_cub3d);
 		ft_raycating(_cub3d, ray_data);
 		_cub3d->ray_angle -= VUE_ANGLE / (double)WIDTH;
-		i++;
+		i += 1;
 	}
 }
