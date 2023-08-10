@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/09 16:07:58 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/10 13:10:36 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,26 @@ typedef struct s_draw_ray
 }	t_draw_ray;
 
 
+typedef struct s_point
+{
+	double	x;
+	double	y;
+}	t_point;
+
+typedef struct s_ray_data
+{
+	int		index;
+	t_point	dest_ray_p;
+	double	dy;
+	double	dx;
+	double	ray_lenth;
+	int		intersection;
+	int		wall_or_door;
+	int		is_door_v;
+	int		is_door_h;
+}	t_ray_data;
+
+
 typedef struct s_img
 {
 	void	*mlx_img;
@@ -84,13 +104,6 @@ typedef struct s_texture
 	char	*name;
 }	t_texture;
 
-
-typedef struct s_point
-{
-	double	x;
-	double	y;
-}	t_point;
-
 typedef struct s_cub3d
 {
 	int     height;
@@ -103,7 +116,6 @@ typedef struct s_cub3d
 	float	px;
 	float	py;
 	int		is_door;
-	int		wall_door;
 	t_point door_hit;
 
 	t_texture	textures[5];

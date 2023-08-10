@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 11:58:47 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/09 19:57:15 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/09 20:05:43 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 int	quit(t_cub3d *_cub3d)
 {
+	int	i;
+
+	i = 0;
+	while (i < 5)
+		mlx_destroy_image(_cub3d->mlx_ptr, _cub3d->textures[i++].img.mlx_img);
 	mlx_destroy_window(_cub3d->mlx_ptr, _cub3d->mlx_win);
 	// ft_free_all(_cub3d);
 	exit(EXIT_SUCCESS);
@@ -49,7 +54,6 @@ void	open_textures(t_cub3d *_cub3d)
 		}
 		_cub3d->textures[i].img.addr = mlx_get_data_addr(_cub3d->textures[i].img.mlx_img, \
 		&_cub3d->textures[i].img.bpp, &_cub3d->textures[i].img.line_len, &_cub3d->textures[i].img.endian);
-		printf("HEIGHT :%d\t WIDTH: %d\n",_cub3d->textures[i].height, _cub3d->textures[i].width);
 		i++;
 	}
 }

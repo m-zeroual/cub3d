@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 22:28:12 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/09 17:43:33 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/09 20:10:22 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void ft_put_pixle(t_cub3d *_cub3d, char c, int x1, int y1)
 			if (c == '1')
 				img_pixl_put(_cub3d, (x1 * PIXEL) + (x ), (y1 * PIXEL) + (y), 0x808080);
 			if (c == 'D')
-				img_pixl_put(_cub3d, (x1 * PIXEL) + (x ), (y1 * PIXEL) + (y), 0xFFFFFF);
+				img_pixl_put(_cub3d, (x1 * PIXEL) + (x ), (y1 * PIXEL) + (y), 0x2F435A);
 			x++;
 		}
 		y++;
