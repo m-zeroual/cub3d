@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/07 21:51:46 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/12 16:07:54 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_point
 
 typedef struct s_cub3d
 {
+	int index_map;
 	int     height;
 	int     width;
 	char    **map;
@@ -139,7 +140,7 @@ char    **ft_read_map(char *map_name);
 char    **ft_clean_map(char **map, t_cub3d *_cub3d);
 
 //====> src/check_map/parse_map.c <=====
-char    **parse_map(char *map_name, t_cub3d *_cub3d);
+int 	parse_map(char *map_name, t_cub3d *_cub3d);
 // ------------------------------------------------------
 
 

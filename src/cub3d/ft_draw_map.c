@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_draw_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 22:28:12 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/04 23:33:24 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/12 16:27:22 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void ft_draw_map(t_cub3d *_cub3d)
 	int x;
 
 	y = 6;
-	while (y < _cub3d->height + 6)
+	while (y < _cub3d->height)
 	{
 		x = 0;
 		while (x < _cub3d->width)

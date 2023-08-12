@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 18:51:54 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/10 11:03:37 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/12 16:22:06 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	check_map(char **new_map)
 	return (1);
 }
 
-char	**parse_map(char *map_name, t_cub3d *_cub3d)
+int parse_map(char *map_name, t_cub3d *_cub3d)
 {
 	char	**map;
 	char	**new_map;
@@ -73,14 +73,14 @@ char	**parse_map(char *map_name, t_cub3d *_cub3d)
 	ft_check_error(map_name);
 	map = ft_read_map(map_name);
 	if (!map)
-		return (ft_putstr_fd("Error\n\tGeneral error.\n", 2), NULL);
+		return (ft_putstr_fd("Error\n\tGeneral error.\n", 2), 0);
 	new_map = ft_clean_map(map, _cub3d);
 	if (!new_map || !*new_map)
-		return (NULL);
+		return (0);
+	// ft_display_map(new_map);
 	ft_free_map(map);
 	// -- clear --
 	if (!check_map(new_map))
-		return (ft_free_map(new_map), NULL);
-	
-	return (new_map);
+		return (ft_free_map(new_map), 0);
+	return (1);
 }
