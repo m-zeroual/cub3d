@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:25:24 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/10 17:26:14 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/12 20:15:27 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	ft_check6lines(char **map, t_cub3d *_cub3d)
 	if (!map || !*map)
 		return (ft_putstr_fd("Error\n\tGeneral Error.\n", 2), 0);
 	first6line = 0;
-	_cub3d->textures[4].name = ft_strdup("files/texture/door.xpm");
+	_cub3d->textures[4].name = ft_strdup("./files/texture/door.xpm");
 	while (first6line < 6)
 	{
 		str = ft_split(map[first6line], ' ');

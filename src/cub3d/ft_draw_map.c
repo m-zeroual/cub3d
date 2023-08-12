@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 22:28:12 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/09 20:10:22 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/12 20:24:48 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void	ft_put_pixle(t_cub3d *_cub3d, char c, int x1, int y1)
 	int	x;
 
 	y = 0;
-	y1 = y1 - 6;
 	while (y < PIXEL)
 	{
 		x = 0;
@@ -41,8 +40,8 @@ void	ft_draw_map(t_cub3d *_cub3d)
 	int	y;
 	int	x;
 
-	y = 6;
-	while (y < _cub3d->height + 6)
+	y = 0;
+	while (y < _cub3d->height)
 	{
 		x = 0;
 		while (x < _cub3d->width)

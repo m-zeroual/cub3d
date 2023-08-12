@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/10 17:17:27 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/12 20:10:42 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct s_cub3d
 	int     height;
 	int     width;
 	char    **map;
+	int		index_map;
 	void	*mlx_ptr;
 	void	*mlx_win;
 	int		up_down;
@@ -150,7 +151,7 @@ char    **ft_read_map(char *map_name);
 char    **ft_clean_map(char **map, t_cub3d *_cub3d);
 
 //====> src/check_map/parse_map.c <=====
-char    **parse_map(char *map_name, t_cub3d *_cub3d);
+int    parse_map(char *map_name, t_cub3d *_cub3d);
 // ------------------------------------------------------
 
 

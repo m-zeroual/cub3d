@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 00:57:18 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/10 17:21:09 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/12 20:09:47 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_free_map(char **map)
 	int	i;
 
 	i = 0;
-	while (map && map[i])
+	while (map[i])
 		free(map[i++]);
 	free(map);
 }

@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:45 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/10 17:06:02 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/12 20:31:54 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	ft_count(t_cub3d *_cub3d, int *width, int *height)
 	int	i;
 	int	j;
 
-	i = 6;
+	i = 0;
 	*width = 0;
 	*height = 0;
 	while (_cub3d->map[i])
@@ -62,13 +62,13 @@ void	ft_draw_player(t_cub3d *_cub3d)
 
 int	initial_direction(t_cub3d *_cub3d)
 {
-	if (_cub3d->map[(int)(_cub3d->py / PIXEL) + 6] \
+	if (_cub3d->map[(int)(_cub3d->py / PIXEL)] \
 	[(int)(_cub3d->px / PIXEL)] == 'N')
 		return (90);
-	else if (_cub3d->map[(int)(_cub3d->py / PIXEL) + 6] \
+	else if (_cub3d->map[(int)(_cub3d->py / PIXEL)] \
 	[(int)(_cub3d->px / PIXEL)] == 'S')
 		return (270);
-	else if (_cub3d->map[(int)(_cub3d->py / PIXEL) + 6] \
+	else if (_cub3d->map[(int)(_cub3d->py / PIXEL)] \
 	[(int)(_cub3d->px / PIXEL)] == 'E')
 		return (0);
 	else
@@ -83,6 +83,8 @@ int	ft_draw(t_cub3d *_cub3d)
 	_cub3d->rotation = normalize_angle(_cub3d->rotation);
 	cast_all_rays(_cub3d);
 	ft_draw_map(_cub3d);
+	_cub3d->px = 2 * PIXEL;
+	_cub3d->py = 3 * PIXEL;
 	ft_draw_player(_cub3d);
 	mlx_put_image_to_window(_cub3d->mlx_ptr, _cub3d->mlx_win, \
 	_cub3d->img.mlx_img, 0, 0);
@@ -93,6 +95,7 @@ int	ft_draw(t_cub3d *_cub3d)
 void	cub3d(t_cub3d *_cub3d)
 {
 	ft_count(_cub3d, &_cub3d->width, &_cub3d->height);
+	printf("HIGHT: %d\n", _cub3d->height);
 	_cub3d->mlx_ptr = mlx_init();
 	open_textures(_cub3d);
 	_cub3d->mlx_win = mlx_new_window(_cub3d->mlx_ptr, WIDTH, HEIGHT, "cub3d");

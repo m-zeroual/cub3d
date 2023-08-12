@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 11:58:47 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/10 17:12:22 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/12 20:15:41 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,16 @@ int	get_color(t_cub3d *_cub3d, int ceile_or_floor)
 
 int	is_upside_wall_dor(t_cub3d *_cub3d, int x, int y, char wall_dor)
 {
-	if (_cub3d->map[(int)((y + PLAYER_SIZE / 2) / PIXEL) + 6] \
+	if (_cub3d->map[(int)((y + PLAYER_SIZE / 2) / PIXEL)] \
 	[(int)(x / PIXEL)] == wall_dor)
 		return (1);
-	else if (_cub3d->map[(int)((y - PLAYER_SIZE / 2) / PIXEL) + 6] \
+	else if (_cub3d->map[(int)((y - PLAYER_SIZE / 2) / PIXEL)] \
 	[(int)(x / PIXEL)] == wall_dor)
 		return (1);
-	else if (_cub3d->map[(int)(y / PIXEL) + 6] \
+	else if (_cub3d->map[(int)(y / PIXEL)] \
 	[(int)((x - PLAYER_SIZE / 2) / PIXEL)] == wall_dor)
 		return (1);
-	else if (_cub3d->map[(int)(y / PIXEL) + 6] \
+	else if (_cub3d->map[(int)(y / PIXEL)] \
 	[(int)((x + PLAYER_SIZE / 2) / PIXEL)] == wall_dor)
 		return (1);
 	return (0);
