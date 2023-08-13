@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 22:56:57 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/12 20:11:57 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/13 10:49:10 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,8 +264,13 @@ static void	ft_raycating(t_cub3d *_cub3d, t_ray_data ray_data)
 		ray_data.intersection = 2;
 	}
 	draw_3d_game(_cub3d, ray_data);
-	if (_cub3d->ray_angle == _cub3d->rotation)
+	// if (_cub3d->ray_angle < _cub3d->rotation + 10 && _cub3d->ray_angle > _cub3d->rotation - 10)
+	if (_cub3d->is_door == 0)
+	{
+		// printf("%f\n", _cub3d->ray_angle);
+		// printf("cordinats: (%f, %f)\n", ray_data.dest_ray_p.x / PIXEL, ray_data.dest_ray_p.y / PIXEL);
 		is_door(_cub3d, ray_data.dest_ray_p);
+	}	
 }
 
 // static void	ft_raycating(t_cub3d *_cub3d, int ray_index)
@@ -309,9 +314,11 @@ void	cast_all_rays(t_cub3d *_cub3d)
 
 	i = 0;
 	_cub3d->ray_angle = _cub3d->rotation + (VUE_ANGLE / 2);
+	// _cub3d->ray_angle = _cub3d->rotation;
+	_cub3d->is_door = 0;
+	// while (i < 1)
 	while (i < WIDTH)
 	{
-		_cub3d->is_door = 0;
 		ray_data.wall_or_door = 0;
 		ray_data.is_door_v = 0;
 		ray_data.is_door_h = 0;

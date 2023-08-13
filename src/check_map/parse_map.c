@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 18:51:54 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/12 16:22:06 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/13 10:53:54 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ int parse_map(char *map_name, t_cub3d *_cub3d)
 	// -- clear --
 	if (!check_map(new_map))
 		return (ft_free_map(new_map), 0);
+	ft_free_map(new_map);
 	return (1);
 }

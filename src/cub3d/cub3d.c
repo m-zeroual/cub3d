@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:45 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/12 20:31:54 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/13 11:13:33 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ int	ft_draw(t_cub3d *_cub3d)
 	_cub3d->rotation = normalize_angle(_cub3d->rotation);
 	cast_all_rays(_cub3d);
 	ft_draw_map(_cub3d);
-	_cub3d->px = 2 * PIXEL;
-	_cub3d->py = 3 * PIXEL;
 	ft_draw_player(_cub3d);
 	mlx_put_image_to_window(_cub3d->mlx_ptr, _cub3d->mlx_win, \
 	_cub3d->img.mlx_img, 0, 0);
@@ -96,6 +94,8 @@ void	cub3d(t_cub3d *_cub3d)
 {
 	ft_count(_cub3d, &_cub3d->width, &_cub3d->height);
 	printf("HIGHT: %d\n", _cub3d->height);
+	_cub3d->px = 2.5 * PIXEL;
+	_cub3d->py = 3.5 * PIXEL;
 	_cub3d->mlx_ptr = mlx_init();
 	open_textures(_cub3d);
 	_cub3d->mlx_win = mlx_new_window(_cub3d->mlx_ptr, WIDTH, HEIGHT, "cub3d");

@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 09:53:42 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/12 20:12:16 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/13 10:43:13 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void	open_close_door(t_cub3d *_cub3d)
 	distance = sqrt(pow((int)_cub3d->door_hit.x - \
 	(int)(_cub3d->px / PIXEL), 2) + \
 	pow((int)_cub3d->door_hit.y - (int)(_cub3d->py / PIXEL), 2));
-	if (distance == 1)
+	if (_cub3d->is_door && distance == 1)
 	{
 		if (_cub3d->map[(int)_cub3d->door_hit.y] \
 		[(int)_cub3d->door_hit.x] == 'D')

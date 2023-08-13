@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 00:57:18 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/12 20:09:47 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/13 10:51:05 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_free_all(t_cub3d *_cub3d)
 	int	i;
 
 	i = 0;
-	ft_free_map(_cub3d->map);
+	ft_free_map(_cub3d->map - _cub3d->index_map);
 	ft_free_map(_cub3d->c_rgb);
 	ft_free_map(_cub3d->f_rgb);
 	while (i < 5)
