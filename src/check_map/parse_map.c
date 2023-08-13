@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 18:51:54 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/12 16:22:06 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/13 14:43:13 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	condition(int i, int j, int *player, char **new_map)
 {
 	if (new_map[i][j] == 'N' || new_map[i][j] == 'W' || new_map[i][j] == 'E'
 	|| new_map[i][j] == 'S' || new_map[i][j] == ' ' || new_map[i][j] == '0'
-	|| new_map[i][j] == '1' || new_map[i][j] == 'D' || new_map[i][j] == '\n')
+	|| new_map[i][j] == '1' || new_map[i][j] == 'D')
 	{
 		if (new_map[i][j] == '0' || new_map[i][j] == 'N'
 		|| new_map[i][j] == 'W' || new_map[i][j] == 'E'
@@ -77,10 +77,10 @@ int parse_map(char *map_name, t_cub3d *_cub3d)
 	new_map = ft_clean_map(map, _cub3d);
 	if (!new_map || !*new_map)
 		return (0);
-	// ft_display_map(new_map);
 	ft_free_map(map);
-	// -- clear --
 	if (!check_map(new_map))
 		return (ft_free_map(new_map), 0);
+	ft_free_map(new_map);
+	// -- clear --
 	return (1);
 }

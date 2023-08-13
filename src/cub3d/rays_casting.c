@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   rays_casting.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 22:56:57 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/12 16:28:32 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/13 10:49:10 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../../include/cub3d.h"
 
-double	ft_calcul_h(t_cub3d *_cub3d)
+double	ft_calcul_h(t_cub3d *_cub3d, int *is_door)
 {
 	int check = 0;
 
@@ -39,15 +39,25 @@ double	ft_calcul_h(t_cub3d *_cub3d)
 		&& (((int)_cub3d->horizontal.y / PIXEL) - check >= 0 &&  (int)(_cub3d->horizontal.y / PIXEL) - check < _cub3d->height))
 	{
 		
-		if (_cub3d->map[(int)(((_cub3d->horizontal.y) - check) / PIXEL) + 6][(int)((_cub3d->horizontal.x ) / PIXEL) ] == '1')
+		// if (_cub3d->map[(int)(((_cub3d->horizontal.y) - check) / PIXEL)][(int)((_cub3d->horizontal.x ) / PIXEL) ] == '1')
+		// printf("value is: [%c]\n", _cub3d->map[((int)((_cub3d->horizontal.y) - check) / PIXEL)][((int)(_cub3d->horizontal.x ) / PIXEL)]);
+		if (_cub3d->map[((int)((_cub3d->horizontal.y) - check) / PIXEL)][((int)(_cub3d->horizontal.x ) / PIXEL)] == '1')
+		{
+			*is_door = 1;
 			break ;
+		}
+		else if (_cub3d->map[((int)((_cub3d->horizontal.y) - check) / PIXEL)][((int)(_cub3d->horizontal.x ) / PIXEL)] == 'D')
+		{
+			*is_door = 2;
+			break ;
+		}
 		_cub3d->horizontal.y += _cub3d->step.y;
 		_cub3d->horizontal.x += _cub3d->step.x;
 	}
 	return (vetagorc(_cub3d->horizontal.x, _cub3d->horizontal.y, _cub3d->px, _cub3d->py));
 }
 
-double ft_calcul_v(t_cub3d *_cub3d)
+double ft_calcul_v(t_cub3d *_cub3d, int *is_door)
 {
 	int check = 0;
 
@@ -75,176 +85,247 @@ double ft_calcul_v(t_cub3d *_cub3d)
 	while (((int)(_cub3d->vertical.x / PIXEL) - check >= 0 && (int)(_cub3d->vertical.x / PIXEL) - check < _cub3d->width)
 		&& (((int)_cub3d->vertical.y / PIXEL) >= 0 &&  (int)(_cub3d->vertical.y / PIXEL)  < _cub3d->height))
 	{
-		if (_cub3d->map[((int)((_cub3d->vertical.y) ) / PIXEL) + 6][(((int)(_cub3d->vertical.x) - check) / PIXEL)] == '1')
+		if (_cub3d->map[((int)((_cub3d->vertical.y) ) / PIXEL)][(((int)(_cub3d->vertical.x) - check) / PIXEL)] == '1')
+		{
+			*is_door = 1;
 			break ;
+		}
+		else if (_cub3d->map[((int)((_cub3d->vertical.y) ) / PIXEL)][(((int)(_cub3d->vertical.x) - check) / PIXEL)] == 'D')
+		{
+			*is_door = 2;
+			break ;
+		}
 		_cub3d->vertical.y += _cub3d->step.y;
 		_cub3d->vertical.x += _cub3d->step.x;
 	}
 	return (vetagorc(_cub3d->vertical.x, _cub3d->vertical.y, _cub3d->px, _cub3d->py));
 }
 
-void	draw_sky(t_cub3d *_cub3d, int index, int end)
-{
-	int	j;
+// void	draw_sky(t_cub3d *_cub3d, int index, int end)
+// {
+// 	int	j;
 
-	j = 0;
-	while (j < end)
-	{
-		// img_pixl_put(_cub3d, index, j, 0x87CEEB);
-		img_pixl_put(_cub3d, index, j, get_color(_cub3d, 1));
-		j++;
-	}
-}
+// 	j = 0;
+// 	while (j < end)
+// 	{
+// 		// img_pixl_put(_cub3d, index, j, 0x87CEEB);
+// 		img_pixl_put(_cub3d, index, j, get_color(_cub3d, 1));
+// 		j++;
+// 	}
+// }
 
-void	draw_floor(t_cub3d *_cub3d, int index, int start)
-{
-	int	j;
+// void	draw_floor(t_cub3d *_cub3d, int index, int start)
+// {
+// 	int	j;
 
-	j = start;
-	while (j < HEIGHT)
-	{
-		img_pixl_put(_cub3d, index, j, get_color(_cub3d, 0));
-		// img_pixl_put(_cub3d, index, j, 0xD2B48C);
-		j++;
-	}
-}
+// 	j = start;
+// 	while (j < HEIGHT)
+// 	{
+// 		img_pixl_put(_cub3d, index, j, get_color(_cub3d, 0));
+// 		// img_pixl_put(_cub3d, index, j, 0xD2B48C);
+// 		j++;
+// 	}
+// }
 
-static void	draw_wall(t_cub3d *_cub3d, t_point dest_ray_p, double d_ray, int index, int intersection)
+// static void	draw_3d_game(t_cub3d *_cub3d, t_point dest_ray_p, double d_ray, int index, int intersection)
+static void	draw_3d_game(t_cub3d *_cub3d, t_ray_data ray_data)
 {
 	double	projected_wall;
-	int		start;
-	int		x_step;
-	(void) dest_ray_p;
 	double	y_step;
+	double	x_step;
+	int		start;
 	int		j;
-	// int		color;
 
-	projected_wall = (double)(HEIGHT / (double)(d_ray * \
+	projected_wall = (double)(HEIGHT / (double)(ray_data.ray_lenth * \
 	cos((_cub3d->ray_angle - _cub3d->rotation) * M_PI / 180) / PIXEL));
 	j = 0;
 	start = (int)((HEIGHT / 2) - (projected_wall / 2));
 	if (start < 0)
 		start = 0;
-	draw_sky(_cub3d, index, start);
 	y_step = 0;
-	// if (_cub3d->ray_angle > 60 && _cub3d->ray_angle < 120)
-	if (_cub3d->ray_angle > 45 && _cub3d->ray_angle < 135)
+	if (ray_data.intersection == 1)
+		x_step = (_cub3d->textures[0].width / PIXEL) * (ray_data.dest_ray_p.x - (int)(ray_data.dest_ray_p.x / PIXEL) * PIXEL);
+	else
+		x_step = (_cub3d->textures[0].width / PIXEL) * (ray_data.dest_ray_p.y - (int)(ray_data.dest_ray_p.y / PIXEL) * PIXEL);
+	double err_w = (projected_wall / 2) - (HEIGHT / 2);
+	if (err_w < 0)
+		err_w = 0;
+	y_step = ((double)_cub3d->textures[0].height / projected_wall) * err_w;
+	while (j < HEIGHT)
 	{
-		if (intersection == 1)
-			x_step = (_cub3d->textures[0].width / PIXEL) * (dest_ray_p.x - (int)(dest_ray_p.x / PIXEL) * PIXEL);
-		// x_step = (_cub3d->east.width / PIXEL) * fmod((dest_ray_p.x / PIXEL), PIXEL);
-		else
-			x_step = (_cub3d->textures[0].width / PIXEL) * (dest_ray_p.y - (int)(dest_ray_p.y / PIXEL) * PIXEL);
-		// printf("VALUE: %lf\n", step);
-		while (j < projected_wall && j < HEIGHT)
+		if (j < start)
+			img_pixl_put(_cub3d, ray_data.index, j, get_color(_cub3d, 1));
+		else if (j >= start && j < start + projected_wall)
 		{
-			// img_pixl_put(_cub3d, index, start + j, img_get_pixel_color(_cub3d, x_step, y_step, 0));
-
-			img_pixl_put(_cub3d, index, start + j, 0x0000FF);
+			if (ray_data.wall_or_door == 2)
+				img_pixl_put(_cub3d, ray_data.index, j, img_get_pixel_color(_cub3d->textures[4], x_step, y_step));
+			else 
+			{
+				if (ray_data.intersection == 1 && _cub3d->up_down)
+					img_pixl_put(_cub3d, ray_data.index, j, img_get_pixel_color(_cub3d->textures[0], x_step, y_step));
+				if (ray_data.intersection == 1 && !_cub3d->up_down)
+					img_pixl_put(_cub3d, ray_data.index, j, img_get_pixel_color(_cub3d->textures[1], x_step, y_step));
+				if (ray_data.intersection == 2 && _cub3d->left_right)
+					img_pixl_put(_cub3d, ray_data.index, j, img_get_pixel_color(_cub3d->textures[2], x_step, y_step));
+				if (ray_data.intersection == 2 && !_cub3d->left_right)
+					img_pixl_put(_cub3d, ray_data.index, j, img_get_pixel_color(_cub3d->textures[3], x_step, y_step));
+			}
 			y_step += (double)_cub3d->textures[0].height / projected_wall;
-			j++;
 		}
-		// printf("up %s\n", _cub3d->textures[0].name);
-
+		else if (j > start + projected_wall)
+			img_pixl_put(_cub3d, ray_data.index, j, get_color(_cub3d, 2));
+		j++;
 	}
-	// else 	if (_cub3d->ray_angle > 225 && _cub3d->ray_angle < 315)
+	// double err_w = (projected_wall / 2) - (HEIGHT / 2);
+	// if(err_w < 0)
+	// 	err_w = 0;
+	// y_step = ((double)_cub3d->textures[0].height / projected_wall) * err_w;
+	// draw_sky(_cub3d, index, start);
+	// while (j < projected_wall && j < HEIGHT)
 	// {
-	// 	if (intersection == 1)
-	// 		x_step = (_cub3d->textures[1].width / PIXEL) * (dest_ray_p.x - (int)(dest_ray_p.x / PIXEL) * PIXEL);
-	// 	// x_step = (_cub3d->east.width / PIXEL) * fmod((dest_ray_p.x / PIXEL), PIXEL);
-	// 	else
-	// 		x_step = (_cub3d->textures[1].width / PIXEL) * (dest_ray_p.y - (int)(dest_ray_p.y / PIXEL) * PIXEL);
-	// 	// printf("VALUE: %lf\n", step);
-	// 	while (j < projected_wall && j < HEIGHT)
-	// 	{
-	// 		img_pixl_put(_cub3d, index, start + j, img_get_pixel_color(_cub3d, x_step, y_step, 1));
-
-	// 		// img_pixl_put(_cub3d, index, start + j, 0x0000FF);
-	// 		y_step += (double)_cub3d->textures[1].height / projected_wall;
-	// 		j++;
-	// 	}
-	// 	// printf("down %s\n", _cub3d->textures[1].name);
+		// if (_cub3d->wall_door == 2)
+		// 	img_pixl_put(_cub3d, index, start + j, img_get_pixel_color(_cub3d->textures[4], x_step, y_step));
+		// else 
+		// {
+		// 	if (intersection == 1 && _cub3d->up_down)
+		// 		img_pixl_put(_cub3d, index, start + j, img_get_pixel_color(_cub3d->textures[0], x_step, y_step));
+		// 	if (intersection == 1 && !_cub3d->up_down)
+		// 		img_pixl_put(_cub3d, index, start + j, img_get_pixel_color(_cub3d->textures[1], x_step, y_step));
+		// 	if (intersection == 2 && _cub3d->left_right)
+		// 		img_pixl_put(_cub3d, index, start + j, img_get_pixel_color(_cub3d->textures[2], x_step, y_step));
+		// 	if (intersection == 2 && !_cub3d->left_right)
+		// 		img_pixl_put(_cub3d, index, start + j, img_get_pixel_color(_cub3d->textures[3], x_step, y_step));
+		// }
+	// 	y_step += (double)_cub3d->textures[0].height / projected_wall;
+	// 	j++;
 	// }
-	// else 	if (_cub3d->ray_angle > 135 && _cub3d->ray_angle < 225)
-	// {
-	// 	if (intersection == 1)
-	// 		x_step = (_cub3d->textures[2].width / PIXEL) * (dest_ray_p.x - (int)(dest_ray_p.x / PIXEL) * PIXEL);
-	// 	// x_step = (_cub3d->east.width / PIXEL) * fmod((dest_ray_p.x / PIXEL), PIXEL);
-	// 	else
-	// 		x_step = (_cub3d->textures[2].width / PIXEL) * (dest_ray_p.y - (int)(dest_ray_p.y / PIXEL) * PIXEL);
-	// 	// printf("VALUE: %lf\n", step);
-	// 	while (j < projected_wall && j < HEIGHT)
-	// 	{
-	// 		img_pixl_put(_cub3d, index, start + j, img_get_pixel_color(_cub3d, x_step, y_step, 2));
-
-	// 		// img_pixl_put(_cub3d, index, start + j, 0x0000FF);
-	// 		y_step += (double)_cub3d->textures[2].height / projected_wall;
-	// 		j++;
-	// 	}
-	// 	// printf("right %s\n", _cub3d->textures[2].name);
-
-	// }
-	// else
-	// {
-	// 	if (intersection == 1)
-	// 		x_step = (_cub3d->textures[3].width / PIXEL) * (dest_ray_p.x - (int)(dest_ray_p.x / PIXEL) * PIXEL);
-	// 	// x_step = (_cub3d->east.width / PIXEL) * fmod((dest_ray_p.x / PIXEL), PIXEL);
-	// 	else
-	// 		x_step = (_cub3d->textures[3].width / PIXEL) * (dest_ray_p.y - (int)(dest_ray_p.y / PIXEL) * PIXEL);
-	// 	// printf("VALUE: %lf\n", step);
-	// 	while (j < projected_wall && j < HEIGHT)
-	// 	{
-	// 		img_pixl_put(_cub3d, index, start + j, img_get_pixel_color(_cub3d, x_step, y_step, 3));
-
-	// 		// img_pixl_put(_cub3d, index, start + j, 0x0000FF);
-	// 		y_step += (double)_cub3d->textures[3].height / projected_wall;
-	// 		j++;
-	// 	}
-	// 	// printf("left %s\n", _cub3d->textures[3].name);
-	// }
-	draw_floor(_cub3d, index, start + j);
-	// usleep(30);
-	if (index == WIDTH - 1)
-	printf("ray      =>  %f\n", _cub3d->ray_angle);
-		
-	// printf("rotation =>  %f\n", _cub3d->rotation);
+	// draw_floor(_cub3d, index, start + j);
 }
 
-static void	ft_raycating(t_cub3d *_cub3d, int i)
+void	_is_door(t_cub3d *_cub3d, t_point point)
 {
-	double	dy;
-	double	dx;
-	t_point	point;
-	
+	if (_cub3d->map[(int)(point.y / PIXEL)][(int)((point.x - 1) / PIXEL)] == 'D' \
+	|| _cub3d->map[(int)(point.y / PIXEL)][(int)((point.x - 1) / PIXEL)] == 'O')
+	{
+		_cub3d->door_hit.x = (point.x - 1) / PIXEL;
+		_cub3d->door_hit.y = point.y / PIXEL;
+		_cub3d->is_door = 1;
+	}
+	else if (_cub3d->map[(int)(point.y / PIXEL)][(int)((point.x + 1) / PIXEL)] == 'D' \
+	|| _cub3d->map[(int)(point.y / PIXEL)][(int)((point.x + 1) / PIXEL)] == 'O')
+	{
+		_cub3d->door_hit.x = (point.x + 1) / PIXEL;
+		_cub3d->door_hit.y = point.y / PIXEL;
+		_cub3d->is_door = 1;
+	}
+}
+
+void	is_door(t_cub3d *_cub3d, t_point point)
+{
+	if (_cub3d->map[(int)((point.y + 1) / PIXEL)][(int)(point.x / PIXEL)] == 'D' \
+	|| _cub3d->map[(int)((point.y + 1) / PIXEL)][(int)(point.x / PIXEL)] == 'O')
+	{
+		_cub3d->door_hit.x = point.x / PIXEL;
+		_cub3d->door_hit.y = (point.y + 1) / PIXEL;
+		_cub3d->is_door = 1;
+	}
+	else if (_cub3d->map[(int)((point.y - 1) / PIXEL)][(int)(point.x / PIXEL)] == 'D' \
+	|| _cub3d->map[(int)((point.y - 1) / PIXEL)][(int)(point.x / PIXEL)] == 'O')
+	{
+		_cub3d->door_hit.x = point.x / PIXEL;
+		_cub3d->door_hit.y = (point.y - 1) / PIXEL;
+		_cub3d->is_door = 1;
+	}
+	else
+		_is_door(_cub3d, point);
+}
+
+static void	ft_raycating(t_cub3d *_cub3d, t_ray_data ray_data)
+{
 	ft_check_view(_cub3d);
-	dy = ft_calcul_h(_cub3d);
-	dx = ft_calcul_v(_cub3d);
-	if (dy < dx)
+	ray_data.dy = ft_calcul_h(_cub3d, &ray_data.is_door_h);
+	ray_data.dx = ft_calcul_v(_cub3d, &ray_data.is_door_v);
+	if (ray_data.dy < ray_data.dx)
 	{
 		ft_draw_ray(_cub3d, _cub3d->horizontal.x, _cub3d->horizontal.y, 0x00FF00);
-		point.x = _cub3d->horizontal.x;
-		point.y = _cub3d->horizontal.y;
-		draw_wall(_cub3d, point, dy, i, 1);
+		ray_data.dest_ray_p.x = _cub3d->horizontal.x;
+		ray_data.dest_ray_p.y = _cub3d->horizontal.y;
+		ray_data.wall_or_door = ray_data.is_door_h;
+		ray_data.ray_lenth = ray_data.dy;
+		ray_data.intersection = 1;
 	}
 	else
 	{
 		ft_draw_ray(_cub3d, _cub3d->vertical.x, _cub3d->vertical.y, 0x00FF00);
-		point.x = _cub3d->vertical.x;
-		point.y = _cub3d->vertical.y;
-		draw_wall(_cub3d, point, dx, i, 2);
+		ray_data.dest_ray_p.x = _cub3d->vertical.x;
+		ray_data.dest_ray_p.y = _cub3d->vertical.y;
+		ray_data.wall_or_door = ray_data.is_door_v;
+		ray_data.ray_lenth = ray_data.dx;
+		ray_data.intersection = 2;
 	}
+	draw_3d_game(_cub3d, ray_data);
+	// if (_cub3d->ray_angle < _cub3d->rotation + 10 && _cub3d->ray_angle > _cub3d->rotation - 10)
+	if (_cub3d->is_door == 0)
+	{
+		// printf("%f\n", _cub3d->ray_angle);
+		// printf("cordinats: (%f, %f)\n", ray_data.dest_ray_p.x / PIXEL, ray_data.dest_ray_p.y / PIXEL);
+		is_door(_cub3d, ray_data.dest_ray_p);
+	}	
 }
+
+// static void	ft_raycating(t_cub3d *_cub3d, int ray_index)
+// {
+// 	t_point	point;
+// 	double	dy;
+// 	double	dx;
+// 	int		is_door_v;
+// 	int		is_door_h;
+
+// 	is_door_v = 0;
+// 	is_door_h = 0;
+// 	ft_check_view(_cub3d);
+// 	dy = ft_calcul_h(_cub3d, &is_door_h);
+// 	dx = ft_calcul_v(_cub3d, &is_door_v);
+// 	if (dy < dx)
+// 	{
+// 		ft_draw_ray(_cub3d, _cub3d->horizontal.x, _cub3d->horizontal.y, 0x00FF00);
+// 		point.x = _cub3d->horizontal.x;
+// 		point.y = _cub3d->horizontal.y;
+// 		_cub3d->wall_door = is_door_h;
+// 		draw_3d_game(_cub3d, point, dy, ray_index, 1);
+// 	}
+// 	else
+// 	{
+// 		ft_draw_ray(_cub3d, _cub3d->vertical.x, _cub3d->vertical.y, 0x00FF00);
+// 		point.x = _cub3d->vertical.x;
+// 		point.y = _cub3d->vertical.y;
+// 		_cub3d->wall_door = is_door_v;
+// 		draw_3d_game(_cub3d, point, dx, ray_index, 2);
+// 		// draw_3d_game(_cub3d, point, dx, ray_index, 2);
+// 	}
+// 	if (_cub3d->ray_angle > (_cub3d->rotation - 10) && _cub3d->ray_angle < (_cub3d->rotation + 10) && _cub3d->is_door == 0)
+// 		is_door(_cub3d, point);
+// }
 
 void	cast_all_rays(t_cub3d *_cub3d)
 {
+	t_ray_data	ray_data;
 	int	i;
 
 	i = 0;
 	_cub3d->ray_angle = _cub3d->rotation + (VUE_ANGLE / 2);
+	// _cub3d->ray_angle = _cub3d->rotation;
+	_cub3d->is_door = 0;
+	// while (i < 1)
 	while (i < WIDTH)
 	{
+		ray_data.wall_or_door = 0;
+		ray_data.is_door_v = 0;
+		ray_data.is_door_h = 0;
+		ray_data.intersection = 0;
+		ray_data.index = i;
 		_cub3d->ray_angle = normalize_angle(_cub3d->ray_angle);
-		ft_raycating(_cub3d, i);
+		ft_raycating(_cub3d, ray_data);
 		_cub3d->ray_angle -= VUE_ANGLE / (double)WIDTH;
 		i += 1;
 	}

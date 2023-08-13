@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzeroual <mzeroual@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 00:57:18 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/06/19 00:57:21 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/13 10:51:05 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,16 @@ void	ft_free_map(char **map)
 	while (map[i])
 		free(map[i++]);
 	free(map);
+}
+
+void	ft_free_all(t_cub3d *_cub3d)
+{
+	int	i;
+
+	i = 0;
+	ft_free_map(_cub3d->map - _cub3d->index_map);
+	ft_free_map(_cub3d->c_rgb);
+	ft_free_map(_cub3d->f_rgb);
+	while (i < 5)
+		free(_cub3d->textures[i++].name);
 }

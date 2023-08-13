@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:45 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/07 16:38:24 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/13 14:33:24 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	ft_count(t_cub3d *_cub3d, int *width, int *height)
 	int	i;
 	int	j;
 
-	i = 6;
+	i = 0;
 	*width = 0;
 	*height = 0;
 	while (_cub3d->map[i])
@@ -29,7 +29,7 @@ static void	ft_count(t_cub3d *_cub3d, int *width, int *height)
 				|| _cub3d->map[i][j] == 'E' || _cub3d->map[i][j] == 'S'))
 			{
 				_cub3d->px = (j * PIXEL) + (PIXEL / 2);
-				_cub3d->py = ((i - 6) * PIXEL) + (PIXEL / 2);
+				_cub3d->py = (i * PIXEL) + (PIXEL / 2);
 			}
 			j++;
 		}
@@ -62,13 +62,13 @@ void	ft_draw_player(t_cub3d *_cub3d)
 
 int	initial_direction(t_cub3d *_cub3d)
 {
-	if (_cub3d->map[(int)(_cub3d->py / PIXEL) + 6] \
+	if (_cub3d->map[(int)(_cub3d->py / PIXEL)] \
 	[(int)(_cub3d->px / PIXEL)] == 'N')
 		return (90);
-	else if (_cub3d->map[(int)(_cub3d->py / PIXEL) + 6] \
+	else if (_cub3d->map[(int)(_cub3d->py / PIXEL)] \
 	[(int)(_cub3d->px / PIXEL)] == 'S')
 		return (270);
-	else if (_cub3d->map[(int)(_cub3d->py / PIXEL) + 6] \
+	else if (_cub3d->map[(int)(_cub3d->py / PIXEL)] \
 	[(int)(_cub3d->px / PIXEL)] == 'E')
 		return (0);
 	else
@@ -87,30 +87,14 @@ int	ft_draw(t_cub3d *_cub3d)
 	mlx_put_image_to_window(_cub3d->mlx_ptr, _cub3d->mlx_win, \
 	_cub3d->img.mlx_img, 0, 0);
 	mlx_destroy_image(_cub3d->mlx_ptr, _cub3d->img.mlx_img);
-
 	return (0);
 }
 
 void	cub3d(t_cub3d *_cub3d)
 {
-	int i;
-
-	i = -1;
 	ft_count(_cub3d, &_cub3d->width, &_cub3d->height);
 	_cub3d->mlx_ptr = mlx_init();
-	while (++i < 4)
-	{
-		printf("%s\n",_cub3d->textures[i].name);
-		_cub3d->textures[i].img.mlx_img = mlx_xpm_file_to_image(_cub3d->mlx_ptr, _cub3d->textures[i].name, &_cub3d->textures[i].width, &_cub3d->textures[i].height);
-		if (!_cub3d->textures[i].img.mlx_img)
-		{
-			ft_putstr_fd("Error in texture\n", 2);
-			exit(1);
-		}
-		printf("HEIGHT: %d\tWIDTH: %d\n", _cub3d->textures[i].height, _cub3d->textures[i].width);
-		_cub3d->textures[i].img.addr = mlx_get_data_addr(_cub3d->textures[i].img.mlx_img, &_cub3d->textures[i].img.bpp, \
-		&_cub3d->textures[i].img.line_len, &_cub3d->textures[i].img.endian);
-	}
+	open_textures(_cub3d);
 	_cub3d->mlx_win = mlx_new_window(_cub3d->mlx_ptr, WIDTH, HEIGHT, "cub3d");
 	_cub3d->rotation = initial_direction(_cub3d);
 	_cub3d->mouse_x_pos = 0;

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+         #
+#    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/17 13:12:29 by mzeroual          #+#    #+#              #
-#    Updated: 2023/08/07 21:28:48 by mzeroual         ###   ########.fr        #
+#    Updated: 2023/08/09 08:08:50 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,6 @@ all:	$(NAME)
 $(NAME):$(OBJS) include/cub3d.h
 		make -C $(PATH_LIB)
 		$(CC) $(CFLAGS) $(PATH_LIB)libft.a $(OBJS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
-		./$(NAME) files/map/map.cub
 
 %.o:%.c
 		$(CC) $(CFLAGS)  -c $^ -o $@

@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 09:20:00 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/12 16:07:15 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/13 14:42:31 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ char **ft_clean_map(char **map, t_cub3d *_cub3d)
 		return (ft_free_map(map) , NULL);
 	while (map[++count[0]])
 	{
-		line = ft_strtrim(map[count[0]], " \t\n");
+		line = ft_strtrim(map[count[0]], "\t\n");
 		if (*line)
 		{
 			if(count[2] == 1)

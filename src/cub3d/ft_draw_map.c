@@ -3,50 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   ft_draw_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 22:28:12 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/12 16:27:22 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/12 20:24:48 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../../include/cub3d.h"
 
-static void ft_put_pixle(t_cub3d *_cub3d, char c, int x1, int y1)
+static void	ft_put_pixle(t_cub3d *_cub3d, char c, int x1, int y1)
 {
-	int y;
-	int x;
+	int	y;
+	int	x;
 
 	y = 0;
-	y1 = y1 - 6;
 	while (y < PIXEL)
 	{
 		x = 0;
 		while (x < PIXEL)
 		{
 			if (c == '1')
-			{
-				img_pixl_put(_cub3d, (x1 * PIXEL) + (x ), (y1 * PIXEL) + (y), 0x808080);
-				// img_pixl_put(_cub3d, (x1 * PIXEL) + (x + 1), (y1 * PIXEL) + (y + 1), 0x808080);
-			}
-			// img_pixl_put(_cub3d, (x1 * PIXEL) + x, y1 * PIXEL, 0x0000FF);
-			// if (y1 == _cub3d->height - 1)
-			// 	img_pixl_put(_cub3d, (x1 * PIXEL) + x, y1 * PIXEL + PIXEL, 0x0000FF);
+				img_pixl_put(_cub3d, (x1 * PIXEL) + x, \
+				(y1 * PIXEL) + y, 0x808080);
+			if (c == 'D')
+				img_pixl_put(_cub3d, (x1 * PIXEL) + x, \
+				(y1 * PIXEL) + y, 0x2F435A);
 			x++;
 		}
-		// img_pixl_put(_cub3d, (x1 * PIXEL), (y1 * PIXEL) + y, 0x0000FF);
-		// if (x1 == _cub3d->width - 1)
-		// 	img_pixl_put(_cub3d, (x1 * PIXEL) + PIXEL, (y1 * PIXEL) + y, 0x0000FF);
 		y++;
 	}
 }
 
-void ft_draw_map(t_cub3d *_cub3d)
+void	ft_draw_map(t_cub3d *_cub3d)
 {
-	int y;
-	int x;
+	int	y;
+	int	x;
 
-	y = 6;
+	y = 0;
 	while (y < _cub3d->height)
 	{
 		x = 0;
@@ -54,6 +48,12 @@ void ft_draw_map(t_cub3d *_cub3d)
 		{
 			if (_cub3d->map[y][x] == '1' && x <= (int)ft_strlen(_cub3d->map[y]))
 				ft_put_pixle(_cub3d, '1', x, y);
+			else if (_cub3d->map[y][x] == 'D' && \
+			x <= (int)ft_strlen(_cub3d->map[y]))
+				ft_put_pixle(_cub3d, 'D', x, y);
+			else if (_cub3d->map[y][x] == 'O' && \
+			x <= (int)ft_strlen(_cub3d->map[y]))
+				ft_put_pixle(_cub3d, 'O', x, y);
 			ft_put_pixle(_cub3d, '0', x, y);
 			x++;
 		}
