@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/14 13:12:40 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/14 16:27:59 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	CUB3D_H
+#ifndef CUB3D_H
 # define CUB3D_H
 
 # include "./../lib/libft/libft.h"
@@ -27,17 +27,15 @@
 # define PLAYER_SIZE 4
 # define VUE_ANGLE 60
 
-
 # define STEP_MOVE 5
 # define ANGLE_MOVE 3
 
-#define UP 1
-#define DOWN 0
-#define RIGHT 1
-#define LEFT 0
+# define UP 1
+# define DOWN 0
+# define RIGHT 1
+# define LEFT 0
 
 # define ESC 53
-
 
 /*---------ALL KEYS---------*/
 # define ARROW_RIGHT 124
@@ -60,11 +58,10 @@ typedef struct s_draw_ray
 	float	x;
 	float	y;
 	int		i;
-    int		dx;
+	int		dx;
 	int		dy;
 	int		steps;
 }	t_draw_ray;
-
 
 typedef struct s_point
 {
@@ -84,7 +81,6 @@ typedef struct s_ray_data
 	int		is_door_v;
 	int		is_door_h;
 }	t_ray_data;
-
 
 typedef struct s_img
 {
@@ -106,7 +102,7 @@ typedef struct s_wall
 
 typedef struct s_texture
 {
-	t_img   img;
+	t_img	img;
 	int		height;
 	int		width;
 	char	*name;
@@ -114,38 +110,38 @@ typedef struct s_texture
 
 typedef struct s_cub3d
 {
-	int     height;
-	int     width;
-	char    **map;
-	int		index_map;
-	int		display_mini_map;
-	void	*mlx_ptr;
-	void	*mlx_win;
-	int		up_down;
-	int		left_right;
-	float	px;
-	float	py;
-	int		is_door;
-	t_point door_hit;
+	int			height;
+	int			width;
+	char		**map;
+	int			index_map;
+	int			display_mini_map;
+	void		*mlx_ptr;
+	void		*mlx_win;
+	int			up_down;
+	int			left_right;
+	float		px;
+	float		py;
+	int			is_door;
+	t_point		door_hit;
 	t_texture	textures[5];
-	char **c_rgb;
-	char **f_rgb;
-	t_point start;
-	t_point step;
-	int		mouse_x_pos;
-	double	rotation;
-	double	ray_angle;
-	t_point vertical;
-	t_point horizontal;
-	t_img   img;
+	char		**c_rgb;
+	char		**f_rgb;
+	t_point		start;
+	t_point		step;
+	int			mouse_x_pos;
+	double		rotation;
+	double		ray_angle;
+	t_point		vertical;
+	t_point		horizontal;
+	t_img		img;
 }	t_cub3d;
 
 // -------------- parse map partie ----------------------
 //====> src/check_map/check_error/ft_check6lines.c <=====
-int	ft_check6lines(char **map, t_cub3d *_cub3d);
+int		ft_check6lines(char **map, t_cub3d *_cub3d);
 
 //====> src/check_map/check_error/ft_error.c <=====
-void ft_check_error(char *map_name);
+void	ft_check_error(char *map_name);
 
 //====> src/check_map/ft_free_map.c <=====
 void	ft_free_map(char **map);
@@ -153,28 +149,26 @@ void	ft_free_all(t_cub3d *_cub3d);
 
 //====> src/check_map/ft_utils.c <=====
 int		ft_count_without_newline(char **map);
-int     ft_count_map(char *map_name);
-char    **ft_read_map(char *map_name);
-char    **ft_clean_map(char **map, t_cub3d *_cub3d);
+int		ft_count_map(char *map_name);
+char	**ft_read_map(char *map_name);
+char	**ft_clean_map(char **map, t_cub3d *_cub3d);
 
 //====> src/check_map/parse_map.c <=====
-int    parse_map(char *map_name, t_cub3d *_cub3d);
+int		parse_map(char *map_name, t_cub3d *_cub3d);
 // ------------------------------------------------------
-
 
 // ---------------- draw map partie -------------------------------------
 //====> src/cub3d/cub3d.c <=====
-void cub3d(t_cub3d *_cub3d);
-void ft_display_map(char **map);
+void	cub3d(t_cub3d *_cub3d);
+void	ft_display_map(char **map);
 
 //====> src/cub3d/ft_draw_map.c <=====
-void ft_draw_map(t_cub3d *_cub3d);
+void	ft_draw_map(t_cub3d *_cub3d);
 
 // -------------------------------------------------------------------------
-
 //====> src/cub3d/control_hooks.c <=====
-int	key_hook(int keyCode, t_cub3d *_cub3d);
-int	mouse_hook(int x, int y, t_cub3d *_cub3d);
+int		key_hook(int keyCode, t_cub3d *_cub3d);
+int		mouse_hook(int x, int y, t_cub3d *_cub3d);
 
 //====> src/cub3d/rays_casting.c <=====
 void	cast_all_rays(t_cub3d *_cub3d);
@@ -196,8 +190,5 @@ int		quit(t_cub3d *_cub3d);
 //====> src/cub3d/is_door.c <=====
 void	is_door(t_cub3d *_cub3d, t_point point);
 
-
-
-int	ft_draw(t_cub3d *_cub3d);
-
+int		ft_draw(t_cub3d *_cub3d);
 #endif
