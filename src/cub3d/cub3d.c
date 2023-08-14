@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:45 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/14 13:29:26 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:11:31 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ int	initial_direction(t_cub3d *_cub3d)
 
 int	ft_draw(t_cub3d *_cub3d)
 {
+	int	endx;
+	int	endy;
+	
 	_cub3d->img.mlx_img = mlx_new_image(_cub3d->mlx_ptr, WIDTH, HEIGHT);
 	_cub3d->img.addr = mlx_get_data_addr(_cub3d->img.mlx_img, &_cub3d->img.bpp, \
 	&_cub3d->img.line_len, &_cub3d->img.endian);
@@ -85,8 +88,8 @@ int	ft_draw(t_cub3d *_cub3d)
 	if (_cub3d->display_mini_map % 2 != 0)
 	{
 		ft_draw_map(_cub3d);
-		int	endx = _cub3d->px + cos(_cub3d->rotation * M_PI / 180) * 10;
-		int	endy = _cub3d->py - sin(_cub3d->rotation * M_PI / 180) * 10;
+		endx = _cub3d->px + cos(_cub3d->rotation * M_PI / 180) * 10;
+		endy = _cub3d->py - sin(_cub3d->rotation * M_PI / 180) * 10;
 		ft_draw_ray(_cub3d, endx, endy, 0x000000);
 		ft_draw_player(_cub3d);
 	}

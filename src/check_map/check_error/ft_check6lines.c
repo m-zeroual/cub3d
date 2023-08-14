@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check6lines.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:25:24 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/12 20:15:27 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:04:10 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../../../include/cub3d.h"
-
 
 static int	ft_check_double_coma(char *line)
 {
@@ -30,11 +29,11 @@ static int	ft_check_double_coma(char *line)
 	return (1);
 }
 
-static int ft_check_rgb(char **s, t_cub3d *_cub3d)
+static int	ft_check_rgb(char **s, t_cub3d *_cub3d)
 {
-	char **rgb;
-	int num;
-	int i;
+	char	**rgb;
+	int		num;
+	int		i;
 
 	i = 0;
 	if (!s || !*s || s[2])
@@ -46,7 +45,8 @@ static int ft_check_rgb(char **s, t_cub3d *_cub3d)
 	{
 		num = ft_atoi(rgb[i]);
 		if (num < 0 || num > 255 || i >= 3)
-			return (ft_free_map(rgb), ft_putstr_fd("Error\n\tRGB out of range.\n", 2), 0);
+			return (ft_free_map(rgb), ft_putstr_fd("Error\n\tRGB out of range\
+.\n", 2), 0);
 		i++;
 	}
 	if (!ft_strncmp(s[0], "F", 2))
@@ -57,7 +57,7 @@ static int ft_check_rgb(char **s, t_cub3d *_cub3d)
 	return (1);
 }
 
-static int ft_fill_texture_name(char **s, t_cub3d *_cub3d)
+static int	ft_fill_texture_name(char **s, t_cub3d *_cub3d)
 {
 	if (s[2])
 		return (ft_putstr_fd("Error\n\tto many args.\n", 2), 0);
@@ -71,22 +71,21 @@ static int ft_fill_texture_name(char **s, t_cub3d *_cub3d)
 		_cub3d->textures[3].name = ft_strdup(s[1]);
 	return (1);
 }
+
 static int	ft_check_texure(char **s, t_cub3d *_cub3d)
 {
 	if (!s || !*s)
 		return (0);
 	if (ft_strncmp(s[0], "NO", 3) && ft_strncmp(s[0], "SO", 3)
-	&& ft_strncmp(s[0], "WE", 3) && ft_strncmp(s[0], "EA", 3)
-	&& ft_strncmp(s[0], "F", 2) && ft_strncmp(s[0], "C", 2))
+		&& ft_strncmp(s[0], "WE", 3) && ft_strncmp(s[0], "EA", 3)
+		&& ft_strncmp(s[0], "F", 2) && ft_strncmp(s[0], "C", 2))
 		return (ft_putstr_fd("Error\n\tNO | WE | SO | EA | F | C.\n", 2), 0);
-		
 	if ((!ft_strncmp(s[0], "NO", 3) || !ft_strncmp(s[0], "SO", 3)
-	|| !ft_strncmp(s[0], "WE", 3) || !ft_strncmp(s[0], "EA", 3)))
+			|| !ft_strncmp(s[0], "WE", 3) || !ft_strncmp(s[0], "EA", 3)))
 		if (!ft_fill_texture_name(s, _cub3d))
 			return (0);
-			
 	if ((!ft_strncmp(s[0], "F", 2) || !ft_strncmp(s[0], "C", 2))
-	&& !ft_check_rgb(s, _cub3d))
+		&& !ft_check_rgb(s, _cub3d))
 		return (0);
 	return (1);
 }

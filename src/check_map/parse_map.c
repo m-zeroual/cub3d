@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 18:51:54 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/13 14:43:13 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:59:42 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	condition(int i, int j, int *player, char **new_map)
 	return (1);
 }
 
-
 static int	check_map(char **new_map)
 {
 	int	line;
@@ -49,7 +48,6 @@ static int	check_map(char **new_map)
 
 	line = 5;
 	player = 0;
-
 	while (new_map[++line])
 	{
 		colum = 0;
@@ -65,7 +63,7 @@ static int	check_map(char **new_map)
 	return (1);
 }
 
-int parse_map(char *map_name, t_cub3d *_cub3d)
+int	parse_map(char *map_name, t_cub3d *_cub3d)
 {
 	char	**map;
 	char	**new_map;
@@ -81,6 +79,5 @@ int parse_map(char *map_name, t_cub3d *_cub3d)
 	if (!check_map(new_map))
 		return (ft_free_map(new_map), 0);
 	ft_free_map(new_map);
-	// -- clear --
 	return (1);
 }

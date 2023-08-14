@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 09:20:00 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/13 14:42:31 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:10:24 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,32 +89,30 @@ char	**ft_read_map(char *map_name)
 	return (map);
 }
 
-char **ft_clean_map(char **map, t_cub3d *_cub3d)
+char	**ft_clean_map(char **map, t_cub3d *_cub3d)
 {
 	char	*line;
 	char	**new_map;
-	int		count[3];
-	int check = 1;
+	int		count[4];
 
 	count[0] = -1;
 	count[1] = 0;
 	count[2] = 0;
+	count[3] = 1;
 	new_map = malloc((ft_count_without_newline(map) + 1) * sizeof(char *));
 	if (!new_map)
-		return (ft_free_map(map) , NULL);
+		return (ft_free_map(map), NULL);
 	while (map[++count[0]])
 	{
 		line = ft_strtrim(map[count[0]], "\t\n");
 		if (*line)
 		{
-			if(count[2] == 1)
-				return (ft_putstr_fd("Error\n\tnew line in the map.\n", 2), ft_free_map(map), NULL);
+			if (count[2] == 1)
+				return (ft_putstr_fd("Error\n\tnew line in the map.\n\
+", 2), ft_free_map(map), NULL);
 			new_map[count[1]++] = ft_strdup(line);
-			if (count[0] > 6 && check)
-			{
+			if (count[0] > 6 && count[3] && count[3]--)
 				_cub3d->index_map = count[0];
-				check = 0;
-			}
 		}
 		if (count[1] >= 7 && *line == 0)
 			count[2] = 1;
