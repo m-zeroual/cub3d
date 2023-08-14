@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   control_hooks.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 09:53:42 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/13 10:43:13 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/14 11:05:30 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,6 @@ int	key_hook(int keyCode, t_cub3d *_cub3d)
 		open_close_door(_cub3d);
 	else if (keyCode == ESC)
 		quit(_cub3d);
+	ft_draw(_cub3d);
 	return (0);
 }

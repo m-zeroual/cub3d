@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 11:58:47 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/12 20:15:41 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/14 11:00:00 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ void	open_textures(t_cub3d *_cub3d)
 			ft_putstr_fd("Error in texture\n", 2);
 			exit(1);
 		}
-		if (_cub3d->textures[i].width != 650 || \
-		_cub3d->textures[i].height != 650)
-		{
-			ft_putstr_fd("Error in texture\n\t\thint: \
-			size have to be (650/650)\n", 2);
-			exit(1);
-		}
+		// if (_cub3d->textures[i].width != 650 || \
+		// _cub3d->textures[i].height != 650)
+		// {
+		// 	ft_putstr_fd("Error in texture\n\t\thint: \
+		// 	size have to be (650/650)\n", 2);
+		// 	exit(1);
+		// }
 		_cub3d->textures[i].img.addr = \
 		mlx_get_data_addr(_cub3d->textures[i].img.mlx_img, \
 		&_cub3d->textures[i].img.bpp, &_cub3d->textures[i].img.line_len, \

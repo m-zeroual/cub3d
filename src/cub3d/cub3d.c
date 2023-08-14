@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:45 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/13 14:33:24 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/14 11:04:28 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ void	cub3d(t_cub3d *_cub3d)
 	_cub3d->mlx_win = mlx_new_window(_cub3d->mlx_ptr, WIDTH, HEIGHT, "cub3d");
 	_cub3d->rotation = initial_direction(_cub3d);
 	_cub3d->mouse_x_pos = 0;
-	mlx_loop_hook(_cub3d->mlx_ptr, ft_draw, _cub3d);
+	ft_draw(_cub3d);
+	// mlx_loop_hook(_cub3d->mlx_ptr, ft_draw, _cub3d);
 	mlx_hook(_cub3d->mlx_win, ON_KEY_PRESS, 0, key_hook, _cub3d);
 	mlx_hook(_cub3d->mlx_win, ON_MOUSE_MOVE, 0, mouse_hook, _cub3d);
 	mlx_hook(_cub3d->mlx_win, ON_DESTROY, 0, quit, _cub3d);

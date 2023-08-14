@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/12 20:10:42 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/14 11:06:17 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define VUE_ANGLE 60
 
 
-# define STEP_MOVE 4
+# define STEP_MOVE 5
 # define ANGLE_MOVE 3
 
 
@@ -188,4 +188,8 @@ int		quit(t_cub3d *_cub3d);
 
 //====> src/cub3d/cub3d_utils3.c <=====
 
+
+
+
+int	ft_draw(t_cub3d *_cub3d);
 #endif
