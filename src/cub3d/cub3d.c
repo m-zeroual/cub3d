@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:45 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/14 15:11:31 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/14 16:12:05 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	ft_draw(t_cub3d *_cub3d)
 {
 	int	endx;
 	int	endy;
-	
+
 	_cub3d->img.mlx_img = mlx_new_image(_cub3d->mlx_ptr, WIDTH, HEIGHT);
 	_cub3d->img.addr = mlx_get_data_addr(_cub3d->img.mlx_img, &_cub3d->img.bpp, \
 	&_cub3d->img.line_len, &_cub3d->img.endian);
@@ -104,7 +104,8 @@ void	cub3d(t_cub3d *_cub3d)
 	ft_count(_cub3d, &_cub3d->width, &_cub3d->height);
 	printf("width: %d\n", _cub3d->width);
 	printf("height: %d\n", _cub3d->height);
-	if (_cub3d->width * PIXEL > MINI_MAP_WIDTH || _cub3d->height * PIXEL > MINI_MAP_HEIGHT)
+	if (_cub3d->width * PIXEL > MINI_MAP_WIDTH
+		|| _cub3d->height * PIXEL > MINI_MAP_HEIGHT)
 	{
 		ft_free_all(_cub3d);
 		ft_putstr_fd("Error in map\n\t\tHINT: map very big!!\n", 2);
