@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/14 11:06:17 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:12:40 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@
 # define PIXEL 20
 # define HEIGHT 1080
 # define WIDTH 1920
+# define MINI_MAP_HEIGHT 200
+# define MINI_MAP_WIDTH 600
 # define PLAYER_SIZE 4
 # define VUE_ANGLE 60
 
 
 # define STEP_MOVE 5
 # define ANGLE_MOVE 3
-
 
 #define UP 1
 #define DOWN 0
@@ -37,20 +38,16 @@
 
 # define ESC 53
 
-# define ARROW_UP 126
-# define ARROW_DOWN 125
+
+/*---------ALL KEYS---------*/
 # define ARROW_RIGHT 124
 # define ARROW_LEFT 123
-
 # define W_KEY 13
 # define S_KEY 1
 # define A_KEY 0
 # define D_KEY 2
-
-# define MINUS 78
-# define PLUS 69
-
 # define D_OPEN 14
+# define MINI_MAP 46
 
 # define ON_DESTROY 17
 # define ON_MOUSE_MOVE 6
@@ -98,6 +95,15 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
+typedef struct s_wall
+{
+	double	y_step;
+	double	x_step;
+	double	step_size;
+	int		start;
+	int		end;
+}	t_wall;
+
 typedef struct s_texture
 {
 	t_img   img;
@@ -112,6 +118,7 @@ typedef struct s_cub3d
 	int     width;
 	char    **map;
 	int		index_map;
+	int		display_mini_map;
 	void	*mlx_ptr;
 	void	*mlx_win;
 	int		up_down;
@@ -186,10 +193,11 @@ int		img_get_pixel_color(t_texture texture, int x, int y);
 int		get_color(t_cub3d *_cub3d, int ceile_or_floor);
 int		quit(t_cub3d *_cub3d);
 
-//====> src/cub3d/cub3d_utils3.c <=====
-
+//====> src/cub3d/is_door.c <=====
+void	is_door(t_cub3d *_cub3d, t_point point);
 
 
 
 int	ft_draw(t_cub3d *_cub3d);
+
 #endif

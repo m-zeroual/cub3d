@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:45 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/14 11:04:28 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:29:26 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,14 @@ int	ft_draw(t_cub3d *_cub3d)
 	&_cub3d->img.line_len, &_cub3d->img.endian);
 	_cub3d->rotation = normalize_angle(_cub3d->rotation);
 	cast_all_rays(_cub3d);
-	ft_draw_map(_cub3d);
-	ft_draw_player(_cub3d);
+	if (_cub3d->display_mini_map % 2 != 0)
+	{
+		ft_draw_map(_cub3d);
+		int	endx = _cub3d->px + cos(_cub3d->rotation * M_PI / 180) * 10;
+		int	endy = _cub3d->py - sin(_cub3d->rotation * M_PI / 180) * 10;
+		ft_draw_ray(_cub3d, endx, endy, 0x000000);
+		ft_draw_player(_cub3d);
+	}
 	mlx_put_image_to_window(_cub3d->mlx_ptr, _cub3d->mlx_win, \
 	_cub3d->img.mlx_img, 0, 0);
 	mlx_destroy_image(_cub3d->mlx_ptr, _cub3d->img.mlx_img);
@@ -93,13 +99,21 @@ int	ft_draw(t_cub3d *_cub3d)
 void	cub3d(t_cub3d *_cub3d)
 {
 	ft_count(_cub3d, &_cub3d->width, &_cub3d->height);
+	printf("width: %d\n", _cub3d->width);
+	printf("height: %d\n", _cub3d->height);
+	if (_cub3d->width * PIXEL > MINI_MAP_WIDTH || _cub3d->height * PIXEL > MINI_MAP_HEIGHT)
+	{
+		ft_free_all(_cub3d);
+		ft_putstr_fd("Error in map\n\t\tHINT: map very big!!\n", 2);
+		exit(1);
+	}
 	_cub3d->mlx_ptr = mlx_init();
 	open_textures(_cub3d);
 	_cub3d->mlx_win = mlx_new_window(_cub3d->mlx_ptr, WIDTH, HEIGHT, "cub3d");
 	_cub3d->rotation = initial_direction(_cub3d);
 	_cub3d->mouse_x_pos = 0;
+	_cub3d->display_mini_map = 1;
 	ft_draw(_cub3d);
-	// mlx_loop_hook(_cub3d->mlx_ptr, ft_draw, _cub3d);
 	mlx_hook(_cub3d->mlx_win, ON_KEY_PRESS, 0, key_hook, _cub3d);
 	mlx_hook(_cub3d->mlx_win, ON_MOUSE_MOVE, 0, mouse_hook, _cub3d);
 	mlx_hook(_cub3d->mlx_win, ON_DESTROY, 0, quit, _cub3d);

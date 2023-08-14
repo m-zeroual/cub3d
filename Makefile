@@ -6,7 +6,7 @@
 #    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/17 13:12:29 by mzeroual          #+#    #+#              #
-#    Updated: 2023/08/09 08:08:50 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/08/14 13:13:08 by kchaouki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS	= 	src/main.c \
 			src/cub3d/control_hooks.c \
 			src/cub3d/cub3d_utils.c \
 			src/cub3d/rays_casting.c \
+			src/cub3d/is_door.c \
 			src/cub3d/cub3d_utils2.c \
 			src/cub3d/cub3d.c \
 			$(PATH_GET_NEXT_LINE)get_next_line.c \
@@ -43,12 +44,12 @@ OBJS	= $(SRCS:.c=.o)
 
 all:	$(NAME)
 
-$(NAME):$(OBJS) include/cub3d.h
+$(NAME):$(OBJS)
 		make -C $(PATH_LIB)
 		$(CC) $(CFLAGS) $(PATH_LIB)libft.a $(OBJS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
-%.o:%.c
-		$(CC) $(CFLAGS)  -c $^ -o $@
+%.o:%.c ./include/cub3d.h
+		$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 		make clean -C $(PATH_LIB)

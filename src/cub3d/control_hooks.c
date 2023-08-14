@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   control_hooks.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 09:53:42 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/14 11:05:30 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:30:04 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int	mouse_hook(int x, int y, t_cub3d *_cub3d)
 	else if (_cub3d->mouse_x_pos < x)
 		_cub3d->rotation -= 2;
 	_cub3d->mouse_x_pos = x;
+	ft_draw(_cub3d);
 	return (0);
 }
 
@@ -112,6 +113,8 @@ int	key_hook(int keyCode, t_cub3d *_cub3d)
 		open_close_door(_cub3d);
 	else if (keyCode == ESC)
 		quit(_cub3d);
+	else if (keyCode == MINI_MAP)
+		_cub3d->display_mini_map += 1;
 	ft_draw(_cub3d);
 	return (0);
 }
