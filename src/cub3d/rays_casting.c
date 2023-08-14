@@ -6,7 +6,7 @@
 /*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 22:56:57 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/13 10:49:10 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/14 10:37:25 by kchaouki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,34 +101,10 @@ double ft_calcul_v(t_cub3d *_cub3d, int *is_door)
 	return (vetagorc(_cub3d->vertical.x, _cub3d->vertical.y, _cub3d->px, _cub3d->py));
 }
 
-// void	draw_sky(t_cub3d *_cub3d, int index, int end)
-// {
-// 	int	j;
-
-// 	j = 0;
-// 	while (j < end)
-// 	{
-// 		// img_pixl_put(_cub3d, index, j, 0x87CEEB);
-// 		img_pixl_put(_cub3d, index, j, get_color(_cub3d, 1));
-// 		j++;
-// 	}
-// }
-
-// void	draw_floor(t_cub3d *_cub3d, int index, int start)
-// {
-// 	int	j;
-
-// 	j = start;
-// 	while (j < HEIGHT)
-// 	{
-// 		img_pixl_put(_cub3d, index, j, get_color(_cub3d, 0));
-// 		// img_pixl_put(_cub3d, index, j, 0xD2B48C);
-// 		j++;
-// 	}
-// }
-
 // static void	draw_3d_game(t_cub3d *_cub3d, t_point dest_ray_p, double d_ray, int index, int intersection)
-static void	draw_3d_game(t_cub3d *_cub3d, t_ray_data ray_data)
+
+
+void	draw_3d_game(t_cub3d *_cub3d, t_ray_data ray_data)
 {
 	double	projected_wall;
 	double	y_step;
@@ -153,9 +129,7 @@ static void	draw_3d_game(t_cub3d *_cub3d, t_ray_data ray_data)
 	y_step = ((double)_cub3d->textures[0].height / projected_wall) * err_w;
 	while (j < HEIGHT)
 	{
-		if (j < start)
-			img_pixl_put(_cub3d, ray_data.index, j, get_color(_cub3d, 1));
-		else if (j >= start && j < start + projected_wall)
+		if (j >= start && j < start + projected_wall)
 		{
 			if (ray_data.wall_or_door == 2)
 				img_pixl_put(_cub3d, ray_data.index, j, img_get_pixel_color(_cub3d->textures[4], x_step, y_step));
@@ -172,34 +146,8 @@ static void	draw_3d_game(t_cub3d *_cub3d, t_ray_data ray_data)
 			}
 			y_step += (double)_cub3d->textures[0].height / projected_wall;
 		}
-		else if (j > start + projected_wall)
-			img_pixl_put(_cub3d, ray_data.index, j, get_color(_cub3d, 2));
 		j++;
 	}
-	// double err_w = (projected_wall / 2) - (HEIGHT / 2);
-	// if(err_w < 0)
-	// 	err_w = 0;
-	// y_step = ((double)_cub3d->textures[0].height / projected_wall) * err_w;
-	// draw_sky(_cub3d, index, start);
-	// while (j < projected_wall && j < HEIGHT)
-	// {
-		// if (_cub3d->wall_door == 2)
-		// 	img_pixl_put(_cub3d, index, start + j, img_get_pixel_color(_cub3d->textures[4], x_step, y_step));
-		// else 
-		// {
-		// 	if (intersection == 1 && _cub3d->up_down)
-		// 		img_pixl_put(_cub3d, index, start + j, img_get_pixel_color(_cub3d->textures[0], x_step, y_step));
-		// 	if (intersection == 1 && !_cub3d->up_down)
-		// 		img_pixl_put(_cub3d, index, start + j, img_get_pixel_color(_cub3d->textures[1], x_step, y_step));
-		// 	if (intersection == 2 && _cub3d->left_right)
-		// 		img_pixl_put(_cub3d, index, start + j, img_get_pixel_color(_cub3d->textures[2], x_step, y_step));
-		// 	if (intersection == 2 && !_cub3d->left_right)
-		// 		img_pixl_put(_cub3d, index, start + j, img_get_pixel_color(_cub3d->textures[3], x_step, y_step));
-		// }
-	// 	y_step += (double)_cub3d->textures[0].height / projected_wall;
-	// 	j++;
-	// }
-	// draw_floor(_cub3d, index, start + j);
 }
 
 void	_is_door(t_cub3d *_cub3d, t_point point)
@@ -240,14 +188,13 @@ void	is_door(t_cub3d *_cub3d, t_point point)
 		_is_door(_cub3d, point);
 }
 
-static void	ft_raycating(t_cub3d *_cub3d, t_ray_data ray_data)
+void	ft_raycating(t_cub3d *_cub3d, t_ray_data ray_data)
 {
 	ft_check_view(_cub3d);
 	ray_data.dy = ft_calcul_h(_cub3d, &ray_data.is_door_h);
 	ray_data.dx = ft_calcul_v(_cub3d, &ray_data.is_door_v);
 	if (ray_data.dy < ray_data.dx)
 	{
-		ft_draw_ray(_cub3d, _cub3d->horizontal.x, _cub3d->horizontal.y, 0x00FF00);
 		ray_data.dest_ray_p.x = _cub3d->horizontal.x;
 		ray_data.dest_ray_p.y = _cub3d->horizontal.y;
 		ray_data.wall_or_door = ray_data.is_door_h;
@@ -256,22 +203,38 @@ static void	ft_raycating(t_cub3d *_cub3d, t_ray_data ray_data)
 	}
 	else
 	{
-		ft_draw_ray(_cub3d, _cub3d->vertical.x, _cub3d->vertical.y, 0x00FF00);
 		ray_data.dest_ray_p.x = _cub3d->vertical.x;
 		ray_data.dest_ray_p.y = _cub3d->vertical.y;
 		ray_data.wall_or_door = ray_data.is_door_v;
 		ray_data.ray_lenth = ray_data.dx;
 		ray_data.intersection = 2;
 	}
+	ft_draw_ray(_cub3d, ray_data.dest_ray_p.x, ray_data.dest_ray_p.y, 0x00FF00);
 	draw_3d_game(_cub3d, ray_data);
-	// if (_cub3d->ray_angle < _cub3d->rotation + 10 && _cub3d->ray_angle > _cub3d->rotation - 10)
 	if (_cub3d->is_door == 0)
-	{
-		// printf("%f\n", _cub3d->ray_angle);
-		// printf("cordinats: (%f, %f)\n", ray_data.dest_ray_p.x / PIXEL, ray_data.dest_ray_p.y / PIXEL);
-		is_door(_cub3d, ray_data.dest_ray_p);
-	}	
+		is_door(_cub3d, ray_data.dest_ray_p);	
 }
+
+// static void	ft_raycating(t_cub3d *_cub3d, t_ray_data ray_data)
+// {
+// 	double	dy;
+// 	double	dx;
+	
+// 	ft_check_view(_cub3d);
+// 	dy = ft_calcul_h(_cub3d, &ray_data.is_door_h);
+// 	dx = ft_calcul_v(_cub3d, &ray_data.is_door_v);
+// 	if (dy < dx)
+// 	{
+// 		ft_draw_ray(_cub3d, _cub3d->horizontal.x, _cub3d->horizontal.y, 0x00FF00);
+// 		// draw_wall(_cub3d, dy, ray_data.index);
+// 	}
+// 	else
+// 	{
+// 		ft_draw_ray(_cub3d, _cub3d->vertical.x, _cub3d->vertical.y, 0x00FF00);
+// 		// draw_wall(_cub3d, dx, ray_data.index);
+// 	}
+// }
+
 
 // static void	ft_raycating(t_cub3d *_cub3d, int ray_index)
 // {
@@ -314,9 +277,23 @@ void	cast_all_rays(t_cub3d *_cub3d)
 
 	i = 0;
 	_cub3d->ray_angle = _cub3d->rotation + (VUE_ANGLE / 2);
-	// _cub3d->ray_angle = _cub3d->rotation;
 	_cub3d->is_door = 0;
-	// while (i < 1)
+	int x = 0;
+	int y = 0;
+	while (x < WIDTH)
+	{
+		y = 0;
+		while (y < HEIGHT)
+		{
+			if (y < HEIGHT / 2)
+				img_pixl_put(_cub3d, x, y, get_color(_cub3d, 1));
+			else 
+				img_pixl_put(_cub3d, x, y, get_color(_cub3d, 2));
+			y++;
+		}
+		x++;
+	}
+	
 	while (i < WIDTH)
 	{
 		ray_data.wall_or_door = 0;
