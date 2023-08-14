@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:45 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/14 16:12:05 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/14 17:14:10 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,6 @@ int	ft_draw(t_cub3d *_cub3d)
 void	cub3d(t_cub3d *_cub3d)
 {
 	ft_count(_cub3d, &_cub3d->width, &_cub3d->height);
-	printf("width: %d\n", _cub3d->width);
-	printf("height: %d\n", _cub3d->height);
 	if (_cub3d->width * PIXEL > MINI_MAP_WIDTH
 		|| _cub3d->height * PIXEL > MINI_MAP_HEIGHT)
 	{
