@@ -6,7 +6,7 @@
 #    By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/17 13:12:29 by mzeroual          #+#    #+#              #
-#    Updated: 2023/08/15 13:55:49 by mzeroual         ###   ########.fr        #
+#    Updated: 2023/08/15 14:54:30 by mzeroual         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,11 @@ SRCS_BONUS= 	bonus/src/main.c \
 				bonus/src/check_map/parse_map.c \
 				bonus/src/check_map/check_error/ft_check6lines.c \
 				bonus/src/check_map/ft_utils.c \
-				bonus/src/cub3d/ft_display_map.c \
 				bonus/src/cub3d/ft_draw_map.c \
 				bonus/src/cub3d/control_hooks.c \
 				bonus/src/cub3d/cub3d_utils.c \
 				bonus/src/cub3d/rays_casting.c \
+				bonus/src/cub3d/ft_calcul_raycasting.c \
 				bonus/src/cub3d/is_door.c \
 				bonus/src/cub3d/cub3d_utils2.c \
 				bonus/src/cub3d/cub3d.c \
@@ -36,12 +36,11 @@ SRCS 	  =	    mandatory/src/main.c \
 				mandatory/src/check_map/parse_map.c \
 				mandatory/src/check_map/check_error/ft_check6lines.c \
 				mandatory/src/check_map/ft_utils.c \
-				mandatory/src/cub3d/ft_display_map.c \
 				mandatory/src/cub3d/ft_draw_map.c \
 				mandatory/src/cub3d/control_hooks.c \
 				mandatory/src/cub3d/cub3d_utils.c \
 				mandatory/src/cub3d/rays_casting.c \
-				mandatory/src/cub3d/is_door.c \
+				mandatory/src/cub3d/ft_calcul_raycasting.c \
 				mandatory/src/cub3d/cub3d_utils2.c \
 				mandatory/src/cub3d/cub3d.c \
 				$(PATH_GET_NEXT_LINE)get_next_line.c \

@@ -6,25 +6,11 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 09:20:00 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/15 13:57:37 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/15 15:09:38 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../../../include/cub3d.h"
-
-// static int	all_line_speace(char *line)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (line[i])
-// 	{
-// 		if (line[i] != ' ' && line[i] != '\t')
-// 			return (0);
-// 		i++;
-// 	}
-// 	return (1);
-// }
 
 int	ft_count_without_newline(char **map)
 {

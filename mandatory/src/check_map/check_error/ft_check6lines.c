@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:25:24 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/15 13:57:30 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/15 15:09:56 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ int	ft_check6lines(char **map, t_cub3d *_cub3d)
 	if (!map || !*map)
 		return (ft_putstr_fd("Error\n\tGeneral Error.\n", 2), 0);
 	first6line = 0;
-	_cub3d->textures[4].name = ft_strdup("./files/texture/door.xpm");
 	while (first6line < 6)
 	{
 		str = ft_split(map[first6line], ' ');

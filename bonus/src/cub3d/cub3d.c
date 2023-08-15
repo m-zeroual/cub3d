@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:45 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/15 13:52:17 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/15 14:34:50 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,13 +102,13 @@ int	ft_draw(t_cub3d *_cub3d)
 void	cub3d(t_cub3d *_cub3d)
 {
 	ft_count(_cub3d, &_cub3d->width, &_cub3d->height);
-	// if (_cub3d->width * PIXEL > MINI_MAP_WIDTH
-	// 	|| _cub3d->height * PIXEL > MINI_MAP_HEIGHT)
-	// {
-	// 	ft_free_all(_cub3d);
-	// 	ft_putstr_fd("Error in map\n\t\tHINT: map very big!!\n", 2);
-	// 	exit(1);
-	// }
+	if (_cub3d->width * PIXEL > MINI_MAP_WIDTH
+		|| _cub3d->height * PIXEL > MINI_MAP_HEIGHT)
+	{
+		ft_free_all(_cub3d);
+		ft_putstr_fd("Error in map\n\t\tHINT: map very big!!\n", 2);
+		exit(1);
+	}
 	_cub3d->mlx_ptr = mlx_init();
 	open_textures(_cub3d);
 	_cub3d->mlx_win = mlx_new_window(_cub3d->mlx_ptr, WIDTH, HEIGHT, "cub3d");

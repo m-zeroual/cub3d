@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 11:58:47 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/15 13:58:35 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/15 15:08:33 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	open_textures(t_cub3d *_cub3d)
 	int	i;
 
 	i = 0;
-	while (i < 5)
+	while (i < 4)
 	{
 		_cub3d->textures[i].img.mlx_img = \
 		mlx_xpm_file_to_image(_cub3d->mlx_ptr, _cub3d->textures[i].name, \
@@ -65,19 +65,19 @@ int	get_color(t_cub3d *_cub3d, int ceile_or_floor)
 	return (r << 16 | g << 8 | b);
 }
 
-int	is_upside_wall_dor(t_cub3d *_cub3d, int x, int y, char wall_dor)
+int	is_upside_wall(t_cub3d *_cub3d, int x, int y)
 {
 	if (_cub3d->map[(int)((y + PLAYER_SIZE / 2) / PIXEL)] \
-	[(int)(x / PIXEL)] == wall_dor)
+	[(int)(x / PIXEL)] == '1')
 		return (1);
 	else if (_cub3d->map[(int)((y - PLAYER_SIZE / 2) / PIXEL)] \
-	[(int)(x / PIXEL)] == wall_dor)
+	[(int)(x / PIXEL)] == '1')
 		return (1);
 	else if (_cub3d->map[(int)(y / PIXEL)] \
-	[(int)((x - PLAYER_SIZE / 2) / PIXEL)] == wall_dor)
+	[(int)((x - PLAYER_SIZE / 2) / PIXEL)] == '1')
 		return (1);
 	else if (_cub3d->map[(int)(y / PIXEL)] \
-	[(int)((x + PLAYER_SIZE / 2) / PIXEL)] == wall_dor)
+	[(int)((x + PLAYER_SIZE / 2) / PIXEL)] == '1')
 		return (1);
 	return (0);
 }
@@ -87,7 +87,7 @@ int	quit(t_cub3d *_cub3d)
 	int	i;
 
 	i = 0;
-	while (i < 5)
+	while (i < 4)
 		mlx_destroy_image(_cub3d->mlx_ptr, _cub3d->textures[i++].img.mlx_img);
 	mlx_destroy_window(_cub3d->mlx_ptr, _cub3d->mlx_win);
 	ft_free_all(_cub3d);

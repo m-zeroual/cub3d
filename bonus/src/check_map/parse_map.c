@@ -6,13 +6,13 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 18:51:54 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/15 13:50:49 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/15 14:34:39 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../../../include/cub3d.h"
 
-int check_door(int i, int j, char **new_map)
+static int	check_door(int i, int j, char **new_map)
 {
 	if ((new_map[i - 1][j] == '1' && new_map[i + 1][j] == '1')
 		|| (new_map[i][j - 1] == '1' && new_map[i][j + 1] == '1'))
@@ -20,7 +20,7 @@ int check_door(int i, int j, char **new_map)
 	return (0);
 }
 
-int	condition(int i, int j, int *player, char **new_map)
+static int	condition(int i, int j, int *player, char **new_map)
 {
 	if (new_map[i][j] == 'N' || new_map[i][j] == 'W' || new_map[i][j] == 'E'
 	|| new_map[i][j] == 'S' || new_map[i][j] == ' ' || new_map[i][j] == '0'
@@ -38,7 +38,7 @@ int	condition(int i, int j, int *player, char **new_map)
 				|| j >= (int)ft_strlen(new_map[i + 1]))
 				return (ft_putstr_fd("Error\n\tmap error.\n", 2), 0);
 			if (new_map[i][j] == 'D' && !check_door(i, j, new_map))
-				return (ft_putstr_fd("Error\n\terror in door.\n", 2),0);
+				return (ft_putstr_fd("Error\n\terror in door.\n", 2), 0);
 			if (new_map[i][j] == 'N' || new_map[i][j] == 'W'
 			|| new_map[i][j] == 'E' || new_map[i][j] == 'S')
 				(*player)++;

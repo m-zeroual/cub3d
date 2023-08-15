@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/15 11:22:30 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/15 15:11:41 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,12 +183,18 @@ void	ft_check_view(t_cub3d *_cub3d);
 //====> src/cub3d/cub3d_utils2.c <=====
 void	open_textures(t_cub3d *_cub3d);
 int		is_upside_wall_dor(t_cub3d *_cub3d, int x, int y, char wall_dor);
+int		is_upside_wall(t_cub3d *_cub3d, int x, int y);
 int		img_get_pixel_color(t_texture texture, int x, int y);
 int		get_color(t_cub3d *_cub3d, int ceile_or_floor);
 int		quit(t_cub3d *_cub3d);
 
 //====> src/cub3d/is_door.c <=====
 void	is_door(t_cub3d *_cub3d, t_point point);
+
+//====> src/cub3d/ft_calcul_raycasting.c <=====
+double	ft_calcul_h(t_cub3d *_cub3d, int *is_door);
+double	ft_calcul_v(t_cub3d *_cub3d, int *is_door);
+int		get_textur_index(t_cub3d *_cub3d, int intersection);
 
 int		ft_draw(t_cub3d *_cub3d);
 #endif
