@@ -6,11 +6,11 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 13:11:33 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/14 16:11:21 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/15 13:51:52 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../include/cub3d.h"
+#include "./../../../include/cub3d.h"
 
 static void	_is_door(t_cub3d *_cub3d, t_point point)
 {

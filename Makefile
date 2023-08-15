@@ -3,32 +3,51 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+         #
+#    By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/17 13:12:29 by mzeroual          #+#    #+#              #
-#    Updated: 2023/08/14 13:13:08 by kchaouki         ###   ########.fr        #
+#    Updated: 2023/08/15 13:55:49 by mzeroual         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 PATH_GET_NEXT_LINE = lib/get_next_line/
 
 
-SRCS	= 	src/main.c \
-			src/check_map/ft_free_map.c \
-			src/check_map/check_error/ft_error.c \
-			src/check_map/parse_map.c \
-			src/check_map/check_error/ft_check6lines.c \
-			src/check_map/ft_utils.c \
-			src/cub3d/ft_display_map.c \
-			src/cub3d/ft_draw_map.c \
-			src/cub3d/control_hooks.c \
-			src/cub3d/cub3d_utils.c \
-			src/cub3d/rays_casting.c \
-			src/cub3d/is_door.c \
-			src/cub3d/cub3d_utils2.c \
-			src/cub3d/cub3d.c \
-			$(PATH_GET_NEXT_LINE)get_next_line.c \
-			$(PATH_GET_NEXT_LINE)get_next_line_utils.c
+SRCS_BONUS= 	bonus/src/main.c \
+				bonus/src/check_map/ft_free_map.c \
+				bonus/src/check_map/check_error/ft_error.c \
+				bonus/src/check_map/parse_map.c \
+				bonus/src/check_map/check_error/ft_check6lines.c \
+				bonus/src/check_map/ft_utils.c \
+				bonus/src/cub3d/ft_display_map.c \
+				bonus/src/cub3d/ft_draw_map.c \
+				bonus/src/cub3d/control_hooks.c \
+				bonus/src/cub3d/cub3d_utils.c \
+				bonus/src/cub3d/rays_casting.c \
+				bonus/src/cub3d/is_door.c \
+				bonus/src/cub3d/cub3d_utils2.c \
+				bonus/src/cub3d/cub3d.c \
+				$(PATH_GET_NEXT_LINE)get_next_line.c \
+				$(PATH_GET_NEXT_LINE)get_next_line_utils.c
+
+SRCS 	  =	    mandatory/src/main.c \
+				mandatory/src/check_map/ft_free_map.c \
+				mandatory/src/check_map/check_error/ft_error.c \
+				mandatory/src/check_map/parse_map.c \
+				mandatory/src/check_map/check_error/ft_check6lines.c \
+				mandatory/src/check_map/ft_utils.c \
+				mandatory/src/cub3d/ft_display_map.c \
+				mandatory/src/cub3d/ft_draw_map.c \
+				mandatory/src/cub3d/control_hooks.c \
+				mandatory/src/cub3d/cub3d_utils.c \
+				mandatory/src/cub3d/rays_casting.c \
+				mandatory/src/cub3d/is_door.c \
+				mandatory/src/cub3d/cub3d_utils2.c \
+				mandatory/src/cub3d/cub3d.c \
+				$(PATH_GET_NEXT_LINE)get_next_line.c \
+				$(PATH_GET_NEXT_LINE)get_next_line_utils.c
+
+
 
 CC		= cc
 
@@ -38,9 +57,13 @@ RM		= rm -f
 
 NAME	= cub3d
 
+NAME_BONUS	= cub3d_bonus
+
 PATH_LIB = lib/libft/
 
 OBJS	= $(SRCS:.c=.o)
+
+OBJS_BONUS	= $(SRCS_BONUS:.c=.o)
 
 all:	$(NAME)
 
@@ -54,9 +77,16 @@ $(NAME):$(OBJS)
 clean:
 		make clean -C $(PATH_LIB)
 		$(RM) $(OBJS)
+		$(RM) $(OBJS_BONUS)
 
 fclean:	clean
 		make fclean -C $(PATH_LIB)
 		$(RM) $(NAME)
+		$(RM) $(NAME_BONUS)
 
-re:		fclean $(NAME)
+re:		fclean all
+
+bonus: $(OBJS_BONUS)
+		make -C $(PATH_LIB)
+		$(CC) $(CFLAGS) $(PATH_LIB)libft.a $(OBJS_BONUS) -lmlx -framework OpenGL -framework AppKit -o $(NAME_BONUS)
+

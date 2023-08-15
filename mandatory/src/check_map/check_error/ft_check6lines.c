@@ -6,11 +6,11 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:25:24 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/14 15:04:10 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/15 13:57:30 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../../include/cub3d.h"
+#include "./../../../../include/cub3d.h"
 
 static int	ft_check_double_coma(char *line)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 11:58:47 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/14 13:24:14 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/15 13:52:07 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../include/cub3d.h"
+#include "./../../../include/cub3d.h"
 
 int	img_get_pixel_color(t_texture texture, int x, int y)
 {

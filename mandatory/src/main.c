@@ -6,11 +6,11 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 09:18:38 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/14 16:36:17 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/15 13:56:13 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../include/cub3d.h"
+#include "./../../include/cub3d.h"
 
 int	main(int ac, char *av[])
 {

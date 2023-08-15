@@ -6,11 +6,11 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 18:51:54 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/15 12:45:04 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/15 13:57:23 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../include/cub3d.h"
+#include "./../../../include/cub3d.h"
 
 int check_door(int i, int j, char **new_map)
 {

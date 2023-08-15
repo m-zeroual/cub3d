@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   control_hooks.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 09:53:42 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/14 13:30:04 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/15 13:57:57 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../include/cub3d.h"
+#include "./../../../include/cub3d.h"
 
 static void	s_w_key(int keyCode, t_cub3d *_cub3d)
 {

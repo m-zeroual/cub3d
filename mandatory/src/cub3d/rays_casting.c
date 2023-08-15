@@ -6,11 +6,11 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 22:56:57 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/15 11:26:55 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/15 13:58:18 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../include/cub3d.h"
+#include "./../../../include/cub3d.h"
 
 void	check_wall_h(t_cub3d *_cub3d, int *is_door, int check)
 {

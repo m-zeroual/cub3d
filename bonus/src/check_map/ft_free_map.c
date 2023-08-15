@@ -6,11 +6,11 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 00:57:18 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/14 14:56:45 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/15 13:50:29 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../include/cub3d.h"
+#include "./../../../include/cub3d.h"
 
 void	ft_free_map(char **map)
 {

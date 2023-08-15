@@ -6,11 +6,11 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:28:31 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/04 16:02:34 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/15 13:57:15 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../../include/cub3d.h"
+#include "./../../../../include/cub3d.h"
 
 static int	ft_check_extension(char *map_name)
 {

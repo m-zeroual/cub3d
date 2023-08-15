@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kchaouki <kchaouki@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 22:53:41 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/06 13:39:57 by kchaouki         ###   ########.fr       */
+/*   Updated: 2023/08/15 13:52:26 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../include/cub3d.h"
+#include "./../../../include/cub3d.h"
 
 void	img_pixl_put(t_cub3d *_cub3d, int x, int y, int color)
 {
