@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 22:16:25 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/14 17:24:22 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/15 11:23:23 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-#  make define BUFFER_SIZE 100
+#  define BUFFER_SIZE 100
 # endif
 
 char	*get_next_line(int fd);

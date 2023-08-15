@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 22:56:57 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/14 16:04:05 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/15 11:26:55 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ double	ft_calcul_h(t_cub3d *_cub3d, int *is_door)
 	_cub3d->horizontal.y = _cub3d->start.y;
 	_cub3d->horizontal.x = _cub3d->start.x;
 	check_wall_h(_cub3d, is_door, check);
-	return (vetagorc(_cub3d->horizontal.x, _cub3d->horizontal.y\
+	return (vetagorc(_cub3d->horizontal.x, _cub3d->horizontal.y \
 , _cub3d->px, _cub3d->py));
 }
 
@@ -146,9 +146,11 @@ t_wall	wall_calculations(t_cub3d *_cub3d, t_ray_data ray_data)
 		err_w = 0;
 	wall.y_step = ((double)_cub3d->textures[0].height / projected_wall) * err_w;
 	if (ray_data.intersection == 1)
-		wall.x_step = (_cub3d->textures[0].width / PIXEL) * (ray_data.dest_ray_p.x - (int)(ray_data.dest_ray_p.x / PIXEL) *PIXEL);
+		wall.x_step = (_cub3d->textures[0].width / PIXEL) * \
+		(ray_data.dest_ray_p.x - (int)(ray_data.dest_ray_p.x / PIXEL) *PIXEL);
 	else
-		wall.x_step = (_cub3d->textures[0].width / PIXEL) * (ray_data.dest_ray_p.y - (int)(ray_data.dest_ray_p.y / PIXEL) *PIXEL);
+		wall.x_step = (_cub3d->textures[0].width / PIXEL) * \
+		(ray_data.dest_ray_p.y - (int)(ray_data.dest_ray_p.y / PIXEL) *PIXEL);
 	wall.step_size = (double)_cub3d->textures[0].height / projected_wall;
 	return (wall);
 }
@@ -167,7 +169,8 @@ void	draw_3d_game(t_cub3d *_cub3d, t_ray_data ray_data)
 			img_get_pixel_color(_cub3d->textures[4], wall.x_step, wall.y_step));
 		else
 			img_pixl_put(_cub3d, ray_data.index, j, \
-			img_get_pixel_color(_cub3d->textures[get_textur_index(_cub3d, ray_data.intersection)], wall.x_step, wall.y_step));
+			img_get_pixel_color(_cub3d->textures[get_textur_index(_cub3d, \
+			ray_data.intersection)], wall.x_step, wall.y_step));
 		wall.y_step += wall.step_size;
 		j++;
 	}

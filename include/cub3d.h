@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/14 16:27:59 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/15 11:22:30 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define PLAYER_SIZE 4
 # define VUE_ANGLE 60
 
-# define STEP_MOVE 5
+# define STEP_MOVE 2
 # define ANGLE_MOVE 3
 
 # define UP 1
