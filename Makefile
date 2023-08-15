@@ -6,7 +6,7 @@
 #    By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/17 13:12:29 by mzeroual          #+#    #+#              #
-#    Updated: 2023/08/15 14:54:30 by mzeroual         ###   ########.fr        #
+#    Updated: 2023/08/15 15:23:20 by mzeroual         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ SRCS 	  =	    mandatory/src/main.c \
 
 CC		= cc
 
-CFLAGS	= -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror
 
 RM		= rm -f
 
