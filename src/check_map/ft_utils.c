@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 09:20:00 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/15 11:50:17 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/15 12:00:39 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,10 +122,11 @@ char	**ft_clean_map(char **map, t_cub3d *_cub3d)
 {
 	char	**new_map;
 
-	new_map = malloc((ft_count_without_newline(map) + 1) * sizeof(char *));
+	new_map = ft_calloc((ft_count_without_newline(map) + 1), sizeof(char *));
 	if (!new_map)
 		return (ft_free_map(map), NULL);
-	ft_clean_map_(_cub3d, new_map, map);
+	if (!ft_clean_map_(_cub3d, new_map, map))
+		return (NULL);
 	if (!ft_check6lines(new_map, _cub3d))
 		return (ft_free_map(new_map), ft_free_map(map), NULL);
 	return (new_map);
