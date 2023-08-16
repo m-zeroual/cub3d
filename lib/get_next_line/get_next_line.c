@@ -6,13 +6,11 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:18:53 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/02/26 14:16:12 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/14 16:29:34 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-# include <stdio.h>
-#include <fcntl.h>
 
 char	*ft_get_big_line(int fd, char *stock)
 {
@@ -61,7 +59,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
 	if (!stock)
-		stock = ft_strdup(""); 
+		stock = ft_strdup("");
 	big_line = ft_get_big_line(fd, stock);
 	stock = 0;
 	if (*big_line == 0)
