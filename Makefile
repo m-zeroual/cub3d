@@ -6,7 +6,7 @@
 #    By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/17 13:12:29 by mzeroual          #+#    #+#              #
-#    Updated: 2023/08/15 15:23:20 by mzeroual         ###   ########.fr        #
+#    Updated: 2023/08/16 09:39:39 by mzeroual         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,6 @@ SRCS 	  =	    mandatory/src/main.c \
 				mandatory/src/check_map/parse_map.c \
 				mandatory/src/check_map/check_error/ft_check6lines.c \
 				mandatory/src/check_map/ft_utils.c \
-				mandatory/src/cub3d/ft_draw_map.c \
 				mandatory/src/cub3d/control_hooks.c \
 				mandatory/src/cub3d/cub3d_utils.c \
 				mandatory/src/cub3d/rays_casting.c \

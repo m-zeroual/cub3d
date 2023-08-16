@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 17:53:45 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/15 14:52:47 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/16 09:38:48 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,27 +40,7 @@ static void	ft_count(t_cub3d *_cub3d, int *width, int *height)
 	}
 }
 
-void	ft_draw_player(t_cub3d *_cub3d)
-{
-	int	x;
-	int	y;
-	int	l;
-
-	y = -(PLAYER_SIZE / 2);
-	l = 1;
-	while (y < PLAYER_SIZE / 2)
-	{
-		x = -(PLAYER_SIZE / 2);
-		while (x < PLAYER_SIZE / 2)
-		{
-			img_pixl_put(_cub3d, _cub3d->px + x, _cub3d->py + y, 0xFF0000);
-			x++;
-		}
-		y++;
-	}
-}
-
-int	initial_direction(t_cub3d *_cub3d)
+static int	initial_direction(t_cub3d *_cub3d)
 {
 	if (_cub3d->map[(int)(_cub3d->py / PIXEL)] \
 	[(int)(_cub3d->px / PIXEL)] == 'N')
@@ -75,7 +55,7 @@ int	initial_direction(t_cub3d *_cub3d)
 		return (180);
 }
 
-int	ft_draw(t_cub3d *_cub3d)
+void	ft_draw(t_cub3d *_cub3d)
 {
 	_cub3d->img.mlx_img = mlx_new_image(_cub3d->mlx_ptr, WIDTH, HEIGHT);
 	_cub3d->img.addr = mlx_get_data_addr(_cub3d->img.mlx_img, &_cub3d->img.bpp, \
@@ -85,7 +65,6 @@ int	ft_draw(t_cub3d *_cub3d)
 	mlx_put_image_to_window(_cub3d->mlx_ptr, _cub3d->mlx_win, \
 	_cub3d->img.mlx_img, 0, 0);
 	mlx_destroy_image(_cub3d->mlx_ptr, _cub3d->img.mlx_img);
-	return (0);
 }
 
 void	cub3d(t_cub3d *_cub3d)

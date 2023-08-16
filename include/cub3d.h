@@ -6,7 +6,7 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 08:44:40 by mzeroual          #+#    #+#             */
-/*   Updated: 2023/08/15 15:11:41 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/16 09:45:20 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "./../lib/get_next_line/get_next_line.h"
 # include <mlx.h>
 # include <math.h>
-# include <stdio.h>
 
 # define PIXEL 20
 # define HEIGHT 1080
@@ -35,9 +34,8 @@
 # define RIGHT 1
 # define LEFT 0
 
-# define ESC 53
-
 /*---------ALL KEYS---------*/
+# define ESC 53
 # define ARROW_RIGHT 124
 # define ARROW_LEFT 123
 # define W_KEY 13
@@ -160,7 +158,6 @@ int		parse_map(char *map_name, t_cub3d *_cub3d);
 // ---------------- draw map partie -------------------------------------
 //====> src/cub3d/cub3d.c <=====
 void	cub3d(t_cub3d *_cub3d);
-void	ft_display_map(char **map);
 
 //====> src/cub3d/ft_draw_map.c <=====
 void	ft_draw_map(t_cub3d *_cub3d);
@@ -196,5 +193,5 @@ double	ft_calcul_h(t_cub3d *_cub3d, int *is_door);
 double	ft_calcul_v(t_cub3d *_cub3d, int *is_door);
 int		get_textur_index(t_cub3d *_cub3d, int intersection);
 
-int		ft_draw(t_cub3d *_cub3d);
+void	ft_draw(t_cub3d *_cub3d);
 #endif

@@ -6,13 +6,13 @@
 /*   By: mzeroual <mzeroual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 22:56:57 by kchaouki          #+#    #+#             */
-/*   Updated: 2023/08/15 14:53:28 by mzeroual         ###   ########.fr       */
+/*   Updated: 2023/08/16 09:45:52 by mzeroual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../../../include/cub3d.h"
 
-t_wall	wall_calculations(t_cub3d *_cub3d, t_ray_data ray_data)
+static t_wall	wall_calculations(t_cub3d *_cub3d, t_ray_data ray_data)
 {
 	double	projected_wall;
 	double	err_w;
@@ -38,7 +38,7 @@ t_wall	wall_calculations(t_cub3d *_cub3d, t_ray_data ray_data)
 	return (wall);
 }
 
-void	draw_3d_game(t_cub3d *_cub3d, t_ray_data ray_data)
+static void	draw_3d_game(t_cub3d *_cub3d, t_ray_data ray_data)
 {
 	t_wall	wall;
 	int		j;
@@ -49,7 +49,8 @@ void	draw_3d_game(t_cub3d *_cub3d, t_ray_data ray_data)
 	{
 		img_pixl_put(_cub3d, ray_data.index, j, \
 		img_get_pixel_color(_cub3d->textures[get_textur_index(_cub3d, \
-		ray_data.intersection)], wall.x_step, wall.y_step));
+		ray_data.intersection)], \
+		_cub3d->textures[1].width - wall.x_step, wall.y_step));
 		wall.y_step += wall.step_size;
 		j++;
 	}
@@ -79,7 +80,7 @@ static void	ft_raycating(t_cub3d *_cub3d, t_ray_data ray_data)
 	draw_3d_game(_cub3d, ray_data);
 }
 
-void	draw_sky_floor(t_cub3d *_cub3d)
+static void	draw_sky_floor(t_cub3d *_cub3d)
 {
 	int	x;
 	int	y;
